@@ -30,7 +30,7 @@
 
 <!-- 地图 -->
 <view class="container" style='height: calc( 100vh -  {{menuH}})'>
-  <map id="map" latitude="{{latitude}}" longitude="{{longitude}}" markers="{{markers}}" polyline="{{polyline}}" bindmarkertap="markertap" show-location controls="{{controls}}" scale="16" bindcontroltap="bindcontroltap" bindtap='bindtapMap' />
+  <map id="map" latitude="{{latitude}}" longitude="{{longitude}}" markers="{{markers}}" polyline="{{polyline}}" bindmarkertap="markertap" show-location controls="{{controls}}" scale="15" bindcontroltap="bindcontroltap" bindtap='bindtapMap' />
 </view>
 
 

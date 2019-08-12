@@ -23,8 +23,8 @@ Page({
       height: 42
     }, {
       id: 2,
-      latitude: 22.962562,
-      longitude: 113.359144,
+      latitude: 22.963194,
+      longitude: 113.362598,
       iconPath: '../../assets/images/marker.png',
       width: 35,
       height: 42
@@ -44,19 +44,47 @@ Page({
       height: 42
     }],
 
-    // polyline: [{
-    //   points: [{
-    //     latitude: 22.93772,
-    //     longitude: 113.38424,
-    //   }, {
-    //     latitude: 22.962562,
-    //     longitude: 113.359144,
-    //   }],
-    //   color: "#000",
-    //   width: 10,
-    //   dottedLine: true
-    // }],
-    polyline: [],
+    polyline: [{
+      points: [{
+          latitude: 22.963194,
+          longitude: 113.362598,
+        },
+        {
+          latitude: 22.962276,
+          longitude: 113.363044,
+        }, {
+          latitude: 22.962360,
+          longitude: 113.363398,
+        }, {
+          latitude: 22.963165,
+          longitude: 113.364347,
+        }, {
+          latitude: 22.964434,
+          longitude: 113.363730,
+        }, {
+          latitude: 22.964074,
+          longitude: 113.363199,
+        }, {
+          latitude: 22.965145,
+          longitude: 113.363414,
+        }, {
+          latitude: 22.965457,
+          longitude: 113.363585,
+        }, {
+          latitude: 22.965471,
+          longitude: 113.363886,
+        }, {
+          latitude: 22.965457,
+          longitude: 113.363585,
+        }, {
+          latitude: 22.965565,
+          longitude: 113.365474
+        }
+      ],
+      color: "#3ACCE1",
+      width: 4,
+      dottedLine: true
+    }],
 
 
     isMenu: false, // 显示主菜单
@@ -78,7 +106,7 @@ Page({
     //获取提示的请求是否显示  提示信息
     this.getInfo();
 
-
+    //  获取当前位置信息
     this.timer = options.timer;
     wx.getLocation({
       type: 'wgs84',
@@ -89,6 +117,8 @@ Page({
         })
       },
     })
+
+    // 地图上的一些操作按钮
     wx.getSystemInfo({
       success: (res) => {
         this.setData({
@@ -124,7 +154,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-
+    this.mapctx = wx.createMapContext("map");
   },
   movetoCenter: function() {
     this.mapctx.moveToLocation();
@@ -134,11 +164,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    this.mapctx = wx.createMapContext("map");
-
     setTimeout(() => {
       this.movetoCenter();
-    }, 500)
+    }, 2000)
   },
 
 
@@ -158,6 +186,7 @@ Page({
    * 点击mak 点
    */
   markertap(e) {
+    console.log(e)
     // 用that取代this，防止不必要的情况发生
     var that = this;
     let markers = this.data.markers.map(item => {

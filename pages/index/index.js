@@ -87,8 +87,18 @@ Page({
     }],
 
 
-    isMenu: false, // 显示主菜单
-    isInfo: false, // 显示提示信息
+    date: '2019-08-12',
+    multiArray: [
+      ['01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00'],
+      ['13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00', '24:00']
+    ],
+    multiIndex: [0, 0],
+
+
+    isMenu: false, // 是否显示主菜单
+    isInfo: false, // 是否显示提示信息
+
+    isAppointment: false // 是否显示预约滑板车
   },
 
   /**
@@ -289,9 +299,20 @@ Page({
         markers,
         matrixData: animation.export(),
         isShow: false,
+        isAppointment: false, //  取消预约滑板车
         isMarker: false //  用于判断是否第二次点击 mak 点
       })
     }, 200)
+  },
+
+
+  /**
+   * 预约滑板车
+   */
+  appointment() {
+    this.setData({
+      isAppointment: true
+    })
   },
 
 
@@ -359,6 +380,31 @@ Page({
   getPhoneNumber(e) {
     console.log(e)
   },
+
+
+
+
+  /**
+   * 日期的选择
+   */
+  bindDateChange: function(e) {
+    this.setData({
+      date: e.detail.value
+    })
+  },
+
+
+  /**
+   * 时间间隔的选择
+   */
+  bindMultiPickerChange: function(e) {
+    this.setData({
+      multiIndex: e.detail.value
+    })
+
+  },
+
+
 
 
 

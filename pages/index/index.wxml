@@ -9,7 +9,7 @@
     </view>
     <view bindtap="search">
       <icon class="iconfont icon-sousuo"></icon>
-      查找附近滑的板车
+      查找附近的滑板车
     </view>
   </view>
 
@@ -47,10 +47,12 @@
 <!-- 菜单操作 -->
 <view class="panel-con" wx:if='{{isShow}}' animation="{{matrixData}}">
 
-  <!-- 借车 or预约 菜单操作  -->
+  <!-- 借车 or 预约 菜单操作  -->
   <view wx:if="{{isMenu}}" class="menu">
     <image src="../../assets/images/menu.png"></image>
-    <view class="menu-content">
+
+
+    <view class="menu-content" wx:if="{{!isAppointment}}">
       <view class="menu-content-t">
         <view>
 
@@ -70,7 +72,7 @@
 
         </view>
         <view>
-          <text class="appointment">预约滑板车</text>
+          <text class="appointment" bindtap="appointment">预约滑板车</text>
         </view>
       </view>
       <view class="menu-content-b">
@@ -80,6 +82,52 @@
         </view>
       </view>
     </view>
+
+
+    <view class="menu-content" wx:if="{{isAppointment}}">
+      <view class="menu-content-t">
+        <view>
+
+          <view class="menu-content-t-title">
+            <text>车辆编号：</text>
+            <text>996883 </text>
+
+            <text class="default">(已默认为您推荐最近的存车位)</text>
+          </view>
+
+          <view class="menu-content-t-title">
+            <text>可用车位：</text>
+            <text>12 </text>
+          </view>
+
+        </view>
+      </view>
+      <view class="selDateTime">
+        <view>请选择预约时间</view>
+        <picker mode="date" value="{{date}}" start="{{date}}" end="" bindchange="bindDateChange">
+          <view class="picker">
+            {{date}}
+          </view>
+        </picker>
+
+        <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+          <view class="picker">
+            {{multiArray[0][multiIndex[0]]}}am - {{multiArray[1][multiIndex[1]]}}pm
+          </view>
+        </picker>
+
+
+      </view>
+      <view class="menu-content-b menu-content-appointment">
+        <view>我是收费文案文案文案文案(如:￥0.5/分钟)</view>
+        <view>
+          <text>立即预约</text>
+        </view>
+      </view>
+    </view>
+
+
+
   </view>
 
 

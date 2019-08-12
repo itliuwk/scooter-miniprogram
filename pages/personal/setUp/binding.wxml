@@ -10,7 +10,7 @@
   <view class="phone verification">
     <icon class="iconfont icon-dunpai"></icon>
     <input placeholder='请输入验证码'></input>
-    <text class="obtain">获取验证码</text>
+    <text class="obtain" bindtap="verificationCode">{{authBtnText}}</text>
   </view>
 
 

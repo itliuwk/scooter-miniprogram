@@ -1,0 +1,76 @@
+/* pages/manage/repair.wxss */
+
+.repair {
+  color: rgba(42, 46, 67, 1);
+}
+
+.repair>image {
+  width: 100vw;
+  height: 100vh;
+}
+
+.repair-content {
+  position: fixed;
+  margin: auto;
+  top: -120rpx;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 600rpx;
+  height: 800rpx;
+  background: rgba(145, 237, 251, 1);
+  border-radius: 12px;
+  padding: 40rpx;
+  text-align: center;
+}
+
+.repair-content .logo {
+  position: relative;
+  top: -100rpx;
+}
+
+.repair-content .logo image {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 50%;
+}
+
+.repair-content .code {
+  position: relative;
+  top: -50rpx;
+}
+
+.repair-content .code image {
+  width: 80%;
+  height: 380rpx;
+}
+
+.info {
+  position: relative;
+  text-align: center;
+}
+
+.weixi {
+  margin-top: 20rpx;
+}
+
+.weixi text:nth-child(1) {
+  display: inline-block;
+  width: 220rpx;
+}
+
+.weixi text {
+  display: inline-block;
+  padding: 5rpx 10rpx;
+  height: 40rpx;
+  text-align: center;
+  line-height: 40rpx;
+  border: 1px solid rgba(112, 112, 112, 0.1803921568627451);
+}
+
+.weixi text:nth-child(2) {
+  border-left: none;
+  background: #fff;
+  font-size: 22rpx;
+  color: rgba(58, 204, 225, 1);
+}

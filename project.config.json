@@ -48,7 +48,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 12,
+			"current": 13,
 			"list": [
 				{
 					"id": -1,
@@ -138,6 +138,13 @@
 					"id": -1,
 					"name": "预约中",
 					"pathName": "pages/manage/appointment/active",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "车辆报修",
+					"pathName": "pages/manage/repair/index",
 					"scene": null
 				}
 			]

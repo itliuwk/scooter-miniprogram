@@ -29,8 +29,15 @@ Page({
 
   },
 
+  onUnload: function() {
+    wx.reLaunch({
+      url: "/pages/index/index"
+    })
+  },
+
   update() {
-    wx.navigateTo({
+
+    wx.redirectTo({
       url: './index?update=true',
     })
   },
@@ -47,7 +54,7 @@ Page({
       isTip: false
     })
   },
-  stopTip(){
+  stopTip() {
     this.setData({
       isTip: true
     })

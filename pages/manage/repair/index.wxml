@@ -1,0 +1,27 @@
+<!--pages/manage/repair.wxml-->
+<view class="repair">
+  <image src="../../../assets/images/repair-bg.png"></image>
+
+  <view class="repair-content">
+
+    <view class="logo">
+      <image src="../../../assets/images/logo.png"></image>
+      <view>爱动客服</view>
+    </view>
+
+    <view class="code">
+      <image src="../../../assets/images/code.png"></image>
+    </view>
+
+    <view class="info">
+      <view>扫描上方二维码添加客服微信</view>
+      <view class="weixi">
+        <text>ghggv889</text>
+        <text>复制</text>
+      </view>
+    </view>
+
+  </view>
+
+
+</view>

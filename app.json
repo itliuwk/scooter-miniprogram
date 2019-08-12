@@ -10,7 +10,8 @@
     "pages/personal/wallet/withdraw",
     "pages/personal/trip",
     "pages/personal/setUp/index",
-    "pages/personal/setUp/binding"
+    "pages/personal/setUp/binding",
+    "pages/manage/appointment/index"
   ],
   "permission": {
     "scope.userLocation": {

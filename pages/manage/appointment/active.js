@@ -1,11 +1,11 @@
-// pages/manage/appointment/nearby.js
+// pages/manage/appointment/active.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    isTip: false
   },
 
   /**
@@ -29,9 +29,27 @@ Page({
 
   },
 
-  selItem() {
+  update() {
     wx.navigateTo({
-      url: './index',
+      url: './index?update=true',
+    })
+  },
+
+
+  tip() {
+    this.setData({
+      isTip: true
+    })
+  },
+
+  closeTip() {
+    this.setData({
+      isTip: false
+    })
+  },
+  stopTip(){
+    this.setData({
+      isTip: true
     })
   }
 })

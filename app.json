@@ -12,7 +12,8 @@
     "pages/personal/setUp/index",
     "pages/personal/setUp/binding",
     "pages/manage/appointment/index",
-    "pages/manage/appointment/nearby"
+    "pages/manage/appointment/nearby",
+    "pages/manage/appointment/active"
   ],
   "permission": {
     "scope.userLocation": {

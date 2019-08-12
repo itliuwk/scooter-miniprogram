@@ -3,7 +3,7 @@
 
   <view class="top top-end">
     <view>
-      <image src="../../../assets/images/end.png"></image>
+      <image src="../../../assets/images/success.png"></image>
       <view class="end">订单已结束</view>
       <view>待支付</view>
       <text>￥</text>

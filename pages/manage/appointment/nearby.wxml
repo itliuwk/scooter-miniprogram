@@ -9,7 +9,7 @@
 
   <view class="items">
 
-    <view class="item">
+    <view class="item" bindtap="selItem">
       <image src="../../../assets/images/logo.png"></image>
       <view>
         <view>广州市番禺区东沙村</view>
@@ -26,7 +26,7 @@
     </view>
 
 
-    <view class="item">
+    <view class="item" bindtap="selItem">
       <image src="../../../assets/images/logo.png"></image>
       <view>
         <view>广州市番禺区市桥地铁站</view>
@@ -43,7 +43,7 @@
     </view>
 
 
-    <view class="item">
+    <view class="item" bindtap="selItem">
       <image src="../../../assets/images/logo.png"></image>
       <view>
         <view>广州市番禺区市万达广场</view>
@@ -59,7 +59,7 @@
       <view>4658M</view>
     </view>
 
-    <view class="item">
+    <view class="item" bindtap="selItem">
       <image src="../../../assets/images/logo.png"></image>
       <view>
         <view>广州市番禺区市塘步西村</view>

@@ -375,8 +375,10 @@ Page({
   },
 
 
-  getPhoneNumber(e) {
-    console.log(e)
+  active(e) {
+    wx.navigateTo({
+      url: './active',
+    })
   },
 
 

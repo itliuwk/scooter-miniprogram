@@ -79,7 +79,7 @@
       </view>
       <view class="menu-content-b menu-content-appointment">
         <view>我是收费文案文案文案文案(如:￥0.5/分钟)</view>
-        <view>
+        <view bindtap="active">
           <text>立即预约</text>
         </view>
       </view>

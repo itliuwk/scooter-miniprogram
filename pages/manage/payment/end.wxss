@@ -19,3 +19,31 @@
 .top-complete-money {
   height: 280rpx;
 }
+
+.order {
+  margin-top: 30rpx;
+}
+
+.order>view:nth-child(1) {
+  margin-bottom: 20rpx;
+  color: rgba(42, 46, 67, 1);
+  font-size: 30rpx;
+  font-weight: bold;
+}
+
+.order>view {
+  line-height: 60rpx;
+}
+
+.order>view text:nth-child(1) {
+  display: inline-block;
+  color: rgba(42, 46, 67, 1);
+}
+
+.order>view .fw {
+  font-weight: bold;
+}
+
+.order>view text:nth-child(3) {
+  margin-left: 20rpx;
+}

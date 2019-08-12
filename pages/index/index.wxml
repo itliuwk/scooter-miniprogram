@@ -71,7 +71,7 @@
     <view class="paid-content">
       <view>您有订单尚未支付，将会影响你的出行</view>
       <view class="to-pay">
-        <text class="toPay">去支付</text>
+        <text bindtap="toPay">去支付</text>
       </view>
     </view>
   </view>

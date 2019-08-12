@@ -266,6 +266,9 @@ Page({
   },
 
 
+  /**
+   *  点击 
+   */
   search() {
     wx.chooseLocation({
       success(res) {
@@ -281,6 +284,16 @@ Page({
   personal() {
     wx.navigateTo({
       url: '/pages/personal/index',
+    })
+  },
+
+
+  /**
+   * 跳转支付页面
+   */
+  toPay() {
+    wx.navigateTo({
+      url: '/pages/manage/payment/end',
     })
   },
 

@@ -1,0 +1,57 @@
+<!--pages/personal/index.wxml-->
+<view class="personal">
+  <view class="personal-info">
+    <image src="../../assets/images/person.png"></image>
+    <view class="personal-info-content">
+
+      <view>
+        <view class="image">
+          <open-data class='icon' type="userAvatarUrl"></open-data>
+        </view>
+        <view class="personal-info-t">
+          <view>189****6666</view>
+          <view>信用分良好</view>
+        </view>
+      </view>
+
+      <view class="personal-record">
+        <view>
+          <text>189</text>
+          <view>里程(公里)</view>
+        </view>
+        <view>
+          <text>200</text>
+          <view>时间(小时)</view>
+        </view>
+      </view>
+
+    </view>
+  </view>
+
+
+  <view class="personal-bottom">
+    <view class="personal-bottom-content">
+      <view bindtap="toUrl" data-url='/pages/personal/appointment'>
+        <image src="../../assets/images/appointment.png"></image>
+        <view>我的预约</view>
+      </view>
+      <view bindtap="toUrl" data-url='/pages/personal/wallet/index'>
+        <image src="../../assets/images/wallet.png"></image>
+        <view>我的钱包</view>
+      </view>
+      <view bindtap="toUrl" data-url='/pages/personal/trip'>
+        <image src="../../assets/images/history.png"></image>
+        <view>行程历史</view>
+      </view>
+      <view bindtap="toUrl" data-url='/pages/personal/setUp/index'>
+        <image src="../../assets/images/setUp.png"></image>
+        <view>设置</view>
+      </view>
+      <!-- <view bindtap="toUrl" data-url='signOut'>
+        <image src="../../assets/images/signOut.png"></image>
+        <view>退出</view>
+      </view> -->
+    </view>
+  </view>
+
+</view>

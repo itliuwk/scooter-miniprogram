@@ -1,0 +1,27 @@
+/* pages/personal/wallet/withdraw.wxss */
+
+.withdraw {
+  padding: 45rpx;
+}
+
+.balance {
+  width: 100%;
+  box-shadow: 0px 0px 16px rgba(69, 91, 99, 0.08);
+  border-radius: 12px;
+  padding: 40rpx 35rpx;
+  box-sizing: border-box;
+}
+
+.withdraw-balance {
+  font-size: 100rpx;
+  border-bottom: 1px solid rgba(244, 244, 246, 1);
+}
+
+.info {
+  color: rgba(149, 157, 173, 1);
+  margin-top: 20rpx;
+}
+
+.submission {
+  margin-top: 80rpx;
+}

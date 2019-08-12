@@ -1,0 +1,33 @@
+<!--pages/payment/complete.wxml-->
+
+
+<view class="page">
+
+  <view class="top top-complete">
+    <view>
+      <image src="../../../assets/images/complete.png"></image>
+      <view>支付成功</view>
+    </view>
+  </view>
+
+  <view class="top top-complete-money">
+    <view>
+      <view>我是小程序名称</view>
+      <text>￥</text>
+      <text>189</text>
+
+    </view>
+  </view>
+
+
+  <view class="bottom">
+
+  </view>
+
+
+  <view class="pay confirm">
+    完成
+  </view>
+
+
+</view>

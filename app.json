@@ -1,0 +1,29 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/manage/payment/deposit",
+    "pages/manage/payment/complete",
+    "pages/manage/payment/end",
+    "pages/personal/index",
+    "pages/personal/appointment",
+    "pages/personal/wallet/index",
+    "pages/personal/wallet/withdraw",
+    "pages/personal/trip",
+    "pages/personal/setUp/index",
+    "pages/personal/setUp/binding"
+  ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的使用"
+    }
+  },
+  "window": {
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "爱动",
+    "backgroundColor": "#eeeeee",
+    "backgroundTextStyle": "light",
+    "enablePullDownRefresh": false
+  },
+  "sitemapLocation": "sitemap.json"
+}

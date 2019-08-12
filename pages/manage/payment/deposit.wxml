@@ -1,0 +1,34 @@
+<!--pages/payment/deposit.wxml-->
+<view class="page">
+
+  <view class="top">
+    <view>
+      <text>￥</text>
+      <text>189</text>
+      <view>押金</view>
+    </view>
+  </view>
+
+  <view class="center">
+    <view>押金使用规则</view>
+    <view>租借滑板车前需缴纳189元押金。滑板车归还成功后，押金 可随时在"个人中心—钱包"提现</view>
+  </view>
+
+
+  <view class="bottom">
+    <view>
+      <image src="../../../assets/images/weixin.png"></image>
+      <text>微信支付</text>
+    </view>
+    <view>
+      <image src="../../../assets/images/check-circle.png"></image>
+    </view>
+  </view>
+
+
+  <view class="pay confirm">
+    确认支付
+  </view>
+
+
+</view>

@@ -1,0 +1,23 @@
+<!--pages/personal/wallet/index.wxml-->
+<view class="wallet">
+  <view class="balance">
+    <view>
+      <text>95</text>
+      <view>余额(元)</view>
+    </view>
+  </view>
+
+
+  <view class="balance deposit">
+    <view>
+      <text>95</text>
+      <view>押金(元)</view>
+    </view>
+  </view>
+
+
+  <view class="confirm retreat" bindtap="withdraw">退押金 </view>
+
+  <view class="info">退还押金数=余额(押金-超时未支付订单金额)</view>
+
+</view>

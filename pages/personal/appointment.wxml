@@ -1,0 +1,50 @@
+<!--pages/personal/appointment.wxml-->
+<view class="appointment">
+
+  <view class="item">
+    <view class="left">
+      <view>
+        <image src="../../assets/images/time.png"></image>
+        <text>2019-8-10 08:00-22:00</text>
+      </view>
+      <view class="title">
+        <text>预约地址：</text>
+        <text>我是位置信息字段我是位置信息字段</text>
+      </view>
+      <view class="title">
+        <text>预约费用：</text>
+        <text>20元</text>
+      </view>
+    </view>
+    <view class="right">
+      <view class="opi">
+        去还车
+      </view>
+    </view>
+  </view>
+
+
+
+  <view class="item">
+    <view class="left">
+      <view>
+        <image src="../../assets/images/time.png"></image>
+        <text>2019-8-10 08:00-22:00</text>
+      </view>
+      <view class="title">
+        <text>预约地址：</text>
+        <text>我是位置信息字段我是位置信息字段</text>
+      </view>
+      <view class="title">
+        <text>预约费用：</text>
+        <text>20元</text>
+      </view>
+    </view>
+    <view class="right">
+      <view class="opi opi-q">
+        去取车
+      </view>
+    </view>
+  </view>
+
+</view>

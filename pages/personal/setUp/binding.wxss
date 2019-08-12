@@ -1,0 +1,53 @@
+/* pages/personal/setUp/binding.wxss */
+
+.binding {
+  padding: 40rpx;
+  box-sizing: border-box;
+}
+
+.phone {
+  position: relative;
+}
+
+.phone input {
+  border-bottom: 1px solid rgba(245, 245, 245, 1);
+  padding-left: 50rpx;
+  color: rgba(42, 46, 67, 1);
+  height: 80rpx;
+}
+
+.phone icon {
+  position: absolute;
+  top: 0;
+  font-size: 50rpx;
+  color: #b2b2b2;
+}
+
+.verification input {
+  width: 60%;
+  display: inline-block;
+}
+
+.verification .icon-dunpai {
+  top: 10rpx;
+  font-size: 40rpx;
+  left: 5rpx;
+}
+
+.obtain {
+  display: inline-block;
+  width: 200rpx;
+  height: 60rpx;
+  color: rgba(58, 204, 225, 1);
+  line-height: 60rpx;
+  text-align: center;
+  border: 1px solid rgba(58, 204, 225, 1);
+  opacity: 1;
+  border-radius: 4px;
+  position: absolute;
+  top: 20rpx;
+}
+
+.confirm-binding {
+  margin-top: 200rpx;
+}

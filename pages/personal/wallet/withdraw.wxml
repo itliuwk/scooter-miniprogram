@@ -1,0 +1,15 @@
+<!--pages/personal/wallet/withdraw.wxml-->
+
+<view class="withdraw">
+  <view class="balance">
+    <view>退款金额</view>
+    <view class="withdraw-balance">
+      <text>￥</text>
+      <text>189</text>
+    </view>
+    <view class="info">系统将在24小时内退款至微信钱包</view>
+  </view>
+
+
+    <view class="confirm submission" bindtap="confirm">确认提交 </view>
+</view>

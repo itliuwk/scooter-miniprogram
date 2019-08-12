@@ -1,0 +1,29 @@
+/* pages/payment/complete.wxss */
+
+@import "./deposit.wxss"
+
+.top-complete{
+    height: 300rpx;
+}
+.top-complete image {
+  width: 120rpx;
+  height: 120rpx;
+}
+
+.top-complete view {
+  color: #41b035;
+  font-size: 28rpx;
+}
+
+.bottom {
+  background: #fff;
+  box-shadow: 0px 4px 16px #fff;
+}
+
+.top-complete-money {
+  height: 350rpx;
+}
+
+.top-complete-money view view {
+  color: rgba(120, 132, 158, 1);
+}

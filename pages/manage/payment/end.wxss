@@ -1,0 +1,21 @@
+/* pages/payment/end.wxss */
+
+@import "./deposit.wxss"
+
+@import "./complete.wxss"
+
+
+.top-end image {
+  width: 120rpx;
+  height: 120rpx;
+}
+
+.top-end .end {
+  color: #2a2e43;
+  font-size: 30rpx;
+  margin-bottom: 12rpx;
+}
+
+.top-complete-money {
+  height: 280rpx;
+}

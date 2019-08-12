@@ -1,0 +1,73 @@
+.trip {
+  padding: 20px 30rpx;
+  box-sizing: border-box;
+  height: 100vh;
+}
+
+.item {
+  width: 100%;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0px 0px 16px rgba(69, 91, 99, 0.08);
+  opacity: 1;
+  border-radius: 12px;
+  box-sizing: border-box;
+  padding: 28rpx;
+  font-size: 28rpx;
+  display: flex;
+  margin-bottom: 20rpx;
+}
+
+.item>.left {
+  flex: 1;
+}
+
+.item>.right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.item>.right text:nth-child(1) {
+  color: rgba(42, 46, 67, 1);
+  opacity: 0.56;
+}
+
+.item>.right text:nth-child(2) {
+  color: rgba(42, 46, 67, 1);
+  font-weight: bold;
+}
+
+.item .left view {
+  margin-bottom: 24rpx;
+}
+
+.item .left view:last-child {
+  margin: 0;
+}
+
+.item image {
+  width: 44rpx;
+  height: 44rpx;
+  vertical-align: bottom;
+}
+
+.item  text {
+  margin-left: 12rpx;
+  color: rgba(42, 46, 67, 1);
+}
+
+.title text:nth-child(1) {
+  color: rgba(42, 46, 67, 1);
+  opacity: 0.56;
+}
+
+.title text:nth-child(2) {
+  color: rgba(42, 46, 67, 1);
+  opacity: 1;
+}
+
+.fwd {
+  color: rgba(42, 46, 67, 1);
+  font-weight: bold;
+}

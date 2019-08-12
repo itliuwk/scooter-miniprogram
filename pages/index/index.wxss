@@ -1,0 +1,179 @@
+/* pages/index/index.wxss */
+
+.container {
+  height: 100%;
+  width: 100%;
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+}
+
+.controls {
+  position: relative;
+  top: -160rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.controls .borrow, .controls .still {
+  width: 200rpx;
+  height: 88rpx;
+  text-align: center;
+  line-height: 88rpx;
+  border-radius: 10rpx;
+  background: #3acce1;
+  color: #fff;
+  margin: 0 80rpx;
+  z-index: 100;
+}
+
+.info {
+  display: flex;
+  height: 100rpx;
+  line-height: 100rpx;
+  background: #fff;
+  padding: 0 20rpx 0 40rpx;
+  box-sizing: border-box;
+}
+
+.info .image {
+  width: 70rpx;
+  height: 70rpx;
+  padding-top: 10rpx;
+}
+
+.info view:nth-child(2) {
+  margin-left: 60rpx;
+  color: #959dad;
+  font-size: 30rpx;
+}
+
+.info view  icon {
+  margin-right: 20rpx;
+  color: #454f63;
+  font-weight: bolder;
+}
+
+.menu {
+  height: 500rpx;
+  position: relative;
+}
+
+.menu image {
+  width: 100%;
+  height: 100%;
+}
+
+.menu-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 50rpx;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.menu-content-t {
+  display: flex;
+}
+
+.menu-content-t>view {
+  flex: 1;
+  font-size: 30rpx;
+}
+
+.menu-content-t-title {
+  margin-bottom: 15rpx;
+}
+
+.menu-content-t-title text:nth-child(1) {
+  color: rgba(241, 241, 241, 1);
+}
+
+.menu-content-t-title text:nth-child(2) {
+  color: rgba(255, 255, 255, 1);
+}
+
+.menu-content-t>view:nth-child(2) {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.menu-content-t .appointment {
+  display: inline-block;
+  width: 160rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  border: 1px solid rgba(58, 204, 225, 1);
+  opacity: 1;
+  color: rgba(255, 255, 255, 1);
+  font-size: 28rpx;
+  border-radius: 16rpx;
+}
+
+.menu-content-b {
+  margin-top: 50rpx;
+}
+
+.menu-content-b>view:nth-child(1) {
+  font-size: 28rpx;
+  color: rgba(204, 204, 204, 1);
+}
+
+.menu-content-b>view:nth-child(2) {
+  margin-top: 50rpx;
+  background: rgba(58, 204, 225, 1);
+  opacity: 1;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  color: rgba(255, 255, 255, 1);
+  border-radius: 12px;
+}
+
+/* 获取手机号码 */
+
+/* 
+.getPhone-bg {
+  position: fixed;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 99;
+}
+
+.getPhone {
+  position: fixed;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 200px;
+  height: 150px;
+}
+
+
+.getPhone cover-image button {
+  position: fixed;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 200px;
+  height: 150px;
+  z-index: 99999;
+} */

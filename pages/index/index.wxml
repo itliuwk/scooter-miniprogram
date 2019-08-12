@@ -1,13 +1,31 @@
 <!--pages/index/index.wxml-->
 
 <view class="info">
-  <view class='image' bindtap='personal'>
-    <open-data type="userAvatarUrl"></open-data>
+
+
+  <view class="person" wx:if="{{!isMenu}}">
+    <view class='image' bindtap='personal'>
+      <open-data type="userAvatarUrl"></open-data>
+    </view>
+    <view bindtap="search">
+      <icon class="iconfont icon-sousuo"></icon>
+      查找附近滑的板车
+    </view>
   </view>
-  <view bindtap="search">
-    <icon class="iconfont icon-sousuo"></icon>
-    查找附近滑的板车
+
+  <view wx:else class="navigation" bindtap='intoMap'>
+    <view>
+      <text>骏盈大厦</text>
+      <view>广东省广州市番禺区东沙村</view>
+    </view>
+    <view>
+      <image src="../../assets/images/nav.png"></image>
+    </view>
   </view>
+
+
+
+
 </view>
 
 <!-- 地图 -->
@@ -78,12 +96,3 @@
 
 
 </view>
-
-
-<!-- <cover-view class="getPhone-bg">
-  <cover-view class="getPhone">
-    <cover-image src="../../assets/images/info-phone.png">
-      <button class='pop_btn' plain="true" open-type='getPhoneNumber' bindgetphonenumber="getPhoneNumber">获取用户手机号</button>
-    </cover-image>
-  </cover-view>
-</cover-view> -->

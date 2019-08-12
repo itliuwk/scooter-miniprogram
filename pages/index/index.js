@@ -173,12 +173,15 @@ Page({
       return item;
     })
 
+
     that.setData({
       markers,
-      isShow: false,
       isMenu: true,
       isInfo: false,
     })
+
+
+
 
     if (this.data.isMarker) { //   用于判断是否第二次点击 mak 点
       return;
@@ -191,7 +194,7 @@ Page({
     animation.translateY(270).step()
     that.setData({
       matrixData: animation.export(),
-      isShow: !this.data.isShow
+      isShow: true
     })
     // 设置setTimeout来改变y轴偏移量，实现有感觉的滑动
     setTimeout(function() {
@@ -215,8 +218,14 @@ Page({
     this.closeMenu();
   },
 
+
+  /**
+   * 关闭菜单
+   */
   closeMenu() {
 
+
+    if (!this.data.isShow) return;
     let markers = this.data.markers.map(item => {
       item.width = 35;
       item.height = 42;
@@ -284,6 +293,26 @@ Page({
   personal() {
     wx.navigateTo({
       url: '/pages/personal/index',
+    })
+  },
+
+  /**
+   * 
+   */
+  intoMap() {
+    wx.getLocation({
+      type: 'gcj02', //返回可以用于wx.openLocation的经纬度
+      success: function(res) { //因为这里得到的是你当前位置的经纬度
+        var latitude = res.latitude
+        var longitude = res.longitude
+        wx.openLocation({ //所以这里会显示你当前的位置
+          latitude: latitude,
+          longitude: longitude,
+          name: "骏盈大厦",
+          address: "广东省广州市番禺区东沙村",
+          scale: 28
+        })
+      }
     })
   },
 

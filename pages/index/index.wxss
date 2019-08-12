@@ -61,6 +61,7 @@
 .menu {
   height: 500rpx;
   position: relative;
+  font-size: 0;
 }
 
 .menu image {
@@ -138,42 +139,53 @@
   border-radius: 12px;
 }
 
-/* 获取手机号码 */
 
-/* 
-.getPhone-bg {
-  position: fixed;
-  margin: auto;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
+
+
+/*  提示信息菜单 start */
+
+.to-be-paid {
+  width: 100%;
+  height: 165rpx;
+  position: relative;
+}
+
+.to-be-paid image {
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 99;
+  position: relative;
+  top: 1px;
 }
 
-.getPhone {
-  position: fixed;
-  margin: auto;
-  left: 0;
-  right: 0;
+.paid-content {
+  position: absolute;
+  width: 100%;
+  height: 100%;
   top: 0;
-  bottom: 0;
-  width: 200px;
-  height: 150px;
+  left: 0;
+  box-sizing: border-box;
+  display: flex;
 }
 
+.paid-content>view {
+  flex: 1;
+}
 
-.getPhone cover-image button {
-  position: fixed;
-  margin: auto;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 200px;
-  height: 150px;
-  z-index: 99999;
-} */
+.paid-content>view:nth-child(1) {
+  padding: 60rpx 0 0 28rpx;
+  flex: 4;
+  color: #fff;
+}
+
+.to-pay text {
+  display: inline-block;
+  background: var(--main-bg-bt);
+  padding: 10rpx 20rpx;
+  border-radius: 24rpx;
+  color: #fff;
+  box-sizing: border-box;
+  position: relative;
+  top: 50rpx;
+}
+
+/*  提示信息菜单 end */

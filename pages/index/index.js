@@ -56,7 +56,11 @@ Page({
     //   width: 10,
     //   dottedLine: true
     // }],
-    polyline: []
+    polyline: [],
+
+
+    isMenu: false, // 显示主菜单
+    isInfo: false, // 显示提示信息
   },
 
   /**
@@ -64,23 +68,15 @@ Page({
    */
   onLoad: function(options) {
 
-    // wx.showModal({
-    //   content: '根据网络安全局要求必须绑定 手机号码后才能使用本服务',
-    //   success(res) {
-    //     if (res.errMsg == 'showModal:ok') {
-    //       wx.getUserInfo({
-    //         success(res) {
-    //           console.log(res)
-    //         }
-    //       })
-    //     }
-    //   }
-    // })
 
     // 初始化减去 info 的高度
     this.setData({
       menuH: this.data.infoH + 'rpx',
     })
+
+
+    //获取提示的请求是否显示  提示信息
+    this.getInfo();
 
 
     this.timer = options.timer;
@@ -147,6 +143,18 @@ Page({
 
 
   /**
+   * 获取提示的请求是否显示  提示信息
+   */
+  getInfo() {
+    this.setData({
+      isInfo: true,
+      isShow: true,
+      menuH: this.data.infoH + 165 + 'rpx', //  165  对应菜单 提示的高度
+    })
+  },
+
+
+  /**
    * 点击mak 点
    */
   markertap(e) {
@@ -166,7 +174,10 @@ Page({
     })
 
     that.setData({
-      markers
+      markers,
+      isShow: false,
+      isMenu: true,
+      isInfo: false,
     })
 
     if (this.data.isMarker) { //   用于判断是否第二次点击 mak 点
@@ -218,8 +229,9 @@ Page({
 
     that.setData({
       menuH: 200 + 'rpx',
+      isMenu: false
     })
-    
+
     var animation = wx.createAnimation({
       duration: 500,
       timingFunction: 'ease'

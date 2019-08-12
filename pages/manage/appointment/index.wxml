@@ -1,11 +1,17 @@
-<!--pages/index/index.wxml-->
-
 <view class="info">
 
 
+  <view class="person" wx:if="{{!isMenu}}">
+    <view class='image' bindtap='personal'>
+      <open-data type="userAvatarUrl"></open-data>
+    </view>
+    <view bindtap="search">
+      <icon class="iconfont icon-sousuo"></icon>
+      查找附近可预约的滑板车
+    </view>
+  </view>
 
-
-  <view class="navigation" bindtap='intoMap'>
+  <view wx:else class="navigation" bindtap='intoMap'>
     <view>
       <text>骏盈大厦</text>
       <view>广东省广州市番禺区东沙村</view>
@@ -32,9 +38,8 @@
 
 
 <!-- 菜单操作 -->
-<view class="panel-con" animation="{{matrixData}}">
+<view class="panel-con" wx:if='{{isShow}}' animation="{{matrixData}}">
 
-  <!-- 借车 or 预约 菜单操作  -->
   <view class="menu">
     <image src="../../../assets/images/menu.png"></image>
 
@@ -80,9 +85,8 @@
       </view>
     </view>
 
-
-
   </view>
+
 
 
 

@@ -48,7 +48,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 10,
+			"current": 11,
 			"list": [
 				{
 					"id": -1,
@@ -124,6 +124,13 @@
 					"id": -1,
 					"name": "预约滑板车",
 					"pathName": "pages/manage/appointment/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "附近滑板车",
+					"pathName": "pages/manage/appointment/nearby",
 					"scene": null
 				}
 			]

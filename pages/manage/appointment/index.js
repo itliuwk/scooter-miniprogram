@@ -8,7 +8,8 @@ Page({
     mapH: '100%',
     infoH: 600,
     menuH: '0',
-    isShow: false,
+    isShow: true,
+    isMarker: true,
     matrixData: null,
 
 
@@ -86,13 +87,16 @@ Page({
       dottedLine: true
     }],
 
-
     date: '2019-08-12',
     multiArray: [
       ['01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00'],
       ['13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00', '24:00']
     ],
-    multiIndex: [0, 0]
+    multiIndex: [0, 0],
+
+
+
+    isMenu: true, // 是否显示主菜单
   },
 
   /**
@@ -107,6 +111,7 @@ Page({
     })
 
 
+
     //  获取当前位置信息
     this.timer = options.timer;
     wx.getLocation({
@@ -115,6 +120,35 @@ Page({
         this.setData({
           longitude: res.longitude,
           latitude: res.latitude
+        })
+      },
+    })
+
+    // 地图上的一些操作按钮
+    wx.getSystemInfo({
+      success: (res) => {
+        this.setData({
+          controls: [{
+            id: 1,
+            iconPath: "../../../assets/images/location.png", // 定位
+            position: {
+              width: 100,
+              height: 100,
+              left: res.screenWidth - 100,
+              top: res.windowHeight - 220
+            },
+            clickable: true
+          }, {
+            id: 2,
+            iconPath: "../../../assets/images/repair.png", //  报修
+            position: {
+              width: 100,
+              height: 100,
+              left: res.screenWidth - 100,
+              top: res.windowHeight - 300
+            },
+            clickable: true
+          }]
         })
       },
     })
@@ -167,12 +201,47 @@ Page({
 
 
     that.setData({
-      markers
+      markers,
+      isMenu: true
     })
+
+
+
+
+    if (this.data.isMarker) { //   用于判断是否第二次点击 mak 点
+      return;
+    }
+    var animation = wx.createAnimation({
+      duration: 200,
+      timingFunction: 'ease'
+    })
+    that.animation = animation
+    animation.translateY(270).step()
+    that.setData({
+      matrixData: animation.export(),
+      isShow: true
+    })
+    // 设置setTimeout来改变y轴偏移量，实现有感觉的滑动
+    setTimeout(function() {
+      animation.translateY(0).step()
+      that.setData({
+        menuH: that.data.infoH + 'rpx',
+        matrixData: animation.export(),
+        isMarker: true //  用于判断是否第二次点击 mak 点
+      })
+    }, 200)
+
 
   },
 
 
+
+  /**
+   * 点击地图上触发
+   */
+  bindtapMap(e) {
+    this.closeMenu();
+  },
 
 
   /**
@@ -212,11 +281,10 @@ Page({
     setTimeout(function() {
       animation.translateY(0).step()
       that.setData({
-        menuH: that.data.infoH + 'rpx',
+        menuH: 0 + 'rpx',
         markers,
         matrixData: animation.export(),
         isShow: false,
-        isAppointment: false, //  取消预约滑板车
         isMarker: false //  用于判断是否第二次点击 mak 点
       })
     }, 200)
@@ -224,25 +292,45 @@ Page({
 
 
   /**
-   * 预约滑板车
+   * 日期的选择
    */
-  appointment() {
+  bindDateChange: function(e) {
     this.setData({
-      isAppointment: true
+      date: e.detail.value
     })
+  },
+
+
+  /**
+   * 时间间隔的选择
+   */
+  bindMultiPickerChange: function(e) {
+    this.setData({
+      multiIndex: e.detail.value
+    })
+
   },
 
 
 
 
+
+
+  borrow() {
+    console.log('借车')
+  },
+
+  still() {
+    console.log('还车')
+  },
+
+
   /**
-   *  点击 
+   *  点击 跳转附近滑板车
    */
   search() {
-    wx.chooseLocation({
-      success(res) {
-        console.log(res)
-      }
+    wx.navigateTo({
+      url: './nearby',
     })
   },
 
@@ -277,29 +365,23 @@ Page({
   },
 
 
-
-
-
-
   /**
-   * 日期的选择
+   * 跳转支付页面
    */
-  bindDateChange: function(e) {
-    this.setData({
-      date: e.detail.value
+  toPay() {
+    wx.navigateTo({
+      url: '/pages/manage/payment/end',
     })
   },
 
 
-  /**
-   * 时间间隔的选择
-   */
-  bindMultiPickerChange: function(e) {
-    this.setData({
-      multiIndex: e.detail.value
-    })
-
+  getPhoneNumber(e) {
+    console.log(e)
   },
+
+
+
+
 
 
 

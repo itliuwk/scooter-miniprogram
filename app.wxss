@@ -24,3 +24,9 @@ page {
   border-radius: 24rpx;
   font-size: 30rpx;
 }
+
+view, image {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}

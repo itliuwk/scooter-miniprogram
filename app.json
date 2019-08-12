@@ -11,7 +11,8 @@
     "pages/personal/trip",
     "pages/personal/setUp/index",
     "pages/personal/setUp/binding",
-    "pages/manage/appointment/index"
+    "pages/manage/appointment/index",
+    "pages/manage/appointment/nearby"
   ],
   "permission": {
     "scope.userLocation": {

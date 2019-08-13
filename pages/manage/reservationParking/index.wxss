@@ -1,0 +1,272 @@
+.container {
+  height: 100%;
+  width: 100%;
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+}
+
+.controls {
+  position: relative;
+  top: -160rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.controls .borrow, .controls .still {
+  width: 200rpx;
+  height: 88rpx;
+  text-align: center;
+  line-height: 88rpx;
+  border-radius: 10rpx;
+  background: #3acce1;
+  color: #fff;
+  margin: 0 80rpx;
+  z-index: 100;
+}
+
+/* 顶部提示信息 start */
+
+.info {
+  height: 100rpx;
+  line-height: 100rpx;
+  background: #fff;
+  padding: 0 20rpx 0 40rpx;
+  box-sizing: border-box;
+}
+
+.info .person {
+  display: flex;
+}
+
+.info .image {
+  width: 70rpx;
+  height: 70rpx;
+  padding-top: 10rpx;
+}
+
+.info>view:nth-child(2) {
+  margin-left: 60rpx;
+  color: #959dad;
+  font-size: 30rpx;
+}
+
+.info view  icon {
+  margin: 0 20rpx;
+  color: #454f63;
+  font-weight: bolder;
+}
+
+.info .navigation {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.navigation>view {
+  flex: 1;
+  display: inline-block;
+  line-height: normal;
+}
+
+.navigation>view:nth-child(1) {
+  flex: 3;
+}
+
+.navigation>view:nth-child(1) text {
+  color: rgba(42, 46, 67, 1);
+  font-weight: bold;
+}
+
+.navigation>view:nth-child(1) view {
+  color: rgba(42, 46, 67, 1);
+}
+
+.navigation image {
+  width: 48rpx;
+  height: 48rpx;
+}
+
+.navigation>view:nth-child(2) {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* 顶部提示信息 end */
+
+.menu {
+  height: 500rpx;
+  position: relative;
+  font-size: 0;
+}
+
+.menu image {
+  width: 100%;
+  height: 100%;
+}
+
+.menu-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 50rpx;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.menu-content-t {
+  display: flex;
+}
+
+.menu-content-t>view {
+  flex: 1;
+  font-size: 30rpx;
+}
+
+.menu-content-t-title {
+  margin-bottom: 15rpx;
+}
+
+.menu-content-t-title text:nth-child(1) {
+  color: rgba(241, 241, 241, 1);
+}
+
+.menu-content-t-title text:nth-child(2) {
+  color: rgba(255, 255, 255, 1);
+}
+
+.menu-content-t-title .default {
+  color: #959dad;
+  font-size: 25rpx;
+  padding-left: 20rpx;
+}
+
+.selDateTime {
+  font-size: 28rpx;
+  margin: 15rpx 0;
+}
+
+.selDateTime>view {
+  color: rgba(255, 255, 255, 1);
+  font-size: 28rpx;
+  margin: 15rpx 0;
+}
+
+.selDateTime picker {
+  display: inline-block;
+  margin: 0 10rpx;
+}
+
+.selDateTime .picker {
+  width: 300rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  border-radius: 10rpx;
+  font-size: 30rpx;
+  text-align: center;
+  background: rgba(69, 79, 99, 1);
+  box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.12);
+  color: rgba(255, 255, 255, 1);
+}
+
+.menu-content-t>view:nth-child(2) {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.menu-content-t .appointment {
+  display: inline-block;
+  width: 160rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  border: 1px solid rgba(58, 204, 225, 1);
+  opacity: 1;
+  color: rgba(255, 255, 255, 1);
+  font-size: 28rpx;
+  border-radius: 16rpx;
+}
+
+.menu-content-b {
+  margin-top: 50rpx;
+}
+
+.menu-content-b>view:nth-child(1) {
+  font-size: 28rpx;
+  color: rgba(204, 204, 204, 1);
+}
+
+.menu-content-b>view:nth-child(2) {
+  margin-top: 50rpx;
+  background: rgba(58, 204, 225, 1);
+  opacity: 1;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  color: rgba(255, 255, 255, 1);
+  border-radius: 12px;
+  font-size: 30rpx;
+}
+
+.menu-content-appointment {
+  margin-top: 20rpx;
+}
+
+.menu-content-appointment>view:nth-child(2) {
+  margin-top: 10rpx;
+}
+
+/*  提示信息菜单 start */
+
+.to-be-paid {
+  width: 100%;
+  height: 165rpx;
+  position: relative;
+}
+
+.to-be-paid image {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  top: 1px;
+}
+
+.paid-content {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  display: flex;
+}
+
+.paid-content>view {
+  flex: 1;
+}
+
+.paid-content>view:nth-child(1) {
+  padding: 60rpx 0 0 28rpx;
+  flex: 4;
+  color: #fff;
+}
+
+.to-pay text {
+  display: inline-block;
+  background: var(--main-bg-bt);
+  padding: 10rpx 20rpx;
+  border-radius: 24rpx;
+  color: #fff;
+  box-sizing: border-box;
+  position: relative;
+  top: 50rpx;
+}
+
+/*  提示信息菜单 end */

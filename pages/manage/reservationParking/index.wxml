@@ -1,0 +1,94 @@
+<view class="info">
+
+
+  <view class="person" wx:if="{{!isMenu}}">
+    <view class='image' bindtap='personal'>
+      <open-data type="userAvatarUrl"></open-data>
+    </view>
+    <view bindtap="search">
+      <icon class="iconfont icon-sousuo"></icon>
+      查找附近可预约的滑板车
+    </view>
+  </view>
+
+  <view wx:else class="navigation" bindtap='intoMap'>
+    <view>
+      <text>骏盈大厦</text>
+      <view>广东省广州市番禺区东沙村</view>
+    </view>
+    <view>
+      <image src="../../../assets/images/nav.png"></image>
+    </view>
+  </view>
+
+
+
+
+</view>
+
+<!-- 地图 -->
+<view class="container" style='height: calc( 100vh -  {{menuH}})'>
+  <map id="map" latitude="{{latitude}}" longitude="{{longitude}}" markers="{{markers}}" polyline="{{polyline}}" bindmarkertap="markertap" show-location controls="{{controls}}" scale="15" bindcontroltap="bindcontroltap" bindtap='bindtapMap' />
+</view>
+
+
+
+
+
+
+
+<!-- 菜单操作 -->
+<view class="panel-con" wx:if='{{isShow}}' animation="{{matrixData}}">
+
+  <view class="menu">
+    <image src="../../../assets/images/menu.png"></image>
+
+    <view class="menu-content">
+      <view class="menu-content-t">
+        <view>
+
+          <view class="menu-content-t-title">
+            <text>车辆编号：</text>
+            <text>996883 </text>
+
+            <text class="default">(已默认为您推荐最近的存车位)</text>
+          </view>
+
+          <view class="menu-content-t-title">
+            <text>可用车位：</text>
+            <text>12 </text>
+          </view>
+
+        </view>
+      </view>
+      <view class="selDateTime">
+        <view>请选择预约时间</view>
+        <picker mode="date" value="{{date}}" start="{{date}}" end="" bindchange="bindDateChange">
+          <view class="picker">
+            {{date}}
+          </view>
+        </picker>
+
+        <picker mode="multiSelector" bindchange="bindMultiPickerChange" value="{{multiIndex}}" range="{{multiArray}}">
+          <view class="picker">
+            {{multiArray[0][multiIndex[0]]}}am - {{multiArray[1][multiIndex[1]]}}pm
+          </view>
+        </picker>
+
+
+      </view>
+      <view class="menu-content-b menu-content-appointment">
+        <view>我是收费文案文案文案文案(如:￥0.5/分钟)</view>
+        <view bindtap="active">
+          <text>立即预约</text>
+        </view>
+      </view>
+    </view>
+
+  </view>
+
+
+
+
+
+</view>

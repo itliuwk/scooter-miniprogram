@@ -14,7 +14,12 @@
     "pages/manage/appointment/index",
     "pages/manage/appointment/nearby",
     "pages/manage/appointment/active",
-    "pages/manage/repair/index"
+    "pages/manage/reservationParking/index",
+    "pages/manage/reservationParking/nearby",
+    "pages/manage/reservationParking/active",
+    "pages/manage/repair/index",
+    "pages/manage/trip/take",
+    "pages/manage/trip/still"
   ],
   "permission": {
     "scope.userLocation": {

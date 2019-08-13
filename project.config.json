@@ -48,7 +48,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 13,
+			"current": 15,
 			"list": [
 				{
 					"id": -1,
@@ -145,6 +145,20 @@
 					"id": -1,
 					"name": "车辆报修",
 					"pathName": "pages/manage/repair/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "取车",
+					"pathName": "pages/manage/trip/take",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "还车",
+					"pathName": "pages/manage/trip/still",
 					"scene": null
 				}
 			]

@@ -1,0 +1,23 @@
+<!--pages/manage/trip/take.wxml-->
+<view class="page">
+
+  <view class="top">
+    <view>
+      <view class="open fw">车门已经打开</view>
+      <view>请及时取走车辆并关好门</view>
+    </view>
+  </view>
+
+  <view class="center">
+
+    <view class="item {{item.checked?'open':''}}" wx:for="{{lattice}}" wx:key="{{item.id}}">
+      <image wx:if="{{item.checked}}" src="../../../assets/images/open.png"></image>
+      <text wx:else></text>
+    </view>
+
+  </view>
+
+
+
+  
+</view>

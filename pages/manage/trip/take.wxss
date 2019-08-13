@@ -1,0 +1,54 @@
+/* pages/manage/trip/take.wxss */
+
+.top {
+  height: 200rpx;
+  display: flex;
+  text-align: center;
+  align-items: flex-end;
+  justify-content: center;
+  margin-bottom: 20rpx;
+}
+
+.top .open {
+  color: rgba(42, 46, 67, 1);
+}
+
+.center {
+  padding: 20rpx 100rpx;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.center .item {
+  width: 28%;
+  margin: 15rpx;
+  box-sizing: border-box;
+  height: 106rpx;
+  line-height: 120rpx;
+  text-align: center;
+  background: rgba(120, 132, 158, 1);
+  opacity: 1;
+  border-radius: 16px;
+}
+
+.center .item text {
+  display: inline-block;
+  width: 36rpx;
+  height: 36rpx;
+  background: rgba(42, 46, 67, 1);
+  border-radius: 50%;
+  opacity: 1;
+}
+
+.center .item image {
+  height: 100%;
+  width: 60%;
+}
+
+.center .open {
+  border: 4rpx solid rgba(58, 204, 225, 1);
+  background: #fff;
+}
+
+
+

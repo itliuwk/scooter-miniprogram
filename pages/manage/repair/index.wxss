@@ -42,7 +42,7 @@
 
 .repair-content .code image {
   width: 80%;
-  height: 380rpx;
+  height: 400rpx;
 }
 
 .info {
@@ -69,6 +69,7 @@
 }
 
 .weixi text:nth-child(2) {
+  width: 80rpx;
   border-left: none;
   background: #fff;
   font-size: 22rpx;

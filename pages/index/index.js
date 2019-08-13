@@ -387,40 +387,13 @@ Page({
         this.movetoCenter();
         break;
       case 2:
-        if (this.timer) {
-          wx.navigateBack({
-            delta: 1
-          })
-        } else {
-          wx.scanCode({
-            success: () => {
-              wx.showLoading({
-                title: '正在获取密码',
-              })
-              wx.request({
-                url: 'https://www.easy-mock.com/mock/5963172d9adc231f357c8ab1/ofo/getname',
-
-                success: (res) => {
-                  console.log(res);
-                  wx.hideLoading();
-                  wx.redirectTo({
-                    url: '../scanResult/index?password=' + res.data.data.password + '&number=' + res.data.data.number,
-                    success: () => {
-                      wx.showToast({
-                        title: '获取密码成功',
-                        duration: 1000
-                      })
-                    }
-                  })
-                }
-              })
-            }
-          })
-        }
+        wx.navigateTo({
+          url: '../manage/repair/index',
+        })
         break;
       case 3:
         wx.navigateTo({
-          url: '../my/index',
+          url: '../manage/repair/index',
         })
         break;
       case 4:
@@ -428,7 +401,6 @@ Page({
           url: '../warn/index',
         })
         break;
-
     }
   },
 })

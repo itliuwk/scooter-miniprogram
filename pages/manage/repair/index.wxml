@@ -10,14 +10,17 @@
     </view>
 
     <view class="code">
-      <image src="../../../assets/images/code.png"></image>
+      <image src="../../../assets/images/code.png" data-src='../../../assets/images/code.png' bindtap='previewImage'></image>
     </view>
 
     <view class="info">
-      <view>扫描上方二维码添加客服微信</view>
+      <view>
+        <text>扫描上方二维码添加客服微信或着</text>
+        <text class="call" bindtap="call">拨打电话</text>
+      </view>
       <view class="weixi">
         <text>ghggv889</text>
-        <text>复制</text>
+        <text data-text="ghggv889" bindtap="copy">复制</text>
       </view>
     </view>
 

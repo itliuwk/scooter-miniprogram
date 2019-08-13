@@ -73,4 +73,10 @@
   background: #fff;
   font-size: 22rpx;
   color: rgba(58, 204, 225, 1);
+  position: relative;
+  top: -1rpx;
+}
+
+.call {
+  color: #188ae2;
 }

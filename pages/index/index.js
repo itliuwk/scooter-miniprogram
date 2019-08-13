@@ -106,9 +106,8 @@ Page({
     //  获取是否授权
     wx.getSetting({
       success(res) {
-        console.log(res)
         let isEmpower = false;
-        if (res.errMsg == 'getSetting:ok') {
+        if (res.authSetting['scope.userInfo']) {
           isEmpower = true
         }
 
@@ -197,7 +196,7 @@ Page({
   getInfo() {
     this.setData({
       isInfo: false,
-      isShow: true,
+      // isShow: true,
       // menuH: this.data.infoH + 165 + 'rpx', //  165  对应菜单 提示的高度
     })
   },
@@ -207,7 +206,15 @@ Page({
    * 点击mak 点
    */
   markertap(e) {
-    console.log(e)
+    if (!this.data.isEmpower) {
+      wx.showToast({
+        title: '请先点击下方授权',
+        icon: 'none'
+      })
+      return false;
+    }
+
+
     // 用that取代this，防止不必要的情况发生
     var that = this;
     let markers = this.data.markers.map(item => {
@@ -331,9 +338,26 @@ Page({
    * 立即出行
    */
   Trip() {
-    wx.navigateTo({
-      url: '/pages/manage/trip/take',
+
+    wx.showToast({
+      title: '你还没有支付押金,不能用车',
+      icon: 'none'
     })
+
+    setTimeout(() => {
+      wx.navigateTo({
+        url: '/pages/manage/payment/deposit',
+      })
+
+      // wx.navigateTo({
+      //   url: '/pages/manage/trip/take',
+      // })
+
+    }, 1500)
+
+
+
+
   },
 
 
@@ -342,20 +366,33 @@ Page({
    */
   empower(res) {
 
-    console.log(res)
+    if (res.detail.errMsg == 'getUserInfo:ok') {
 
-    wx.login({
-      success: res => {
-        console.log(res)
-        // 登录注册接口
-        if (res.code) {
-          // 调用服务端登录接口，发送 res.code 到服务器端换取 openId, sessionKey, unionId并存入数据库中
+      wx.showLoading({
+        title: '',
+      })
 
-        } else {
-          console.log('登录失败！' + res.errMsg)
+
+      setTimeout(() => {
+        this.setData({
+          isEmpower: true
+        }, () => {
+          wx.hideLoading()
+        })
+      }, 1500)
+      wx.login({
+        success: res => {
+
+          // 登录注册接口
+          if (res.code) {
+            // 调用服务端登录接口，发送 res.code 到服务器端换取 openId, sessionKey, unionId并存入数据库中
+
+          } else {
+            console.log('登录失败！' + res.errMsg)
+          }
         }
-      }
-    });
+      });
+    }
   },
 
 

@@ -23,7 +23,6 @@
   text-align: center;
   line-height: 88rpx;
   border-radius: 10rpx;
-  background: #3acce1;
   color: #fff;
   margin: 0 80rpx;
   z-index: 100;

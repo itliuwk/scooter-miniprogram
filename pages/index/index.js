@@ -313,7 +313,9 @@ Page({
   },
 
   still() {
-    console.log('还车')
+    wx.navigateTo({
+      url: "/pages/manage/trip/still"
+    })
   },
 
 

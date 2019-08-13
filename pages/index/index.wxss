@@ -19,8 +19,13 @@
   z-index: 1;
 }
 
+.controls button {
+  width: 80%;
+  background: #3acce1;
+  color: #fff;
+}
+
 .controls .borrow, .controls .still {
-  width: 200rpx;
   height: 88rpx;
   text-align: center;
   line-height: 88rpx;

@@ -19,7 +19,8 @@
     "pages/manage/reservationParking/active",
     "pages/manage/repair/index",
     "pages/manage/trip/take",
-    "pages/manage/trip/still"
+    "pages/manage/trip/still",
+    "pages/manage/trip/use"
   ],
   "permission": {
     "scope.userLocation": {

@@ -1,0 +1,27 @@
+<view class="info">
+
+  <view class="navigation">
+    <view>
+      <text>189</text>
+      <view>里程(公里)</view>
+    </view>
+    <view>
+      <text>2</text>
+      <view>时长(小时)</view>
+    </view>
+  </view>
+
+
+</view>
+
+<!-- 地图 -->
+<view class="container" style='height: calc( 100vh -  {{menuH}})'>
+  <map id="map" latitude="{{latitude}}" longitude="{{longitude}}" polyline="{{polyline}}" bindmarkertap="markertap" show-location controls="{{controls}}" scale="15" bindcontroltap="bindcontroltap" bindtap='bindtapMap' />
+</view>
+
+
+<!-- 预约车位/结束行程 按钮 -->
+<cover-view class="controls">
+  <cover-image class="borrow" src="../../../assets/images/reservationParking.png" bindtap="borrow" />
+  <cover-image class="still" src="../../../assets/images/endJourney.png" bindtap="still" />
+</cover-view>

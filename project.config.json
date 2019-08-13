@@ -48,7 +48,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 15,
+			"current": 16,
 			"list": [
 				{
 					"id": -1,
@@ -159,6 +159,14 @@
 					"id": -1,
 					"name": "还车",
 					"pathName": "pages/manage/trip/still",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "使用中",
+					"pathName": "pages/manage/trip/use",
+					"query": "",
 					"scene": null
 				}
 			]

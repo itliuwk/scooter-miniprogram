@@ -35,7 +35,7 @@
       <text bindtap="update">修改预约</text>
     </view>
     <view>
-      <text>去取车</text>
+      <text>去还车</text>
     </view>
   </view>
 

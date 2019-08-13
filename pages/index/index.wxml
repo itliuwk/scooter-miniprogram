@@ -37,8 +37,8 @@
 
 <!-- 借车/还车 按钮 -->
 <cover-view class="controls" wx:if='{{!isShow}}'>
-  <cover-image class="borrow" src="../../assets/images/borrow.png" bindtap="borrow" />
-  <cover-image class="still" src="../../assets/images/still.png" bindtap="still" />
+  <!-- <cover-image class="borrow" src="../../assets/images/travelAtOnce.png" bindtap="borrow" /> -->
+  <button bindtap="Trip">立即出行</button>
 </cover-view>
 
 
@@ -78,7 +78,7 @@
       <view class="menu-content-b">
         <view>我是收费文案文案文案文案(如:￥0.5/分钟)</view>
         <view>
-          <text>立即出行</text>
+          <text bindtap="Trip">立即出行</text>
         </view>
       </view>
     </view>

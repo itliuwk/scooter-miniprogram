@@ -8,41 +8,12 @@ Page({
     mapH: '100%',
     infoH: 100,
     menuH: '0',
-    isShow: false,
+    isMarker: true,
     matrixData: null,
 
 
     longitude: 0,
     latitude: 0,
-    markers: [{
-      id: 1,
-      latitude: 22.965565,
-      longitude: 113.365474,
-      iconPath: '../../assets/images/marker.png',
-      width: 35,
-      height: 42
-    }, {
-      id: 2,
-      latitude: 22.963194,
-      longitude: 113.362598,
-      iconPath: '../../assets/images/marker.png',
-      width: 35,
-      height: 42
-    }, {
-      id: 3,
-      latitude: 22.940531,
-      longitude: 113.384743,
-      iconPath: '../../assets/images/marker.png',
-      width: 35,
-      height: 42
-    }, {
-      id: 4,
-      latitude: 22.939246,
-      longitude: 113.382490,
-      iconPath: '../../assets/images/marker.png',
-      width: 35,
-      height: 42
-    }],
 
     polyline: [{
       points: [{
@@ -83,15 +54,10 @@ Page({
       ],
       color: "#3ACCE1",
       width: 4,
-      dottedLine: true
-    }],
+      dottedLine: true,
+      arrowLine: true
+    }]
 
-
-
-
-
-    isMenu: false, // 是否显示主菜单
-    isInfo: false, // 是否显示提示信息
   },
 
   /**
@@ -106,8 +72,6 @@ Page({
     })
 
 
-    //获取提示的请求是否显示  提示信息
-    this.getInfo();
 
     //  获取当前位置信息
     this.timer = options.timer;
@@ -127,7 +91,7 @@ Page({
         this.setData({
           controls: [{
             id: 1,
-            iconPath: "../../assets/images/location.png", // 定位
+            iconPath: "../../../assets/images/location.png", // 定位
             position: {
               width: 100,
               height: 100,
@@ -137,7 +101,7 @@ Page({
             clickable: true
           }, {
             id: 2,
-            iconPath: "../../assets/images/repair.png", //  报修
+            iconPath: "../../../assets/images/repair.png", //  报修
             position: {
               width: 100,
               height: 100,
@@ -172,17 +136,15 @@ Page({
     }, 2000)
   },
 
-
-  /**
-   * 获取提示的请求是否显示  提示信息
-   */
-  getInfo() {
-    this.setData({
-      isInfo: true,
-      isShow: true,
-      menuH: this.data.infoH + 165 + 'rpx', //  165  对应菜单 提示的高度
+  onUnload(){
+  
+    wx.reLaunch({
+      url: '/pages/index/index',
     })
   },
+
+
+
 
 
   /**
@@ -196,11 +158,11 @@ Page({
       if (item.id == e.markerId) {
         item.width = 40;
         item.height = 47;
-        item.iconPath = '../../assets/images/selMarker.png'
+        item.iconPath = '../../../assets/images/selMarker.png'
       } else {
         item.width = 35;
         item.height = 42;
-        item.iconPath = '../../assets/images/marker.png'
+        item.iconPath = '../../../assets/images/marker.png'
       }
       return item;
     })
@@ -208,35 +170,9 @@ Page({
 
     that.setData({
       markers,
-      isMenu: true,
-      isInfo: false,
+      isMenu: true
     })
 
-
-
-
-    if (this.data.isMarker) { //   用于判断是否第二次点击 mak 点
-      return;
-    }
-    var animation = wx.createAnimation({
-      duration: 200,
-      timingFunction: 'ease'
-    })
-    that.animation = animation
-    animation.translateY(270).step()
-    that.setData({
-      matrixData: animation.export(),
-      isShow: true
-    })
-    // 设置setTimeout来改变y轴偏移量，实现有感觉的滑动
-    setTimeout(function() {
-      animation.translateY(0).step()
-      that.setData({
-        menuH: 500 + that.data.infoH + 'rpx',
-        matrixData: animation.export(),
-        isMarker: true //  用于判断是否第二次点击 mak 点
-      })
-    }, 200)
 
 
   },
@@ -256,12 +192,10 @@ Page({
    */
   closeMenu() {
 
-
-    if (!this.data.isShow) return;
     let markers = this.data.markers.map(item => {
       item.width = 35;
       item.height = 42;
-      item.iconPath = '../../assets/images/marker.png'
+      item.iconPath = '../../../assets/images/marker.png'
       return item;
     })
 
@@ -273,60 +207,32 @@ Page({
       isMenu: false
     })
 
-    var animation = wx.createAnimation({
-      duration: 500,
-      timingFunction: 'ease'
-    })
-
-    that.animation = animation
-    animation.translateY(300).step()
-    that.setData({
-      matrixData: animation.export(),
-
-    })
-    // 设置setTimeout来改变y轴偏移量，实现有感觉的滑动
-    setTimeout(function() {
-      animation.translateY(0).step()
-      that.setData({
-        menuH: that.data.infoH + 'rpx',
-        markers,
-        matrixData: animation.export(),
-        isShow: false,
-        isMarker: false //  用于判断是否第二次点击 mak 点
-      })
-    }, 200)
   },
 
 
-  /**
-   * 预约滑板车
-   */
-  appointment() {
+
+
+
+
+
+
+  borrow() {
     wx.navigateTo({
-      url: "/pages/manage/appointment/index"
+      url: '/pages/manage/reservationParking/index',
     })
   },
 
-
-
-  /**
-   * 立即出行
-   */
-  Trip() {
-    wx.navigateTo({
-      url: '/pages/manage/trip/take',
-    })
+  still() {
+    console.log('还车')
   },
 
 
   /**
-   *  点击 
+   *  点击 跳转附近滑板车
    */
   search() {
-    wx.chooseLocation({
-      success(res) {
-        console.log(res)
-      }
+    wx.navigateTo({
+      url: './nearby',
     })
   },
 
@@ -338,41 +244,6 @@ Page({
     wx.navigateTo({
       url: '/pages/personal/index',
     })
-  },
-
-  /**
-   * 
-   */
-  intoMap() {
-    wx.getLocation({
-      type: 'gcj02', //返回可以用于wx.openLocation的经纬度
-      success: function(res) { //因为这里得到的是你当前位置的经纬度
-        var latitude = res.latitude
-        var longitude = res.longitude
-        wx.openLocation({ //所以这里会显示你当前的位置
-          latitude: latitude,
-          longitude: longitude,
-          name: "骏盈大厦",
-          address: "广东省广州市番禺区东沙村",
-          scale: 28
-        })
-      }
-    })
-  },
-
-
-  /**
-   * 跳转支付页面
-   */
-  toPay() {
-    wx.navigateTo({
-      url: '/pages/manage/payment/end',
-    })
-  },
-
-
-  getPhoneNumber(e) {
-    console.log(e)
   },
 
 

@@ -12,7 +12,7 @@
 
   <view class="top top-complete-money">
     <view>
-      <view>我是小程序名称</view>
+      <view>爱动滑板</view>
       <text>￥</text>
       <text>189</text>
 
@@ -25,7 +25,7 @@
   </view>
 
 
-  <view class="pay confirm">
+  <view class="pay confirm" bindtap="complete">
     完成
   </view>
 

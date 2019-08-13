@@ -92,13 +92,31 @@ Page({
 
     isMenu: false, // 是否显示主菜单
     isInfo: false, // 是否显示提示信息
+
+    isEmpower: false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    let that = this;
 
+
+    //  获取是否授权
+    wx.getSetting({
+      success(res) {
+        console.log(res)
+        let isEmpower = false;
+        if (res.errMsg == 'getSetting:ok') {
+          isEmpower = true
+        }
+
+        that.setData({
+          isEmpower
+        })
+      }
+    })
 
     // 初始化减去 info 的高度
     this.setData({
@@ -178,9 +196,9 @@ Page({
    */
   getInfo() {
     this.setData({
-      isInfo: true,
+      isInfo: false,
       isShow: true,
-      menuH: this.data.infoH + 165 + 'rpx', //  165  对应菜单 提示的高度
+      // menuH: this.data.infoH + 165 + 'rpx', //  165  对应菜单 提示的高度
     })
   },
 
@@ -320,9 +338,39 @@ Page({
 
 
   /**
+   * 授权
+   */
+  empower(res) {
+
+    console.log(res)
+
+    wx.login({
+      success: res => {
+        console.log(res)
+        // 登录注册接口
+        if (res.code) {
+          // 调用服务端登录接口，发送 res.code 到服务器端换取 openId, sessionKey, unionId并存入数据库中
+
+        } else {
+          console.log('登录失败！' + res.errMsg)
+        }
+      }
+    });
+  },
+
+
+  /**
    *  点击 
    */
   search() {
+
+    if (!this.data.isEmpower) {
+      wx.showToast({
+        title: '请先点击下方授权',
+        icon: 'none'
+      })
+      return false;
+    }
     wx.chooseLocation({
       success(res) {
         console.log(res)
@@ -335,6 +383,15 @@ Page({
    * 跳转个人中心 
    */
   personal() {
+
+
+    if (!this.data.isEmpower) {
+      wx.showToast({
+        title: '请先点击下方授权',
+        icon: 'none'
+      })
+      return false;
+    }
     wx.navigateTo({
       url: '/pages/personal/index',
     })

@@ -136,8 +136,8 @@ Page({
     }, 2000)
   },
 
-  onUnload(){
-  
+  onUnload() {
+
     wx.reLaunch({
       url: '/pages/index/index',
     })
@@ -223,7 +223,9 @@ Page({
   },
 
   still() {
-    console.log('还车')
+    wx.navigateTo({
+      url: '/pages/manage/trip/still',
+    })
   },
 
 
@@ -261,7 +263,7 @@ Page({
         break;
       case 2:
         wx.navigateTo({
-          url: '../manage/repair/index',
+          url: '/pages/manage/repair/index',
         })
         break;
       case 3:

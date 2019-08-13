@@ -38,7 +38,8 @@
 <!-- 借车/还车 按钮 -->
 <cover-view class="controls" wx:if='{{!isShow}}'>
   <!-- <cover-image class="borrow" src="../../assets/images/travelAtOnce.png" bindtap="borrow" /> -->
-  <button bindtap="Trip">立即出行</button>
+  <button wx:if="{{isEmpower}}" bindtap="Trip">立即出行</button>
+  <button bindgetuserinfo="empower" wx:if="{{!isEmpower}}" open-type="getUserInfo">授权小程序</button>
 </cover-view>
 
 

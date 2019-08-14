@@ -12,7 +12,12 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    tripList: [],
+    listEnd: false,
+    listParams: {
+      size: 10,
+      from: 0
+    }
   },
 
   /**
@@ -37,12 +42,49 @@ Page({
   },
 
   fetchList() {
+
+    if (this.data.listEnd) {
+      return
+    }
+
     fetch({
-      url: '/journey/list'
+      url: '/journey/list',
+      data: {
+        ...this.data.listParams
+      }
     }).then(res => {
-      console.log(res)
+
+      if (res.data.length < this.data.listParams.size) {
+        this.setData({
+          listEnd: true
+        })
+      }
+
+      res.data.map(item => {
+        item.createdDate = formatYYYY(item.createdDate)
+        return item;
+      })
+
+
+      this.setData({
+        tripList: [...this.data.tripList, ...res.data]
+      })
     })
-  }
+  },
+
+
+  /**
+   * 列表触底加更多列表数据
+   */
+  loadMoreListData: function() {
+    this.setData({
+      listParams: {
+        ...this.data.listParams,
+        from: this.data.listParams.from + this.data.listParams.size
+      }
+    })
+    this.fetchList();
+  },
 
 
 })

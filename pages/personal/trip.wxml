@@ -1,75 +1,30 @@
-<view class="trip">
+<scroll-view bindscrolltolower="loadMoreListData" style="height:100vh" scroll-y="{{true}}">
+  <view class="trip">
+    <view class="item" wx:for="{{tripList}}" wx:key="{{item.id}}">
+      <view class="left">
+        <view>
+          <image src="../../assets/images/time.png"></image>
+          <text class="fwd">{{item.createdDate}}</text>
+        </view>
+        <view class="title">
+          <text>行驶里程：</text>
+          <text class="fwd">{{item.distance}}</text>
+          <text>公里</text>
+        </view>
+        <view class="title">
+          <text>订单金额：</text>
+          <text class="fwd">{{item.total}}元</text>
+        </view>
+      </view>
+      <view class="right">
+        <text>行驶时间：</text>
+        <text>{{item.costTime}}</text>
+        <text>分钟</text>
+      </view>
+    </view>
 
-  <view class="item">
-    <view class="left">
-      <view>
-        <image src="../../assets/images/time.png"></image>
-        <text class="fwd">2019-07-23</text>
-      </view>
-      <view class="title">
-        <text>行驶里程：</text>
-        <text class="fwd">3.8</text>
-        <text>公里</text>
-      </view>
-      <view class="title">
-        <text>订单金额：</text>
-        <text class="fwd">40.5元</text>
-      </view>
-    </view>
-    <view class="right">
-      <text>行驶时间：</text>
-      <text>40</text>
-      <text>分钟</text>
-    </view>
+
+
+
   </view>
-
-
-  <view class="item">
-    <view class="left">
-      <view>
-        <image src="../../assets/images/time.png"></image>
-        <text class="fwd">2019-08-05</text>
-      </view>
-      <view class="title">
-        <text>行驶里程：</text>
-        <text class="fwd">1.8</text>
-        <text>公里</text>
-      </view>
-      <view class="title">
-        <text>订单金额：</text>
-        <text class="fwd">26.5元</text>
-      </view>
-    </view>
-    <view class="right">
-      <text>行驶时间：</text>
-      <text>20</text>
-      <text>分钟</text>
-    </view>
-  </view>
-
-  <view class="item">
-    <view class="left">
-      <view>
-        <image src="../../assets/images/time.png"></image>
-        <text class="fwd">2019-08-11</text>
-      </view>
-      <view class="title">
-        <text>行驶里程：</text>
-        <text class="fwd">10.6</text>
-        <text>公里</text>
-      </view>
-      <view class="title">
-        <text>订单金额：</text>
-        <text class="fwd">85.6元</text>
-      </view>
-    </view>
-    <view class="right">
-      <text>行驶时间：</text>
-      <text>64</text>
-      <text>分钟</text>
-    </view>
-  </view>
-
-
-
-</view>
+</scroll-view>

@@ -5,7 +5,7 @@
     <view>退款金额</view>
     <view class="withdraw-balance">
       <text>￥</text>
-      <text>189</text>
+      <text>{{balance}}</text>
     </view>
     <view class="info">系统将在24小时内退款至微信钱包</view>
   </view>

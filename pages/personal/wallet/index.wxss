@@ -21,6 +21,7 @@
 
 .deposit {
   margin-top: 30rpx;
+  margin-bottom: 120rpx;
 }
 
 .balance view view {
@@ -35,4 +36,8 @@
   text-align: center;
   color: rgba(149, 157, 173, 1);
   margin-top: 20rpx;
+}
+
+.no-retreat {
+  background: #78849e;
 }

@@ -1,37 +1,78 @@
 // pages/personal/wallet/index.js
+import fetch from '../../../lib/fetch.js'
+
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    status: '', //  是否交押金  UNPAIDDEPOSIT 未交  PAIDDEPOSIT 已交
+    wallet: {}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-
+  onLoad: function(options) {
+    this.setData({
+      status: options.status
+    })
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
+    if (this.data.status == 'UNPAIDDEPOSIT') {
+      this.setData({
+        wallet: {
+          balance: 0,
+          deposit: 0
+        }
+      })
+    } else {
+      this.fetchWallet()
+    }
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
-  withdraw(){
+  withdraw() {
+
+    if (this.data.status == 'UNPAIDDEPOSIT') {
+      wx.showToast({
+        title: '您还未交押金，退押金无效',
+        icon: 'none'
+      })
+      return false
+    }
+
     wx.navigateTo({
-      url: './withdraw',
+      url: './withdraw?balance=' + this.data.wallet.balance,
+    })
+
+  },
+
+  fetchWallet() {
+
+    fetch({
+      url: '/settlement/wallet',
+      isLoading: true
+    }).then(res => {
+      this.setData({
+        wallet: res
+      })
     })
   }
+
+
+
 })

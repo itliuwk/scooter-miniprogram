@@ -41,6 +41,10 @@ Page({
     let url = e.currentTarget.dataset.url;
     console.log(url)
 
+    if (url == '/pages/personal/wallet/index') {
+      url += '?status=' + this.data.userInfo.status
+    }
+
     wx.navigateTo({
       url
     })

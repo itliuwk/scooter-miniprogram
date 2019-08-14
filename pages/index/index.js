@@ -1,10 +1,6 @@
 // pages/index/index.js
-
-var QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js'); //引入 sdk  
-
-var qqmapsdk;
-
 import fetch from '../../lib/fetch.js'
+import address from '../../utils/address.js'
 Page({
 
   /**
@@ -81,14 +77,7 @@ Page({
    */
   onLoad: function(options) {
 
-    // 实例化API核心类
-    qqmapsdk = new QQMapWX({
-      key: 'MSABZ-XHBWP-BACDF-V5IHV-DY3QF-BQFKI'
-    });
-
-
     let that = this;
-
 
     //  获取是否授权
     wx.getSetting({
@@ -223,23 +212,20 @@ Page({
       url: '/business/stubDetail?id=' + id,
       isLoading: true
     }).then(result => {
+
       // 调用接口转换成具体位置
-      qqmapsdk.reverseGeocoder({
-        location: {
-          latitude: result.latitude,
-          longitude: result.longitude
-        },
-        success: function(res) {
-          let markerDetail = {
-            ...result,
-            address: res.result.address_component.province + res.result.address_component.city + res.result.address_component.district,
-            recommend: res.result.formatted_addresses.recommend
-          }
-          that.setData({
-            markerDetail: markerDetail
-          })
+      address(result.latitude, result.longitude).then(res => {
+        let markerDetail = {
+          ...result,
+          address: res.result.address_component.province + res.result.address_component.city + res.result.address_component.district,
+          recommend: res.result.formatted_addresses.recommend
         }
+        that.setData({
+          markerDetail: markerDetail
+        })
       })
+
+
 
 
 
@@ -496,7 +482,7 @@ Page({
       longitude: this.data.markerDetail.longitude,
       name: this.data.markerDetail.recommend,
       address: this.data.markerDetail.address,
-      scale: 25
+      scale: 15
     })
   },
 

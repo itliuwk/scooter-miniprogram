@@ -9,18 +9,18 @@
           <open-data class='icon' type="userAvatarUrl"></open-data>
         </view>
         <view class="personal-info-t">
-          <view>189****6666</view>
+          <view>{{userInfo.mobile}}</view>
           <view>信用分良好</view>
         </view>
       </view>
 
       <view class="personal-record">
         <view>
-          <text>189</text>
+          <text>{{userInfo.distance}}</text>
           <view>里程(公里)</view>
         </view>
         <view>
-          <text>200</text>
+          <text>{{userInfo.useTime}}</text>
           <view>时间(小时)</view>
         </view>
       </view>

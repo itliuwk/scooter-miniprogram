@@ -1,4 +1,5 @@
 // pages/index/index.js
+import fetch from '../../lib/fetch.js'
 Page({
 
   /**
@@ -14,35 +15,38 @@ Page({
 
     longitude: 0,
     latitude: 0,
-    markers: [{
-      id: 1,
-      latitude: 22.965565,
-      longitude: 113.365474,
-      iconPath: '../../assets/images/marker.png',
-      width: 35,
-      height: 42
-    }, {
-      id: 2,
-      latitude: 22.963194,
-      longitude: 113.362598,
-      iconPath: '../../assets/images/marker.png',
-      width: 35,
-      height: 42
-    }, {
-      id: 3,
-      latitude: 22.940531,
-      longitude: 113.384743,
-      iconPath: '../../assets/images/marker.png',
-      width: 35,
-      height: 42
-    }, {
-      id: 4,
-      latitude: 22.939246,
-      longitude: 113.382490,
-      iconPath: '../../assets/images/marker.png',
-      width: 35,
-      height: 42
-    }],
+    hasMarkers: false,
+    markers: [],
+
+    // markers: [{
+    //   id: 1,
+    //   latitude: 22.962859,
+    //   longitude: 113.367813,
+    //   iconPath: '../../assets/images/marker.png',
+    //   width: 35,
+    //   height: 42
+    // }, {
+    //   id: 2,
+    //   latitude: 22.968430,
+    //   longitude: 113.364358,
+    //   iconPath: '../../assets/images/marker.png',
+    //   width: 35,
+    //   height: 42
+    // }, {
+    //   id: 3,
+    //   latitude: 22.940531,
+    //   longitude: 113.384743,
+    //   iconPath: '../../assets/images/marker.png',
+    //   width: 35,
+    //   height: 42
+    // }, {
+    //   id: 4,
+    //   latitude: 22.939246,
+    //   longitude: 113.382490,
+    //   iconPath: '../../assets/images/marker.png',
+    //   width: 35,
+    //   height: 42
+    // }],
 
     polyline: [{
       points: [{
@@ -122,6 +126,9 @@ Page({
       menuH: this.data.infoH + 'rpx',
     })
 
+    //获取网点信息
+    this.fetchNearest()
+
 
     //获取提示的请求是否显示  提示信息
     this.getInfo();
@@ -187,6 +194,28 @@ Page({
     setTimeout(() => {
       this.movetoCenter();
     }, 2000)
+  },
+
+
+  fetchNearest() {
+    fetch({
+      url: '/business/nearestStub',
+      isLoading: true
+    }).then(res => {
+
+      let markers = res.data.map((item, index) => {
+        item.iconPath = '../../assets/images/marker.png';
+        item.width = 35;
+        item.height = 42;
+        return item;
+      })
+
+
+      this.setData({
+        markers,
+        hasMarkers: true
+      })
+    })
   },
 
 
@@ -349,15 +378,16 @@ Page({
         url: '/pages/manage/payment/deposit',
       })
 
-      // wx.navigateTo({
-      //   url: '/pages/manage/trip/take',
-      // })
+
 
     }, 1500)
+  },
 
 
-
-
+  Trips() {
+    wx.navigateTo({
+      url: '/pages/manage/trip/take',
+    })
   },
 
 

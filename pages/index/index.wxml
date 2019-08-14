@@ -30,7 +30,7 @@
 
 <!-- 地图 -->
 <view class="container" style='height: calc( 100vh -  {{menuH}})'>
-  <map id="map" latitude="{{latitude}}" longitude="{{longitude}}" markers="{{markers}}" polyline="{{polyline}}" bindmarkertap="markertap" show-location controls="{{controls}}" scale="15" bindcontroltap="bindcontroltap" bindtap='bindtapMap' />
+  <map id="map" latitude="{{latitude}}" longitude="{{longitude}}" markers="{{markers}}" polyline="{{polyline}}" bindmarkertap="markertap" show-location controls="{{controls}}" scale="10" bindcontroltap="bindcontroltap" bindtap='bindtapMap' wx:if="{{hasMarkers}}" />
 </view>
 
 
@@ -79,7 +79,7 @@
       <view class="menu-content-b">
         <view>我是收费文案文案文案文案(如:￥0.5/分钟)</view>
         <view>
-          <text bindtap="Trip">立即出行</text>
+          <text bindtap="Trips">立即出行</text>
         </view>
       </view>
     </view>

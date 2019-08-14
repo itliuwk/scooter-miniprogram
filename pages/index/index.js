@@ -1,4 +1,9 @@
 // pages/index/index.js
+
+var QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js'); //引入 sdk  
+
+var qqmapsdk;
+
 import fetch from '../../lib/fetch.js'
 Page({
 
@@ -17,37 +22,6 @@ Page({
     latitude: 0,
     hasMarkers: false,
     markers: [],
-
-    // markers: [{
-    //   id: 1,
-    //   latitude: 22.962859,
-    //   longitude: 113.367813,
-    //   iconPath: '../../assets/images/marker.png',
-    //   width: 35,
-    //   height: 42
-    // }, {
-    //   id: 2,
-    //   latitude: 22.968430,
-    //   longitude: 113.364358,
-    //   iconPath: '../../assets/images/marker.png',
-    //   width: 35,
-    //   height: 42
-    // }, {
-    //   id: 3,
-    //   latitude: 22.940531,
-    //   longitude: 113.384743,
-    //   iconPath: '../../assets/images/marker.png',
-    //   width: 35,
-    //   height: 42
-    // }, {
-    //   id: 4,
-    //   latitude: 22.939246,
-    //   longitude: 113.382490,
-    //   iconPath: '../../assets/images/marker.png',
-    //   width: 35,
-    //   height: 42
-    // }],
-
     polyline: [{
       points: [{
           latitude: 22.963194,
@@ -90,6 +64,8 @@ Page({
       dottedLine: true
     }],
 
+    markerDetail: {},
+
 
 
 
@@ -104,6 +80,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+
+    // 实例化API核心类
+    qqmapsdk = new QQMapWX({
+      key: 'MSABZ-XHBWP-BACDF-V5IHV-DY3QF-BQFKI'
+    });
+
+
     let that = this;
 
 
@@ -126,7 +109,7 @@ Page({
       menuH: this.data.infoH + 'rpx',
     })
 
-    //获取网点信息
+    //获取附近所有网点信息
     this.fetchNearest()
 
 
@@ -232,6 +215,40 @@ Page({
 
 
   /**
+   *   获取点击 mak  的详情
+   */
+  fetchDetail(id) {
+    let that = this
+    fetch({
+      url: '/business/stubDetail?id=' + id,
+      isLoading: true
+    }).then(result => {
+      // 调用接口转换成具体位置
+      qqmapsdk.reverseGeocoder({
+        location: {
+          latitude: result.latitude,
+          longitude: result.longitude
+        },
+        success: function(res) {
+          let markerDetail = {
+            ...result,
+            address: res.result.address_component.province + res.result.address_component.city + res.result.address_component.district,
+            recommend: res.result.formatted_addresses.recommend
+          }
+          that.setData({
+            markerDetail: markerDetail
+          })
+        }
+      })
+
+
+
+
+    })
+  },
+
+
+  /**
    * 点击mak 点
    */
   markertap(e) {
@@ -242,6 +259,12 @@ Page({
       })
       return false;
     }
+
+
+
+    this.fetchDetail(e.markerId);
+
+
 
 
     // 用that取代this，防止不必要的情况发生
@@ -468,19 +491,12 @@ Page({
    * 
    */
   intoMap() {
-    wx.getLocation({
-      type: 'gcj02', //返回可以用于wx.openLocation的经纬度
-      success: function(res) { //因为这里得到的是你当前位置的经纬度
-        var latitude = res.latitude
-        var longitude = res.longitude
-        wx.openLocation({ //所以这里会显示你当前的位置
-          latitude: latitude,
-          longitude: longitude,
-          name: "骏盈大厦",
-          address: "广东省广州市番禺区东沙村",
-          scale: 28
-        })
-      }
+    wx.openLocation({ //所以这里会显示你当前的位置
+      latitude: this.data.markerDetail.latitude,
+      longitude: this.data.markerDetail.longitude,
+      name: this.data.markerDetail.recommend,
+      address: this.data.markerDetail.address,
+      scale: 25
     })
   },
 

@@ -15,8 +15,8 @@
 
   <view wx:else class="navigation" bindtap='intoMap'>
     <view>
-      <text>骏盈大厦</text>
-      <view>广东省广州市番禺区东沙村</view>
+      <text>{{markerDetail.recommend}}</text>
+      <view>{{markerDetail.address}}</view>
     </view>
     <view>
       <image src="../../assets/images/nav.png"></image>
@@ -30,7 +30,8 @@
 
 <!-- 地图 -->
 <view class="container" style='height: calc( 100vh -  {{menuH}})'>
-  <map id="map" latitude="{{latitude}}" longitude="{{longitude}}" markers="{{markers}}" polyline="{{polyline}}" bindmarkertap="markertap" show-location controls="{{controls}}" scale="10" bindcontroltap="bindcontroltap" bindtap='bindtapMap' wx:if="{{hasMarkers}}" />
+  <map id="map" latitude="{{latitude}}" longitude="{{longitude}}" markers="{{markers}}" polyline="{{polyline}}" bindmarkertap="markertap" show-location show-scale controls="{{controls}}" scale="10" bindcontroltap="bindcontroltap" bindtap='bindtapMap' wx:if="{{hasMarkers}}"
+  />
 </view>
 
 
@@ -58,17 +59,17 @@
         <view>
 
           <view class="menu-content-t-title">
-            <text>车辆编号：</text>
-            <text>996883 </text>
+            <text>车库编号：</text>
+            <text>{{markerDetail.id}} </text>
           </view>
 
           <view class="menu-content-t-title">
             <text>可用车辆：</text>
-            <text>12 </text>
+            <text>{{markerDetail.vehicleNum}} </text>
           </view>
           <view class="menu-content-t-title">
             <text>可用车位：</text>
-            <text>2 </text>
+            <text>{{markerDetail.slotsNum}} </text>
           </view>
 
         </view>
@@ -77,7 +78,7 @@
         </view>
       </view>
       <view class="menu-content-b">
-        <view>我是收费文案文案文案文案(如:￥0.5/分钟)</view>
+        <view>￥0.5/分钟</view>
         <view>
           <text bindtap="Trips">立即出行</text>
         </view>

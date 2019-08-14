@@ -6,7 +6,7 @@
     <view class="image">
       <open-data class='icon' type="userAvatarUrl"></open-data>
     </view>
-    <text>189****6666</text>
+    <text>{{mobile}}</text>
   </view>
 
   <view class="content">

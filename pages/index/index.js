@@ -408,7 +408,7 @@ Page({
     if (res.detail.errMsg == 'getUserInfo:ok') {
 
       wx.showLoading({
-        title: '',
+        title: '加载中',
       })
 
 
@@ -419,12 +419,18 @@ Page({
           wx.hideLoading()
         })
       }, 1500)
+
       wx.login({
         success: res => {
-
           // 登录注册接口
           if (res.code) {
             // 调用服务端登录接口，发送 res.code 到服务器端换取 openId, sessionKey, unionId并存入数据库中
+
+            fetch({
+              url: '/login'
+            }).then(res => {
+              console.log(res)
+            })
 
           } else {
             console.log('登录失败！' + res.errMsg)

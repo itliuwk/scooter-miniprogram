@@ -3,17 +3,17 @@
 
   <view class="phone">
     <icon class="iconfont icon-phone"></icon>
-    <input placeholder="请输入手机号码"></input>
+    <input placeholder="请输入手机号码" type="number" bindinput="mobileTap"></input>
   </view>
 
 
   <view class="phone verification">
     <icon class="iconfont icon-dunpai"></icon>
-    <input placeholder='请输入验证码'></input>
+    <input placeholder='请输入验证码' type="number" bindinput="codeTap"></input>
     <text class="obtain" bindtap="verificationCode">{{authBtnText}}</text>
   </view>
 
 
-    <view class="confirm-binding confirm">确认绑定</view>
+  <view class="confirm-binding confirm" bindtap="confirm">确认绑定</view>
 
 </view>

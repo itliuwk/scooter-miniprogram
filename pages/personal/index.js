@@ -43,6 +43,8 @@ Page({
 
     if (url == '/pages/personal/wallet/index') {
       url += '?status=' + this.data.userInfo.status
+    } else if (url == '/pages/personal/setUp/index') {
+      url += '?mobile=' + this.data.userInfo.mobile
     }
 
     wx.navigateTo({

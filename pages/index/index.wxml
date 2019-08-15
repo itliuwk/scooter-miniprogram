@@ -92,7 +92,8 @@
   <view class="to-be-paid" wx:if="{{isInfo}}">
     <image src="../../assets/images/info.png"></image>
     <view class="paid-content">
-      <view>您有订单尚未支付，将会影响你的出行</view>
+      <view>您有订单尚未支付，金额
+        <text style="color:rgba(58,204,225,1);">{{pendingTotal}}</text> 元</view>
       <view class="to-pay">
         <text bindtap="toPay">去支付</text>
       </view>

@@ -47,8 +47,12 @@
 			"currentL": -1,
 			"list": []
 		},
+		"gamePlugin": {
+			"current": -1,
+			"list": []
+		},
 		"miniprogram": {
-			"current": 16,
+			"current": 17,
 			"list": [
 				{
 					"id": -1,
@@ -167,6 +171,12 @@
 					"name": "使用中",
 					"pathName": "pages/manage/trip/use",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "支付押金",
+					"pathName": "pages/manage/payment/deposit",
 					"scene": null
 				}
 			]

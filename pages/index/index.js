@@ -69,7 +69,14 @@ Page({
     isMenu: false, // 是否显示主菜单
     isInfo: false, // 是否显示提示信息
 
-    isEmpower: false
+    isPending: false, // 是否有订单未支付
+    pendingTotal: '', //订单未支付的额金额
+
+    isProgressing: false,
+    progressingTotal: '', //进行中的订单 多少分钟
+
+    isEmpower: false,
+
   },
 
   /**
@@ -107,15 +114,7 @@ Page({
 
     //  获取当前位置信息
     this.timer = options.timer;
-    wx.getLocation({
-      type: 'wgs84',
-      success: (res) => {
-        this.setData({
-          longitude: res.longitude,
-          latitude: res.latitude
-        })
-      },
-    })
+
 
     // 地图上的一些操作按钮
     wx.getSystemInfo({
@@ -170,24 +169,42 @@ Page({
 
 
   fetchNearest() {
-    fetch({
-      url: '/business/nearestStub',
-      isLoading: true
-    }).then(res => {
+    let that = this
+    wx.getLocation({
+      type: 'wgs84',
+      success: (res) => {
+        that.setData({
+          longitude: res.longitude,
+          latitude: res.latitude
+        }, () => {
+          fetch({
+            url: '/business/nearestStub',
+            data: {
+              longitude: res.longitude,
+              latitude: res.latitude
+            },
+            isLoading: true
+          }).then(res => {
 
-      let markers = res.data.map((item, index) => {
-        item.iconPath = '../../assets/images/marker.png';
-        item.width = 35;
-        item.height = 42;
-        return item;
-      })
+            let markers = res.data.map((item, index) => {
+              item.iconPath = '../../assets/images/marker.png';
+              item.width = 35;
+              item.height = 42;
+              return item;
+            })
 
 
-      this.setData({
-        markers,
-        hasMarkers: true
-      })
+            that.setData({
+              markers,
+              hasMarkers: true
+            })
+          })
+        })
+      },
     })
+
+
+
   },
 
 
@@ -195,11 +212,52 @@ Page({
    * 获取提示的请求是否显示  提示信息
    */
   getInfo() {
-    this.setData({
-      isInfo: false,
-      // isShow: true,
-      // menuH: this.data.infoH + 165 + 'rpx', //  165  对应菜单 提示的高度
+
+
+
+    //订单交易 / 未完成订单
+    fetch({
+      url: '/transaction/pending'
+    }).then(res => {
+      if (res.data.total) {
+        this.setData({
+          isPending: true,
+          isInfo: true,
+          isShow: true,
+          pendingTotal: res.data.total,
+          menuH: this.data.infoH + 165 + 'rpx', //  165  对应菜单 提示的高度
+        })
+      }
     })
+
+
+
+    //订单交易 / 进行中的订单
+    // fetch({
+    //   url: '/transaction/progressing'
+    // }).then(res => {
+    //   if (res.data.total) {
+    //     this.setData({
+    //       isProgressing: true,
+    //       progressingTotal: res.data.total,
+    //     }, () => {
+    //       setTimeout(() => {
+    //         wx.showToast({
+    //           title: '你有进行中的订单，即将跳转',
+    //           icon: 'none'
+    //         })
+    //       }, 1000)
+
+    //       setTimeout(() => {
+    //         wx.reLaunch({
+    //           url: '/pages/manage/trip/use',
+    //         })
+    //       }, 2000)
+    //     })
+    //   }
+    // })
+
+
   },
 
 
@@ -245,6 +303,16 @@ Page({
       })
       return false;
     }
+
+
+    if (this.data.isPending) {
+      wx.showToast({
+        title: '你有订单未支付，支付完成后才可以用车',
+        icon: 'none'
+      })
+      return false;
+    }
+
 
 
 
@@ -318,6 +386,11 @@ Page({
    * 关闭菜单
    */
   closeMenu() {
+
+    if (this.data.isPending) {
+
+      return false;
+    }
 
 
     if (!this.data.isShow) return;

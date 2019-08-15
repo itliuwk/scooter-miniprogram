@@ -1,4 +1,7 @@
 // pages/payment/deposit.js
+import fetch from '../../../lib/fetch.js'
+
+
 Page({
 
   /**

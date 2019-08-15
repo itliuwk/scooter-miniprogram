@@ -1,64 +1,31 @@
 // pages/manage/trip/take.js
+import fetch from '../../../lib/fetch.js'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    lattice: [{
-        id: 1,
-      checked: false
-      },
-      {
-        id: 2,
-        checked: false
-      },
-      {
-        id: 3,
-        checked: false
-      },
-      {
-        id: 4,
-        checked: true
-      },
-      {
-        id: 5,
-        checked: false
-      },
-      {
-        id: 6,
-        checked: false
-      },
-      {
-        id: 7,
-        checked: false
-      },
-      {
-        id: 8,
-        checked: false
-      },
-      {
-        id: 9,
-        checked: false
-      },
-
-    ]
+    lattice: [],
+    id: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    this.setData({
+      id: options.id || 123
+    }, () => {
+      this.fetchRent()
+    })
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-    setTimeout(() => {
-      this.toUse();
-    }, 3000)
+   
   },
 
   /**
@@ -68,9 +35,45 @@ Page({
 
   },
 
+  fetchRent() {
+    fetch({
+      url: '/business/rent?id=' + this.data.id,
+      method: 'POST',
+      data: {
+        id: this.data.id
+      }
+    }).then(res => {
+      let lattice = []
+      for (let i = 1; i < res.maxSlotsNum + 1; i++) {
+        var obj = {}
+        if (i == res.slotNum) {
+          obj = {
+            id: i,
+            checked: true
+          }
+        } else {
+          obj = {
+            id: i,
+            checked: false
+          }
+        }
+        lattice.push(obj)
+      }
+
+      this.setData({
+        lattice
+      },()=>{
+        setTimeout(() => {
+          this.toUse();
+        }, 1500)
+      })
+  
+    })
+  },
+
 
   toUse() {
-    wx.navigateTo({
+    wx.reLaunch({
       url: "./use"
     })
   }

@@ -177,6 +177,13 @@
 					"id": -1,
 					"name": "支付押金",
 					"pathName": "pages/manage/payment/deposit",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "预约停车位",
+					"pathName": "pages/manage/reservationParking/index",
 					"scene": null
 				}
 			]

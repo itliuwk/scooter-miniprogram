@@ -31,15 +31,21 @@ Page({
 
   onUnload: function() {
     wx.reLaunch({
-      url: "/pages/index/index"
+      url: "/pages/manage/trip/use"
     })
   },
 
   update() {
 
-    wx.redirectTo({
-      url: './index?update=true',
+
+    // 在C页面内 navigateBack，将返回A页面
+    wx.navigateBack({
+      delta: 1
     })
+
+
+
+
   },
 
 

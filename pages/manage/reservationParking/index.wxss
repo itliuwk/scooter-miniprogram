@@ -203,7 +203,7 @@
   color: rgba(204, 204, 204, 1);
 }
 
-.menu-content-b>view:nth-child(2) {
+.menu-content-b .add {
   margin-top: 50rpx;
   background: rgba(58, 204, 225, 1);
   opacity: 1;
@@ -270,3 +270,32 @@
 }
 
 /*  提示信息菜单 end */
+
+.menu-content-b .update {
+  margin-top: 100rpx;
+  opacity: 1;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  color: rgba(255, 255, 255, 1);
+  display: flex;
+  font-size: 30rpx;
+}
+
+.menu-content-b .update view {
+  flex: 1;
+}
+
+.menu-content-b .update view text {
+  display: inline-block;
+  width: 200rpx;
+  text-align: center;
+  color: rgba(255, 255, 255, 1);
+  font-size: 30rpx;
+  background: rgba(58, 204, 225, 1);
+  border-radius: 12px;
+}
+
+.menu-content-b .update view:nth-child(1) text {
+  background: rgba(120, 132, 158, 1);
+}

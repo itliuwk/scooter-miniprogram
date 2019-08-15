@@ -19,48 +19,16 @@ Page({
     hasMarkers: false,
     markers: [],
     polyline: [{
-      points: [{
-          latitude: 22.963194,
-          longitude: 113.362598,
-        },
-        {
-          latitude: 22.962276,
-          longitude: 113.363044,
-        }, {
-          latitude: 22.962360,
-          longitude: 113.363398,
-        }, {
-          latitude: 22.963165,
-          longitude: 113.364347,
-        }, {
-          latitude: 22.964434,
-          longitude: 113.363730,
-        }, {
-          latitude: 22.964074,
-          longitude: 113.363199,
-        }, {
-          latitude: 22.965145,
-          longitude: 113.363414,
-        }, {
-          latitude: 22.965457,
-          longitude: 113.363585,
-        }, {
-          latitude: 22.965471,
-          longitude: 113.363886,
-        }, {
-          latitude: 22.965457,
-          longitude: 113.363585,
-        }, {
-          latitude: 22.965565,
-          longitude: 113.365474
-        }
-      ],
+      points: [],
       color: "#3ACCE1",
       width: 4,
       dottedLine: true
     }],
 
-    markerDetail: {},
+    markerDetail: {}, //  某个mak 点详细信息
+
+
+    userInfo: {}, //  个人基本信息
 
 
 
@@ -105,12 +73,12 @@ Page({
       menuH: this.data.infoH + 'rpx',
     })
 
-    //获取附近所有网点信息
-    this.fetchNearest()
+    //数据初始化
+    this.init()
 
 
     //获取提示的请求是否显示  提示信息
-    this.getInfo();
+    //this.getInfo();
 
     //  获取当前位置信息
     this.timer = options.timer;
@@ -207,6 +175,29 @@ Page({
 
   },
 
+  init() {
+    //获取附近所有网点信息
+    this.fetchNearest()
+
+    //获取是否绑定手机号  和 是否交付押金
+    this.fetchProfile()
+  },
+
+
+  /**
+   *  获取是否绑定手机号  和 是否交付押金
+   */
+  fetchProfile() {
+    fetch({
+      url: '/profile',
+
+    }).then(res => {
+      this.setData({
+        userInfo: res
+      })
+    })
+  },
+
 
   /**
    * 获取提示的请求是否显示  提示信息
@@ -233,29 +224,29 @@ Page({
 
 
     //订单交易 / 进行中的订单
-    // fetch({
-    //   url: '/transaction/progressing'
-    // }).then(res => {
-    //   if (res.data.total) {
-    //     this.setData({
-    //       isProgressing: true,
-    //       progressingTotal: res.data.total,
-    //     }, () => {
-    //       setTimeout(() => {
-    //         wx.showToast({
-    //           title: '你有进行中的订单，即将跳转',
-    //           icon: 'none'
-    //         })
-    //       }, 1000)
+    fetch({
+      url: '/transaction/progressing'
+    }).then(res => {
+      if (res.data.total) {
+        this.setData({
+          isProgressing: true,
+          progressingTotal: res.data.total,
+        }, () => {
+          setTimeout(() => {
+            wx.showToast({
+              title: '你有进行中的订单，即将跳转',
+              icon: 'none'
+            })
+          }, 1000)
 
-    //       setTimeout(() => {
-    //         wx.reLaunch({
-    //           url: '/pages/manage/trip/use',
-    //         })
-    //       }, 2000)
-    //     })
-    //   }
-    // })
+          setTimeout(() => {
+            wx.reLaunch({
+              url: '/pages/manage/trip/use',
+            })
+          }, 2000)
+        })
+      }
+    })
 
 
   },
@@ -450,26 +441,67 @@ Page({
    */
   Trip() {
 
-    wx.showToast({
-      title: '你还没有支付押金,不能用车',
-      icon: 'none'
-    })
+    // wx.showToast({
+    //   title: '你还没有支付押金,不能用车',
+    //   icon: 'none'
+    // })
 
-    setTimeout(() => {
-      wx.navigateTo({
-        url: '/pages/manage/payment/deposit',
+    // setTimeout(() => {
+    //   wx.navigateTo({
+    //     url: '/pages/manage/payment/deposit',
+    //   })
+    // }, 1500)
+
+
+    if (!this.data.userInfo.mobile) {
+      wx.showToast({
+        title: '你还没有绑定手机号码,不能用车',
+        icon: 'none'
       })
 
+      setTimeout(() => {
+        wx.navigateTo({
+          url: '/pages/personal/setUp/binding',
+        })
+      }, 1500)
+    }
 
 
-    }, 1500)
+
   },
 
 
+  /**
+   * 立即出行
+   */
   Trips() {
-    wx.navigateTo({
-      url: '/pages/manage/trip/take',
+
+
+    // if (this.data.userInfo.status == 'UNPAIDDEPOSIT') {
+    //   wx.showToast({
+    //     title: '你还没有支付押金,不能用车',
+    //     icon: 'none'
+    //   })
+
+    //   setTimeout(() => {
+    //     wx.navigateTo({
+    //       url: '/pages/manage/payment/deposit',
+    //     })
+    //   }, 1500)
+    //   return false;
+    // }
+
+    wx.scanCode({
+      success(res) {
+        wx.navigateTo({
+          url: '/pages/manage/trip/take?id=' + res.result,
+        })
+      }
     })
+
+
+
+
   },
 
 

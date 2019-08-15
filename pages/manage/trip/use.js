@@ -1,4 +1,7 @@
 // pages/index/index.js
+import fetch from '../../../lib/fetch.js'
+
+
 Page({
 
   /**
@@ -10,53 +13,22 @@ Page({
     menuH: '0',
     isMarker: true,
     matrixData: null,
-
+    hasMap: false,
 
     longitude: 0,
     latitude: 0,
 
     polyline: [{
-      points: [{
-          latitude: 22.963194,
-          longitude: 113.362598,
-        },
-        {
-          latitude: 22.962276,
-          longitude: 113.363044,
-        }, {
-          latitude: 22.962360,
-          longitude: 113.363398,
-        }, {
-          latitude: 22.963165,
-          longitude: 113.364347,
-        }, {
-          latitude: 22.964434,
-          longitude: 113.363730,
-        }, {
-          latitude: 22.964074,
-          longitude: 113.363199,
-        }, {
-          latitude: 22.965145,
-          longitude: 113.363414,
-        }, {
-          latitude: 22.965457,
-          longitude: 113.363585,
-        }, {
-          latitude: 22.965471,
-          longitude: 113.363886,
-        }, {
-          latitude: 22.965457,
-          longitude: 113.363585,
-        }, {
-          latitude: 22.965565,
-          longitude: 113.365474
-        }
-      ],
+      points: [],
       color: "#3ACCE1",
       width: 4,
       dottedLine: true,
       arrowLine: true
-    }]
+    }],
+
+    chargeDetail: {},
+
+    isExists: false,
 
   },
 
@@ -134,17 +106,9 @@ Page({
     setTimeout(() => {
       this.movetoCenter();
     }, 2000)
+    this.fetchCharge();
+    this.fecchExist();
   },
-
-  onUnload() {
-
-    wx.reLaunch({
-      url: '/pages/index/index',
-    })
-  },
-
-
-
 
 
   /**
@@ -209,6 +173,40 @@ Page({
 
   },
 
+
+  fetchCharge() {
+    fetch({
+      url: '/business/charge',
+    }).then(res => {
+
+      this.setData({
+        chargeDetail: res,
+        polyline: [{
+          points: res.trail,
+          color: "#3ACCE1",
+          width: 4,
+          dottedLine: true,
+          arrowLine: true
+        }],
+        hasMap: true
+
+      })
+    })
+  },
+
+
+  /**
+   * 是否预约
+   */
+  fecchExist() {
+    fetch({
+      url: '/business/reserve/exist',
+    }).then(res => {
+      this.setData({
+        isExists: res.exists
+      })
+    })
+  },
 
 
 

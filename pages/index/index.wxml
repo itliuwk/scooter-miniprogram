@@ -79,8 +79,8 @@
       </view>
       <view class="menu-content-b">
         <view>￥0.5/分钟</view>
-        <view>
-          <text bindtap="Trips">立即出行</text>
+        <view bindtap="Trips">
+          <text>立即出行</text>
         </view>
       </view>
     </view>

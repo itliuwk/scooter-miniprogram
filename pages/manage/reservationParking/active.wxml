@@ -30,14 +30,14 @@
   <view class="info">温馨提示:请在规定时间内归还车辆，超时订单将自动取消，并扣除押金。</view>
 
 
-  <view class="bottom">
+  <!-- <view class="bottom">
     <view>
       <text bindtap="update">修改预约</text>
     </view>
     <view>
       <text>去还车</text>
     </view>
-  </view>
+  </view> -->
 
 </view>
 

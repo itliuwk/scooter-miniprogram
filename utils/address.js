@@ -9,6 +9,7 @@ var qqmapsdk = new QQMapWX({ // 实例化API核心类
 function address(latitude, longitude) {
   wx.showToast({
     title: '加载中',
+    icon: 'none'
   })
   return new Promise(function(resolve, reject) {
     qqmapsdk.reverseGeocoder({

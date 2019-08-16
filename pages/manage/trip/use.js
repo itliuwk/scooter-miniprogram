@@ -200,7 +200,7 @@ Page({
    */
   fecchExist() {
     fetch({
-      url: '/business/reserve/exist',
+      url: '/business/reserve/exist?type=GIVEBACK',
     }).then(res => {
       this.setData({
         isExists: res.exists

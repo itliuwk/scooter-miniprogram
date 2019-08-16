@@ -1,4 +1,13 @@
 // pages/index/index.js
+import fetch from '../../../lib/fetch.js'
+import address from '../../../utils/address.js'
+import {
+  formatYYYY,
+  formatHHMM
+} from '../../../utils/date.js'
+
+
+
 Page({
 
   /**
@@ -8,101 +17,41 @@ Page({
     mapH: '100%',
     infoH: 600,
     menuH: '0',
-    isShow: true,
+    isShow: false,
     isMarker: true,
     matrixData: null,
 
 
     longitude: 0,
     latitude: 0,
-    markers: [{
-      id: 1,
-      latitude: 22.965565,
-      longitude: 113.365474,
-      iconPath: '../../../assets/images/marker.png',
-      width: 35,
-      height: 42
-    }, {
-      id: 2,
-      latitude: 22.963194,
-      longitude: 113.362598,
-      iconPath: '../../../assets/images/marker.png',
-      width: 35,
-      height: 42
-    }, {
-      id: 3,
-      latitude: 22.940531,
-      longitude: 113.384743,
-      iconPath: '../../../assets/images/marker.png',
-      width: 35,
-      height: 42
-    }, {
-      id: 4,
-      latitude: 22.939246,
-      longitude: 113.382490,
-      iconPath: '../../../assets/images/marker.png',
-      width: 35,
-      height: 42
-    }],
 
-    polyline: [{
-      points: [{
-          latitude: 22.963194,
-          longitude: 113.362598,
-        },
-        {
-          latitude: 22.962276,
-          longitude: 113.363044,
-        }, {
-          latitude: 22.962360,
-          longitude: 113.363398,
-        }, {
-          latitude: 22.963165,
-          longitude: 113.364347,
-        }, {
-          latitude: 22.964434,
-          longitude: 113.363730,
-        }, {
-          latitude: 22.964074,
-          longitude: 113.363199,
-        }, {
-          latitude: 22.965145,
-          longitude: 113.363414,
-        }, {
-          latitude: 22.965457,
-          longitude: 113.363585,
-        }, {
-          latitude: 22.965471,
-          longitude: 113.363886,
-        }, {
-          latitude: 22.965457,
-          longitude: 113.363585,
-        }, {
-          latitude: 22.965565,
-          longitude: 113.365474
-        }
-      ],
-      color: "#3ACCE1",
-      width: 4,
-      dottedLine: true
-    }],
+    hasMarkers: false,
+    markers: [],
 
-    date: '2019-08-12',
+
+
+    date: formatYYYY(new Date()),
     multiArray: [
-      ['01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00'],
-      ['13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00', '24:00']
+      ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'],
+      ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00']
     ],
     multiIndex: [0, 0],
 
 
 
     isMenu: true, // 是否显示主菜单
+    isExists: false, //是否预约
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+
+
+    this.setData({
+      isExists: options.isExists
+    })
 
 
     // 初始化减去 info 的高度
@@ -161,6 +110,7 @@ Page({
    */
   onReady: function() {
     this.mapctx = wx.createMapContext("map");
+    this.fetchNearest()
   },
   movetoCenter: function() {
     this.mapctx.moveToLocation();
@@ -173,6 +123,145 @@ Page({
     setTimeout(() => {
       this.movetoCenter();
     }, 2000)
+
+  },
+
+
+  /**
+   * 获取停车位
+   */
+  fetchNearest() {
+    let that = this
+    wx.getLocation({
+      type: 'wgs84',
+      success: (res) => {
+        that.setData({
+          longitude: res.longitude,
+          latitude: res.latitude
+        }, () => {
+          fetch({
+            url: '/business/nearestStub',
+            data: {
+              longitude: res.longitude,
+              latitude: res.latitude
+            },
+            isLoading: true
+          }).then(res => {
+            let first = ''
+            let markers = res.data.map((item, index) => {
+              if (index == 0) {
+                item.width = 40;
+                item.height = 47;
+                item.iconPath = '../../../assets/images/selMarker.png'
+                first = item;
+                return item;
+              } else {
+                item.iconPath = '../../../assets/images/marker.png';
+                item.width = 35;
+                item.height = 42;
+                return item;
+              }
+            })
+
+
+            that.setData({
+              markers,
+              hasMarkers: true,
+              currId: first.id
+            }, () => {
+              if (this.data.isExists == 'false') {
+                this.fetchDetail(first.id) //  获取第一个点 mak 点
+              } else {
+                this.fetchAppointment(first.id) //  获取第一个点 mak 点
+              }
+            })
+          })
+        })
+      },
+    })
+
+  },
+
+
+  /**
+   *   获取点击 mak  的详情
+   */
+  fetchDetail(id) {
+    let that = this
+    fetch({
+      url: '/business/stubDetail?id=' + id,
+      isLoading: true
+    }).then(result => {
+
+      // 调用接口转换成具体位置
+      address(result.latitude, result.longitude).then(res => {
+        let markerDetail = {
+          ...result,
+          address: res.result.address_component.province + res.result.address_component.city + res.result.address_component.district,
+          recommend: res.result.formatted_addresses.recommend
+        }
+        that.setData({
+          isShow: true,
+          markerDetail: markerDetail
+        })
+      })
+
+    })
+  },
+
+
+
+  fetchAppointment() {
+    let that = this;
+    fetch({
+      url: '/reservation',
+      isLoading: true
+    }).then(result => {
+
+
+      let date = formatYYYY(result.startTime)
+      let start = formatHHMM(result.startTime)
+      let end = formatHHMM(result.endTime)
+
+      let multiArray = this.data.multiArray
+      // let multiIndex = this.data.multiIndex
+
+
+
+      let multiIndex = []
+      multiArray[0].forEach(function(item, index) {
+        if (item == start) {
+          multiIndex.push(index)
+        }
+      })
+
+      multiArray[0].forEach(function(item, index) {
+        if (item == end) {
+          multiIndex.push(index)
+        }
+      })
+
+
+
+
+      // 调用接口转换成具体位置
+      address(result.latitude, result.longitude).then(res => {
+        let appointment = {
+          ...result,
+          address: res.result.address_component.province + res.result.address_component.city + res.result.address_component.district,
+          recommend: res.result.formatted_addresses.recommend
+        }
+
+        that.setData({
+          isShow: true,
+          currId: result.id,
+          date: date,
+          multiIndex,
+          markerDetail: appointment
+        })
+      })
+
+    })
   },
 
 
@@ -183,7 +272,10 @@ Page({
    * 点击mak 点
    */
   markertap(e) {
-    console.log(e)
+
+
+    this.fetchDetail(e.markerId);
+
     // 用that取代this，防止不必要的情况发生
     var that = this;
     let markers = this.data.markers.map(item => {
@@ -202,6 +294,7 @@ Page({
 
     that.setData({
       markers,
+      currId: e.markerId,
       isMenu: true
     })
 
@@ -305,6 +398,27 @@ Page({
    * 时间间隔的选择
    */
   bindMultiPickerChange: function(e) {
+    let value = e.detail.value
+    if (value[0] > value[1]) {
+      wx.showToast({
+        title: '开始间隔不能大于结束间隔,选择无效',
+        icon: 'none'
+      })
+
+      return false;
+    }
+
+
+    if (value[0] == value[1]) {
+      wx.showToast({
+        title: '开始间隔不能相同,选择无效',
+        icon: 'none'
+      })
+
+      return false;
+    }
+
+
     this.setData({
       multiIndex: e.detail.value
     })
@@ -348,19 +462,12 @@ Page({
    * 
    */
   intoMap() {
-    wx.getLocation({
-      type: 'gcj02', //返回可以用于wx.openLocation的经纬度
-      success: function(res) { //因为这里得到的是你当前位置的经纬度
-        var latitude = res.latitude
-        var longitude = res.longitude
-        wx.openLocation({ //所以这里会显示你当前的位置
-          latitude: latitude,
-          longitude: longitude,
-          name: "骏盈大厦",
-          address: "广东省广州市番禺区东沙村",
-          scale: 28
-        })
-      }
+    wx.openLocation({ //所以这里会显示你当前的位置
+      latitude: this.data.markerDetail.latitude,
+      longitude: this.data.markerDetail.longitude,
+      name: this.data.markerDetail.recommend,
+      address: this.data.markerDetail.address,
+      scale: 15
     })
   },
 
@@ -375,10 +482,132 @@ Page({
   },
 
 
+
+  /**
+   * 立即预约
+   */
   active(e) {
-    wx.navigateTo({
-      url: './active',
+
+    let multiArray = this.data.multiArray
+    let multiIndex = this.data.multiIndex
+
+    if (multiIndex[0] == multiIndex[1]) {
+      wx.showToast({
+        title: '开始间隔不能相同,请重新选择',
+        icon: 'none'
+      })
+
+      return false;
+    }
+
+    let date = this.data.date
+
+    let start = date + ' ' + multiArray[0][multiIndex[0]];
+    let end = date + ' ' + multiArray[1][multiIndex[1]];
+
+
+
+    fetch({
+      url: '/business/reserve',
+      method: 'post',
+      data: {
+        start,
+        end,
+        id: this.data.currId,
+        type: 'RENT'
+      },
+      isLoading: true
+    }).then(result => {
+
+      wx.showToast({
+        title: '预约车辆成功',
+      })
+      setTimeout(() => {
+        wx.navigateTo({
+          url: './active?result=' + JSON.stringify(result),
+        })
+      }, 1500)
+
     })
+
+  },
+
+
+  /**
+   * 取消预约
+   */
+  cancel(e) {
+
+
+    fetch({
+      url: '/business/reserve/cancel',
+      method: 'post',
+      data: {
+        type: 'RENT',
+        id: this.data.currId
+      }
+    }).then(result => {
+
+      wx.showToast({
+        title: '取消预约成功',
+      })
+      setTimeout(() => {
+        wx.reLaunch({
+          url: '/pages/manage/trip/use',
+        })
+      }, 1500)
+
+    })
+
+  },
+
+
+
+  /**
+   * 确认预约
+   */
+  confirm(e) {
+    let multiArray = this.data.multiArray
+    let multiIndex = this.data.multiIndex
+
+    if (multiIndex[0] == multiIndex[1]) {
+      wx.showToast({
+        title: '开始间隔不能相同,请重新选择',
+        icon: 'none'
+      })
+
+      return false;
+    }
+
+    let date = this.data.date
+
+    let start = date + ' ' + multiArray[0][multiIndex[0]];
+    let end = date + ' ' + multiArray[1][multiIndex[1]];
+
+
+
+    fetch({
+      url: '/scooter/business/reserve',
+      method: 'PUT',
+      data: {
+        start,
+        end,
+        id: this.data.currId,
+        type: 'RENT'
+      }
+    }).then(result => {
+
+      wx.showToast({
+        title: '修改预约成功',
+      })
+      setTimeout(() => {
+        wx.navigateTo({
+          url: './active',
+        })
+      }, 1500)
+
+    })
+
   },
 
 

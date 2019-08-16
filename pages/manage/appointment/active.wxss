@@ -24,18 +24,18 @@
 }
 
 .center view {
-  padding: 0 30rpx;
+  padding: 20rpx 30rpx;
   margin-bottom: 30rpx;
   border-radius: 12px;
   box-shadow: 0px 0px 16px rgba(69, 91, 99, 0.08);
-  height: 100rpx;
-  line-height: 100rpx;
+  /* height: 100rpx;
+  line-height: 100rpx; */
   position: relative;
 }
 
 .center .tip {
   position: absolute;
-  top: 35rpx;
+  top: 22rpx;
   right: 30rpx;
   display: inline-block;
   width: 40rpx;

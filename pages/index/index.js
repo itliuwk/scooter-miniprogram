@@ -44,6 +44,7 @@ Page({
     progressingTotal: '', //进行中的订单 多少分钟
 
     isEmpower: false,
+    isExists: false,
 
   },
 
@@ -249,6 +250,18 @@ Page({
     })
 
 
+
+
+    //是否预约车辆
+    fetch({
+      url: '/business/reserve/exist?type=GIVEBACK',
+    }).then(res => {
+      this.setData({
+        isExists: res.exists
+      })
+    })
+
+
   },
 
 
@@ -430,7 +443,7 @@ Page({
    */
   appointment() {
     wx.navigateTo({
-      url: "/pages/manage/appointment/index"
+      url: "/pages/manage/appointment/index?isExists=" + this.data.isExists
     })
   },
 

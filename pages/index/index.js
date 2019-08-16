@@ -74,15 +74,27 @@ Page({
       menuH: this.data.infoH + 'rpx',
     })
 
-    //数据初始化
-    this.init()
+
+    // 获取经纬度
+    wx.getLocation({
+      type: 'wgs84',
+      success: (res) => {
+        that.setData({
+          longitude: res.longitude,
+          latitude: res.latitude
+        }, () => {
+          //数据初始化
+          that.init()
+        })
+      }
+    })
 
 
-    //获取提示的请求是否显示  提示信息
-    //this.getInfo();
 
-    //  获取当前位置信息
-    this.timer = options.timer;
+
+
+
+
 
 
     // 地图上的一些操作按钮
@@ -137,44 +149,6 @@ Page({
   },
 
 
-  fetchNearest() {
-    let that = this
-    wx.getLocation({
-      type: 'wgs84',
-      success: (res) => {
-        that.setData({
-          longitude: res.longitude,
-          latitude: res.latitude
-        }, () => {
-          fetch({
-            url: '/business/nearestStub',
-            data: {
-              longitude: res.longitude,
-              latitude: res.latitude
-            },
-            isLoading: true
-          }).then(res => {
-
-            let markers = res.data.map((item, index) => {
-              item.iconPath = '../../assets/images/marker.png';
-              item.width = 35;
-              item.height = 42;
-              return item;
-            })
-
-
-            that.setData({
-              markers,
-              hasMarkers: true
-            })
-          })
-        })
-      },
-    })
-
-
-
-  },
 
   init() {
     //获取附近所有网点信息
@@ -182,7 +156,44 @@ Page({
 
     //获取是否绑定手机号  和 是否交付押金
     this.fetchProfile()
+
+
+    //获取提示的请求是否显示  提示信息
+    //this.getInfo();
   },
+
+
+  //获取附近所有网点信息
+  fetchNearest() {
+    let that = this
+
+    fetch({
+      url: '/business/nearestStub',
+      data: {
+        longitude: this.data.longitude,
+        latitude: this.data.latitude
+      },
+      isLoading: true
+    }).then(res => {
+
+      let markers = res.data.map((item, index) => {
+        item.iconPath = '../../assets/images/marker.png';
+        item.width = 35;
+        item.height = 42;
+        return item;
+      })
+
+
+      that.setData({
+        markers,
+        hasMarkers: true
+      })
+    })
+
+
+
+  },
+
 
 
   /**
@@ -252,7 +263,7 @@ Page({
 
 
 
-    //是否预约车辆
+    //是否有预约车辆
     fetch({
       url: '/business/reserve/exist?type=GIVEBACK',
     }).then(res => {

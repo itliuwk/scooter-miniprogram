@@ -219,8 +219,29 @@ Page({
     }).then(result => {
 
 
-      result.date = formatYYYY(result.startTime)
-      result.time = formatHHMM(result.startTime) + '-' + formatHHMM(result.endTime)
+      let date = formatYYYY(result.startTime)
+      let start = formatHHMM(result.startTime)
+      let end = formatHHMM(result.endTime)
+
+      let multiArray = this.data.multiArray
+      // let multiIndex = this.data.multiIndex
+
+
+
+      let multiIndex = []
+      multiArray[0].forEach(function(item, index) {
+        if (item == start) {
+          multiIndex.push(index)
+        }
+      })
+
+      multiArray[0].forEach(function(item, index) {
+        if (item == end) {
+          multiIndex.push(index)
+        }
+      })
+
+
 
 
       // 调用接口转换成具体位置
@@ -231,10 +252,11 @@ Page({
           recommend: res.result.formatted_addresses.recommend
         }
 
-
         that.setData({
           isShow: true,
           currId: result.id,
+          date: date,
+          multiIndex,
           markerDetail: appointment
         })
       })

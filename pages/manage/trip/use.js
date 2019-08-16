@@ -216,9 +216,12 @@ Page({
 
   borrow() {
 
+    // wx.navigateTo({
+    //   url: '/pages/manage/reservationParking/index?isExists=' + this.data.isExists,
+    // })
 
     wx.navigateTo({
-      url: '/pages/manage/reservationParking/index?isExists=' + this.data.isExists,
+      url: '/pages/manage/reservationParking/index?isExists=true',
     })
 
 

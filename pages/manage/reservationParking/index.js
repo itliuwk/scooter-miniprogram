@@ -49,6 +49,11 @@ Page({
   onLoad: function(options) {
 
 
+    this.setData({
+      isExists: options.isExists
+    })
+
+
     // 初始化减去 info 的高度
     this.setData({
       menuH: this.data.infoH + 'rpx',
@@ -226,7 +231,6 @@ Page({
 
         that.setData({
           currId: result.id,
-          isExists: true,
           markerDetail: appointment
         })
       })
@@ -494,7 +498,7 @@ Page({
       })
       setTimeout(() => {
         wx.navigateTo({
-          url: './active',
+          url: './active?result=' + JSON.stringify(result),
         })
       }, 1500)
 

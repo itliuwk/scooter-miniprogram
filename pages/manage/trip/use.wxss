@@ -10,7 +10,7 @@
 
 .controls {
   position: relative;
-  top: -160rpx;
+  top: -140rpx;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,6 +26,27 @@
   color: #fff;
   margin: 0 80rpx;
   z-index: 100;
+}
+
+button::after {
+  border-radius: 0 !important;
+  border: none !important;
+}
+
+button {
+  border-radius: 0;
+}
+
+.controls  button {
+  padding: 0 25rpx;
+  border-radius: 10px;
+  background: #3497fd;
+  color: #fff;
+  font-size: 30rpx;
+}
+
+.controls  button:nth-child(1) {
+  background: #3acce1;
 }
 
 /* 顶部提示信息 start */

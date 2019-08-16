@@ -12,17 +12,17 @@
   <view class="center">
     <view>
       <text>预约时间：</text>
-      <text class="fw">2019-08-01   8:00am-22:pm</text>
+      <text class="fw">{{result.date}}</text>
     </view>
 
     <view>
       <text>预约地点：</text>
-      <text>广州市番禺区东沙村骏盈大厦</text>
+      <text bindtap="intoMap" class="fw">{{result.address}}{{result.recommend}}</text>
     </view>
 
     <view>
       <text>预计费用：</text>
-      <text class="fw">8</text>元
+      <text class="fw">{{result.estimatedCost}}</text>元
       <text class="tip" bindtap="tip">?</text>
     </view>
   </view>

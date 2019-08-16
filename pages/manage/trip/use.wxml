@@ -22,6 +22,11 @@
 
 <!-- 预约车位/结束行程 按钮 -->
 <cover-view class="controls">
-  <cover-image class="borrow" src="../../../assets/images/reservationParking.png" bindtap="borrow" />
-  <cover-image class="still" src="../../../assets/images/endJourney.png" bindtap="still" />
+
+  <button wx:if='{{!isExists}}' bindtap="borrow">预约车位</button>
+  <button wx:if='{{isExists}}' bindtap="borrow">修改预约</button>
+  <button bindtap="still">结束行程</button>
+
+  <!-- <cover-image class="borrow" src="../../../assets/images/reservationParking.png" bindtap="borrow" />
+  <cover-image class="still" src="../../../assets/images/endJourney.png" bindtap="still" /> -->
 </cover-view>

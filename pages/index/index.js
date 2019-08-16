@@ -582,9 +582,15 @@ Page({
       })
       return false;
     }
+    let that = this
     wx.chooseLocation({
       success(res) {
-        console.log(res)
+        that.setData({
+          longitude: res.longitude,
+          latitude: res.latitude
+        }, () => {
+          that.fetchNearest()
+        })
       }
     })
   },

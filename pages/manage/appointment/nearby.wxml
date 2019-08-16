@@ -3,79 +3,37 @@
 
 
   <view class="search">
-    <icon class="iconfont icon-sousuo"></icon>
-    <input placeholder="请输入位置信息"></input>
+    <view>
+      <icon class="iconfont icon-sousuo"></icon>
+      <input placeholder="请输入位置信息"></input>
+    </view>
   </view>
 
-  <view class="items">
 
-    <view class="item" bindtap="selItem">
+  <scroll-view class="items"  scroll-y="{{true}}">
+
+
+    <view class="item" bindtap="selItem" wx:for="{{list}}" wx:key="{{item.id}}">
       <image src="../../../assets/images/logo.png"></image>
       <view>
-        <view>广州市番禺区东沙村</view>
+        <view>{{item.address}}</view>
         <view>
           <text>可用滑板车数：</text>
-          <text>5</text>
+          <text>{{item.slotsNum}}</text>
         </view>
         <view>
           <text>可用车位数：</text>
-          <text>8</text>
+          <text>{{item.slotsNum}}</text>
         </view>
       </view>
-      <view>1445M</view>
+      <view>{{item.distance}}M</view>
     </view>
 
 
-    <view class="item" bindtap="selItem">
-      <image src="../../../assets/images/logo.png"></image>
-      <view>
-        <view>广州市番禺区市桥地铁站</view>
-        <view>
-          <text>可用滑板车数：</text>
-          <text>6</text>
-        </view>
-        <view>
-          <text>可用车位数：</text>
-          <text>10</text>
-        </view>
-      </view>
-      <view>351M</view>
-    </view>
 
 
-    <view class="item" bindtap="selItem">
-      <image src="../../../assets/images/logo.png"></image>
-      <view>
-        <view>广州市番禺区市万达广场</view>
-        <view>
-          <text>可用滑板车数：</text>
-          <text>5</text>
-        </view>
-        <view>
-          <text>可用车位数：</text>
-          <text>7</text>
-        </view>
-      </view>
-      <view>4658M</view>
-    </view>
 
-    <view class="item" bindtap="selItem">
-      <image src="../../../assets/images/logo.png"></image>
-      <view>
-        <view>广州市番禺区市塘步西村</view>
-        <view>
-          <text>可用滑板车数：</text>
-          <text>13</text>
-        </view>
-        <view>
-          <text>可用车位数：</text>
-          <text>10</text>
-        </view>
-      </view>
-      <view>6513M</view>
-    </view>
-
-  </view>
+  </scroll-view>
 
 
 </view>

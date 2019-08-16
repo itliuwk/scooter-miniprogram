@@ -169,8 +169,11 @@ Page({
               hasMarkers: true,
               currId: first.id
             }, () => {
-              this.fetchDetail(first.id) //  获取第一个点 mak 点
-              this.fetchAppointment(first.id) //  获取第一个点 mak 点
+              if (this.data.isExists == 'false') {
+                this.fetchDetail(first.id) //  获取第一个点 mak 点
+              } else {
+                this.fetchAppointment(first.id) //  获取第一个点 mak 点
+              }
             })
           })
         })
@@ -230,6 +233,7 @@ Page({
 
 
         that.setData({
+          isShow: true,
           currId: result.id,
           markerDetail: appointment
         })

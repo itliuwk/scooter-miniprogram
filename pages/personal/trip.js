@@ -62,6 +62,7 @@ Page({
 
       res.data.map(item => {
         item.createdDate = formatYYYY(item.createdDate)
+        item.time = parseInt((item.time / 1000) / 3600 * 60)
         return item;
       })
 

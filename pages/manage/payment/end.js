@@ -1,66 +1,61 @@
 // pages/payment/end.js
+import fetch from '../../../lib/fetch.js'
+import {
+  formatYYYY,
+  formatHHMM
+} from '../../../utils/date.js'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    detail: {}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
 
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-
+  onReady: function() {
+    this.getPending()
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
+  getPending() {
+    //订单交易 / 未完成订单
+    fetch({
+      url: '/transaction/pending'
+    }).then(res => {
+      res.data.createdDate = formatYYYY(res.data.createdDate)
+      res.data.time = parseInt((res.data.time / 1000) / 3600 * 60)
+      this.setData({
+        detail: res.data
+      })
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  confirm() {
+    //订单交易 / 未完成订单
+    fetch({
+      url: '/transaction/pending'
+    }).then(res => {
+      res.data.createdDate = formatYYYY(res.data.createdDate)
+      res.data.time = parseInt((res.data.time / 1000) / 3600 * 60)
+      this.setData({
+        detail: res.data
+      })
+    })
   }
 })

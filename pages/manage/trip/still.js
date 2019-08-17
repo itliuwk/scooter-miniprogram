@@ -5,60 +5,31 @@ Page({
    * 页面的初始数据
    */
   data: {
-    lattice: [{
-        id: 1,
-        checked: false
-      },
-      {
-        id: 2,
-        checked: false
-      },
-      {
-        id: 3,
-        checked: false
-      },
-      {
-        id: 4,
-        checked: true
-      },
-      {
-        id: 5,
-        checked: false
-      },
-      {
-        id: 6,
-        checked: false
-      },
-      {
-        id: 7,
-        checked: false
-      },
-      {
-        id: 8,
-        checked: false
-      },
-      {
-        id: 9,
-        checked: false
-      },
-
-    ]
+    lattice: [],
+    item: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    if (options.item) {
+      this.setData({
+        lattice: JSON.parse(options.item).lattice,
+        item: JSON.parse(options.item)
+      }, () => {
+        setTimeout(() => {
+          this.toEnd()
+        }, 1500)
+      })
+    }
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-    setTimeout(() => {
-      this.toEnd();
-    }, 3000)
+
   },
 
   /**
@@ -67,6 +38,9 @@ Page({
   onShow: function() {
 
   },
+
+
+
 
   toHome() {
     wx.navigateTo({

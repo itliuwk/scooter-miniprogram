@@ -3,6 +3,23 @@
 
 
 
+  <view class="top">
+    <view>
+      <view class="open fw">车门已经打开</view>
+      <view>请按如图位置放好车辆并关好门</view>
+    </view>
+  </view>
+
+
+  <!-- <view class="top">
+    <view>
+      <view class="open fw">车位已满</view>
+      <view>试试查找附近的车位吧~</view>
+    </view>
+  </view> -->
+
+
+
   <view class="center">
 
     <view class="item {{item.checked?'open':''}}" wx:for="{{lattice}}" wx:key="{{item.id}}">
@@ -13,26 +30,12 @@
   </view>
 
 
-  <view class="top">
-    <view>
-      <view class="open fw">车门已经打开</view>
-      <view>请按如图位置放好车辆并关好门</view>
-    </view>
-  </view>
 
 
-  <view class="top">
-    <view>
-      <view class="open fw">车位已满</view>
-      <view>试试查找附近的车位吧~</view>
-    </view>
-  </view>
-
-
-
+<!-- 
   <view class="toHome" bindtap="toHome">
     <view class="pay confirm">查找附近车位</view>
-  </view>
+  </view> -->
 
 
 

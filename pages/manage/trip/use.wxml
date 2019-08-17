@@ -2,12 +2,12 @@
 
   <view class="navigation">
     <view>
-      <text>{{chargeDetail.distance}}</text>
+      <text>{{chargeDetail.distance||0}}</text>
       <view>里程(公里)</view>
     </view>
     <view>
-      <text>{{chargeDetail.time}}</text>
-      <view>时长(小时)</view>
+      <text>{{chargeDetail.createdDate}}</text>
+      <view>时长(分钟)</view>
     </view>
   </view>
 

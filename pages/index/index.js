@@ -159,7 +159,7 @@ Page({
 
 
     //获取提示的请求是否显示  提示信息
-    //this.getInfo();
+    this.getInfo();
   },
 
 
@@ -222,7 +222,7 @@ Page({
     fetch({
       url: '/transaction/pending'
     }).then(res => {
-      if (res.data.total) {
+      if (res.data) {
         this.setData({
           isPending: true,
           isInfo: true,
@@ -239,7 +239,7 @@ Page({
     fetch({
       url: '/transaction/progressing'
     }).then(res => {
-      if (res.data.total) {
+      if (res.data) {
         this.setData({
           isProgressing: true,
           progressingTotal: res.data.total,
@@ -265,7 +265,7 @@ Page({
 
     //是否有预约车辆
     fetch({
-      url: '/business/reserve/exist?type=GIVEBACK',
+      url: '/business/reserve/exist?type=RENT',
     }).then(res => {
       this.setData({
         isExists: res.exists
@@ -285,18 +285,23 @@ Page({
       url: '/business/stubDetail?id=' + id,
       isLoading: true
     }).then(result => {
+      console.log(result)
+
+      that.setData({
+        markerDetail: result.data
+      })
 
       // 调用接口转换成具体位置
-      address(result.latitude, result.longitude).then(res => {
-        let markerDetail = {
-          ...result,
-          address: res.result.address_component.province + res.result.address_component.city + res.result.address_component.district,
-          recommend: res.result.formatted_addresses.recommend
-        }
-        that.setData({
-          markerDetail: markerDetail
-        })
-      })
+      // address(result.latitude, result.longitude).then(res => {
+      //   let markerDetail = {
+      //     ...result,
+      //     address: res.result.address_component.province + res.result.address_component.city + res.result.address_component.district,
+      //     recommend: res.result.formatted_addresses.recommend
+      //   }
+      //   that.setData({
+      //     markerDetail: markerDetail
+      //   })
+      // })
 
 
 
@@ -517,9 +522,54 @@ Page({
 
     wx.scanCode({
       success(res) {
-        wx.navigateTo({
-          url: '/pages/manage/trip/take?id=' + res.result,
+
+
+        fetch({
+          url: '/business/rent?id=' + res.result,
+          method: 'POST',
+          data: {
+            id: res.result
+          }
+        }).then(res => {
+
+
+          if (res.data.errorCode === 0) { //  是否借车成功
+            let lattice = []
+            for (let i = 1; i < res.data.maxSlotsNum + 1; i++) {
+              var obj = {}
+              if (i == res.data.slotNum) {
+                obj = {
+                  id: i,
+                  checked: true
+                }
+              } else {
+                obj = {
+                  id: i,
+                  checked: false
+                }
+              }
+              lattice.push(obj)
+            }
+            res.data.lattice = lattice
+
+
+            wx.navigateTo({
+              url: '/pages/manage/trip/take?item=' + JSON.stringify(res.data),
+            })
+
+          } else {
+            wx.showToast({
+              title: '租车失败,请重新扫码',
+              icon: 'none'
+            })
+          }
         })
+
+
+
+
+
+
       }
     })
 

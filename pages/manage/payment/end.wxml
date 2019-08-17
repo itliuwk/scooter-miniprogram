@@ -7,7 +7,7 @@
       <view class="end">订单已结束</view>
       <view>待支付</view>
       <text>￥</text>
-      <text>20</text>
+      <text>{{detail.total||0}}</text>
     </view>
   </view>
 
@@ -16,23 +16,23 @@
 
     <view>
       <text>订单编号：</text>
-      <text>2125153121</text>
+      <text>{{detail.id}}</text>
     </view>
 
     <view>
       <text>出行时间：</text>
-      <text class="fw">2019.08.01</text>
-      <text class="fw"> 20</text>分钟
+      <text class="fw">{{detail.createdDate}}</text>
+      <text class="fw"> {{detail.time||0}} </text>分钟
     </view>
 
     <view>
       <text>行驶里程：</text>
-      <text class="fw">1.8</text>公里
+      <text class="fw">{{detail.distance||0}} </text>公里
     </view>
 
     <view>
       <text>订单金额：</text>
-      <text class="fw">20</text>元
+      <text class="fw">{{detail.total||0}} </text>元
     </view>
 
 
@@ -44,7 +44,7 @@
   </view>
 
 
-  <view class="pay confirm">
+  <view class="pay confirm" bindtap="confirm">
     立即支付
   </view>
 

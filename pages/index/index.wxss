@@ -89,7 +89,7 @@ button {
 .navigation>view {
   flex: 1;
   display: inline-block;
-  line-height: normal;
+  line-height: 100rpx;
 }
 
 .navigation>view:nth-child(1) {
@@ -146,6 +146,10 @@ button {
 .menu-content-t>view {
   flex: 1;
   font-size: 30rpx;
+}
+
+.menu-content-t>view:nth-child(1) {
+  flex: 3;
 }
 
 .menu-content-t-title {

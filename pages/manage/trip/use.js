@@ -4,6 +4,8 @@ import fetch from '../../../lib/fetch.js'
 
 Page({
 
+  //  14:58
+
   /**
    * 页面的初始数据
    */
@@ -29,6 +31,8 @@ Page({
     chargeDetail: {},
 
     isExists: false,
+
+    timer: null
 
   },
 
@@ -106,8 +110,15 @@ Page({
     setTimeout(() => {
       this.movetoCenter();
     }, 2000)
+    // this.timer = setInterval(() => {
+
+    // }, 1000)
     this.fetchCharge();
     this.fecchExist();
+  },
+
+  onUnload: function() {
+    clearInterval(this.timer)
   },
 
 
@@ -177,12 +188,13 @@ Page({
   fetchCharge() {
     fetch({
       url: '/business/charge',
+      isLoading: false,
     }).then(res => {
-
+      res.data.createdDate = this.fleterDate(res.data.createdDate)
       this.setData({
-        chargeDetail: res,
+        chargeDetail: res.data,
         polyline: [{
-          points: res.trail,
+          points: res.data.trail || [],
           color: "#3ACCE1",
           width: 4,
           dottedLine: true,
@@ -208,6 +220,13 @@ Page({
     })
   },
 
+  fleterDate(createdDate) {
+    let now = Date.now();
+    let second = (now - createdDate) / 1000;
+    var hour = parseInt(second / 3600 * 60)
+    return hour;
+  },
+
 
 
 
@@ -228,9 +247,61 @@ Page({
   },
 
   still() {
-    wx.navigateTo({
-      url: '/pages/manage/trip/still',
+    wx.scanCode({
+      success(res) {
+
+        fetch({
+          url: '/business/return?id=' + res.result,
+          method: 'POST',
+          data: {
+            id: res.result
+          }
+        }).then(res => {
+          if (!res.data.full) { // 车位是否已满
+
+            if (res.data.errorCode === 0) { //  是否还车成功
+              let lattice = []
+              for (let i = 1; i < res.data.maxSlotsNum + 1; i++) {
+                var obj = {}
+                if (i == res.data.slotNum) {
+                  obj = {
+                    id: i,
+                    checked: true
+                  }
+                } else {
+                  obj = {
+                    id: i,
+                    checked: false
+                  }
+                }
+                lattice.push(obj)
+              }
+              res.data.lattice = lattice
+              wx.navigateTo({
+                url: '/pages/manage/trip/still?item=' + JSON.stringify(res.data),
+              })
+
+            } else {
+              wx.showToast({
+                title: '还车失败,请重新扫码',
+                icon: 'none'
+              })
+            }
+
+
+
+          } else {
+            wx.showToast({
+              title: '此车位已满,请重新扫码',
+              icon: 'none'
+            })
+          }
+
+        })
+
+      }
     })
+
   },
 
 

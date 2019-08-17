@@ -8,7 +8,7 @@
         </view>
         <view class="title">
           <text>行驶里程：</text>
-          <text class="fwd">{{item.time||0}}</text>
+          <text class="fwd">{{item.distance||0}}</text>
           <text>公里</text>
         </view>
         <view class="title">
@@ -18,7 +18,7 @@
       </view>
       <view class="right">
         <text>行驶时间：</text>
-        <text>{{item.costTime||0}}</text>
+        <text>{{item.time||0}}</text>
         <text>分钟</text>
       </view>
     </view>

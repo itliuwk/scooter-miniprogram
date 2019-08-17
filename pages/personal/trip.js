@@ -2,7 +2,7 @@
 
 import fetch from '../../lib/fetch.js'
 import {
-  formatYYYY
+  formatYYYYSS
 } from '../../utils/date.js'
 
 
@@ -61,10 +61,11 @@ Page({
       }
 
       res.data.map(item => {
-        item.createdDate = formatYYYY(item.createdDate)
-        item.time = parseInt((item.time / 1000) / 3600 * 60)
+        item.createdDate = formatYYYYSS(item.createdDate)
+        item.time = parseInt((item.time / 1000) / 60)
         return item;
       })
+      console.log(res.data)
 
 
       this.setData({

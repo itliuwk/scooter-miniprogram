@@ -110,16 +110,27 @@ Page({
     setTimeout(() => {
       this.movetoCenter();
     }, 2000)
-    // this.timer = setInterval(() => {
 
-    // }, 1000)
-    this.fetchCharge();
+    let that = this;
+    that.setData({
+      timer: setInterval(function() {
+        that.fetchCharge();
+      }, 1000)
+    })
+
+
     this.fecchExist();
   },
 
   onUnload: function() {
-    clearInterval(this.timer)
+    clearInterval(this.data.timer)
   },
+
+  onHide: function () {
+
+    clearInterval(this.data.timer)
+  },
+
 
 
   /**
@@ -222,9 +233,8 @@ Page({
 
   fleterDate(createdDate) {
     let now = Date.now();
-    let second = (now - createdDate) / 1000;
-    var hour = parseInt(second / 3600 * 60)
-    return hour;
+    let second = (now - createdDate) / 1000 / 60;
+    return parseInt(second);
   },
 
 
@@ -247,6 +257,7 @@ Page({
   },
 
   still() {
+    let that = this
     wx.scanCode({
       success(res) {
 
@@ -280,6 +291,7 @@ Page({
               wx.navigateTo({
                 url: '/pages/manage/trip/still?item=' + JSON.stringify(res.data),
               })
+              clearInterval(that.timer)
 
             } else {
               wx.showToast({

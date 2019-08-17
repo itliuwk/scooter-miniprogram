@@ -15,12 +15,20 @@
           <text>订单金额：</text>
           <text class="fwd">{{item.total||0}}元</text>
         </view>
+
+        <!-- <view class="title">
+          <text>行驶时间：</text>
+          <text class="fwd">{{item.time||0}}</text>
+          <text>分钟</text>
+        </view> -->
+
       </view>
       <view class="right">
         <text>行驶时间：</text>
         <text>{{item.time||0}}</text>
         <text>分钟</text>
       </view>
+
     </view>
 
 

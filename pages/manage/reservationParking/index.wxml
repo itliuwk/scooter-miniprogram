@@ -13,7 +13,6 @@
 
   <view wx:else class="navigation" bindtap='intoMap'>
     <view>
-      <text>{{markerDetail.recommend}}</text>
       <view>{{markerDetail.address}}</view>
     </view>
     <view>
@@ -51,7 +50,7 @@
             <text>车辆编号：</text>
             <text>{{markerDetail.id}} </text>
 
-            <text class="default">(已默认为您推荐最近的存车位)</text>
+            <text class="default">(已默认为您推荐最近停车位)</text>
           </view>
 
           <view class="menu-content-t-title">

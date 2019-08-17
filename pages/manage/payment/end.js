@@ -39,7 +39,7 @@ Page({
       url: '/transaction/pending'
     }).then(res => {
       res.data.createdDate = formatYYYY(res.data.createdDate)
-      res.data.time = parseInt((res.data.time / 1000) / 3600 * 60)
+      res.data.time = parseInt((res.data.time / 1000) / 60)
       this.setData({
         detail: res.data
       })
@@ -52,7 +52,7 @@ Page({
       url: '/transaction/pending'
     }).then(res => {
       res.data.createdDate = formatYYYY(res.data.createdDate)
-      res.data.time = parseInt((res.data.time / 1000) / 3600 * 60)
+      res.data.time = parseInt((res.data.time / 1000) / 60)
       this.setData({
         detail: res.data
       })

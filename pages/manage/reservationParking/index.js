@@ -3,7 +3,8 @@ import fetch from '../../../lib/fetch.js'
 import address from '../../../utils/address.js'
 import {
   formatYYYY,
-  formatHHMM
+  formatHHMM,
+  formatValue
 } from '../../../utils/date.js'
 
 
@@ -15,7 +16,7 @@ Page({
    */
   data: {
     mapH: '100%',
-    infoH: 600,
+    infoH: 650,
     menuH: '0',
     isShow: false,
     isMarker: true,
@@ -40,7 +41,7 @@ Page({
 
 
     isMenu: true, // 是否显示主菜单
-    isExists: false, //是否预约
+    isExists: 'false', //是否预约
   },
 
   /**
@@ -48,9 +49,8 @@ Page({
    */
   onLoad: function(options) {
 
-
     this.setData({
-      isExists: options.isExists
+      isExists: options.isExists || 'false'
     })
 
 
@@ -193,17 +193,9 @@ Page({
       isLoading: true
     }).then(result => {
 
-      // 调用接口转换成具体位置
-      address(result.latitude, result.longitude).then(res => {
-        let markerDetail = {
-          ...result,
-          address: res.result.address_component.province + res.result.address_component.city + res.result.address_component.district,
-          recommend: res.result.formatted_addresses.recommend
-        }
-        that.setData({
-          isShow: true,
-          markerDetail: markerDetail
-        })
+      that.setData({
+        isShow: true,
+        markerDetail: result.data
       })
 
     })
@@ -219,9 +211,9 @@ Page({
     }).then(result => {
 
 
-      let date = formatYYYY(result.startTime)
-      let start = formatHHMM(result.startTime)
-      let end = formatHHMM(result.endTime)
+      let date = formatYYYY(result.data.startTime)
+      let start = formatHHMM(result.data.startTime)
+      let end = formatHHMM(result.data.endTime)
 
       let multiArray = this.data.multiArray
       // let multiIndex = this.data.multiIndex
@@ -243,22 +235,12 @@ Page({
 
 
 
-
-      // 调用接口转换成具体位置
-      address(result.latitude, result.longitude).then(res => {
-        let appointment = {
-          ...result,
-          address: res.result.address_component.province + res.result.address_component.city + res.result.address_component.district,
-          recommend: res.result.formatted_addresses.recommend
-        }
-
-        that.setData({
-          isShow: true,
-          currId: result.id,
-          date: date,
-          multiIndex,
-          markerDetail: appointment
-        })
+      that.setData({
+        isShow: true,
+        currId: result.data.id,
+        date: date,
+        multiIndex,
+        markerDetail: result.data
       })
 
     })
@@ -488,6 +470,14 @@ Page({
    */
   active(e) {
 
+    // if (this.data.markerDetail.slotsNum === 0) {
+    //   wx.showToast({
+    //     title: '没有可用车位,请重新选择',
+    //     icon: 'none'
+    //   })
+    //   return false;
+    // }
+
     let multiArray = this.data.multiArray
     let multiIndex = this.data.multiIndex
 
@@ -508,15 +498,14 @@ Page({
 
 
     fetch({
-      url: '/business/reserve',
+      url: '/business/reserve?id=' + this.data.currId + '&type=GIVEBACK',
       method: 'post',
       data: {
-        start,
-        end,
+        start: formatValue(start),
+        end: formatValue(end),
         id: this.data.currId,
         type: 'GIVEBACK'
-      },
-      isLoading: true
+      }
     }).then(result => {
 
       wx.showToast({
@@ -524,7 +513,7 @@ Page({
       })
       setTimeout(() => {
         wx.navigateTo({
-          url: './active?result=' + JSON.stringify(result),
+          url: './active?result=' + JSON.stringify(result.data),
         })
       }, 1500)
 
@@ -540,7 +529,7 @@ Page({
 
 
     fetch({
-      url: '/business/reserve/cancel',
+      url: '/business/reserve/cancel?id=' + this.data.currId + '&type=GIVEBACK',
       method: 'post',
       data: {
         type: 'GIVEBACK',
@@ -587,11 +576,11 @@ Page({
 
 
     fetch({
-      url: '/scooter/business/reserve',
+      url: '/business/reserve',
       method: 'PUT',
       data: {
-        start,
-        end,
+        start: formatValue(start),
+        end: formatValue(end),
         id: this.data.currId,
         type: 'GIVEBACK'
       }
@@ -602,7 +591,7 @@ Page({
       })
       setTimeout(() => {
         wx.navigateTo({
-          url: './active',
+          url: './active?result=' + JSON.stringify(result.data),
         })
       }, 1500)
 

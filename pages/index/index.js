@@ -285,7 +285,7 @@ Page({
       url: '/business/stubDetail?id=' + id,
       isLoading: true
     }).then(result => {
-      console.log(result)
+
 
       that.setData({
         markerDetail: result.data

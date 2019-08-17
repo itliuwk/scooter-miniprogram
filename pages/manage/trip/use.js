@@ -126,7 +126,7 @@ Page({
     clearInterval(this.data.timer)
   },
 
-  onHide: function () {
+  onHide: function() {
 
     clearInterval(this.data.timer)
   },
@@ -226,7 +226,7 @@ Page({
       url: '/business/reserve/exist?type=GIVEBACK',
     }).then(res => {
       this.setData({
-        isExists: res.exists
+        isExists: res.data
       })
     })
   },
@@ -248,11 +248,6 @@ Page({
     wx.navigateTo({
       url: '/pages/manage/reservationParking/index?isExists=' + this.data.isExists,
     })
-
-    // wx.navigateTo({
-    //   url: '/pages/manage/reservationParking/index?isExists=true',
-    // })
-
 
   },
 

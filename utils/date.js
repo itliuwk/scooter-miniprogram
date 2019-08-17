@@ -1,16 +1,22 @@
-let monment = require('../lib/moment.min.js')
+let moment = require('../lib/moment.min.js')
 
 
 export function formatYYYY(date) {
-  return monment(date).format('YYYY-MM-DD')
+  return moment(date).format('YYYY-MM-DD')
 }
 
 
 export function formatYYYYSS(date) {
-  return monment(date).format('YYYY-MM-DD HH:mm:ss')
+  return moment(date).format('YYYY-MM-DD HH:mm:ss')
 }
 
 
 export function formatHHMM(date) {
-  return monment(date).format('HH:mm')
+  console.log(date)
+  return moment(date).format('HH:mm')
+}
+
+
+export function formatValue(date) {
+  return moment(date).valueOf(); // 
 }

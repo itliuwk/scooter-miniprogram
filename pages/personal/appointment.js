@@ -59,11 +59,61 @@ Page({
   },
 
 
+  /**
+   * 去取车，或者还车
+   */
   appointmentTap(e) {
     let type = e.currentTarget.dataset.type;
+
     let that = this;
     wx.scanCode({
       success(res) {
+
+        if (type == 'RENT') {
+
+          fetch({
+            url: '/business/rent?id=' + res.result,
+            method: 'POST',
+            data: {
+              id: res.result
+            }
+          }).then(res => {
+
+
+            if (res.data.errorCode === 0) { //  是否借车成功
+              let lattice = []
+              for (let i = 1; i < res.data.maxSlotsNum + 1; i++) {
+                var obj = {}
+                if (i == res.data.slotNum) {
+                  obj = {
+                    id: i,
+                    checked: true
+                  }
+                } else {
+                  obj = {
+                    id: i,
+                    checked: false
+                  }
+                }
+                lattice.push(obj)
+              }
+              res.data.lattice = lattice
+
+
+              wx.navigateTo({
+                url: '/pages/manage/trip/take?item=' + JSON.stringify(res.data),
+              })
+
+            } else {
+              wx.showToast({
+                title: '租车失败,请重新扫码',
+                icon: 'none'
+              })
+            }
+          })
+
+          return false;
+        }
 
         fetch({
           url: '/business/return?id=' + res.result,
@@ -95,7 +145,7 @@ Page({
               wx.navigateTo({
                 url: '/pages/manage/trip/still?item=' + JSON.stringify(res.data),
               })
-      
+
 
             } else {
               wx.showToast({
@@ -117,6 +167,11 @@ Page({
 
       }
     })
+  },
+
+
+  update(e) {
+    let type = e.currentTarget.dataset.type;
   },
 
 

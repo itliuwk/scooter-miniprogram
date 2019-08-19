@@ -70,7 +70,7 @@
 .navigation>view {
   flex: 1;
   display: inline-block;
-  line-height: normal;
+  line-height: 100rpx;
 }
 
 .navigation>view:nth-child(1) {
@@ -100,7 +100,7 @@
 /* 顶部提示信息 end */
 
 .menu {
-  height: 500rpx;
+  height: 550rpx;
   position: relative;
   font-size: 0;
 }

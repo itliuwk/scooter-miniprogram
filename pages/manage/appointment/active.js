@@ -19,7 +19,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     if (options.result) {
       this.setData({
         result: JSON.parse(options.result)
@@ -32,18 +32,18 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
 
   },
 
-  onUnload: function() {
+  onUnload: function () {
     wx.reLaunch({
       url: "/pages/index/index"
     })
@@ -51,20 +51,16 @@ Page({
 
   filterResult(result) {
     let that = this;
-    let date = formatYYYY(result.start) + ' ' + formatHHMM(result.start) + '-' + formatHHMM(result.end)
+    let newResult = {
+      date: formatYYYY(result.startTime) + ' ' + formatHHMM(result.startTime) + '-' + formatHHMM(result.endTime),
+      address: result.address,
+      estimatedCost: result.estimatedCost,
+    }
 
-    // 调用接口转换成具体位置
-    address(result.latitude, result.longitude).then(res => {
-      let newResult = {
-        ...result,
-        date,
-        address: res.result.address_component.province + res.result.address_component.city + res.result.address_component.district,
-        recommend: res.result.formatted_addresses.recommend
-      }
-      console.log(newResult)
-      that.setData({
-        result: newResult
-      })
+    console.log(newResult)
+
+    that.setData({
+      result: newResult
     })
 
 

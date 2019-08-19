@@ -3,7 +3,8 @@ import fetch from '../../../lib/fetch.js'
 import address from '../../../utils/address.js'
 import {
   formatYYYY,
-  formatHHMM
+  formatHHMM,
+  formatValue 
 } from '../../../utils/date.js'
 
 
@@ -15,7 +16,7 @@ Page({
    */
   data: {
     mapH: '100%',
-    infoH: 600,
+    infoH: 650,
     menuH: '0',
     isShow: false,
     isMarker: true,
@@ -52,6 +53,7 @@ Page({
     this.setData({
       isExists: options.isExists
     })
+
 
 
     // 初始化减去 info 的高度
@@ -187,23 +189,16 @@ Page({
    *   获取点击 mak  的详情
    */
   fetchDetail(id) {
+    console.log(345)
     let that = this
     fetch({
       url: '/business/stubDetail?id=' + id,
       isLoading: true
     }).then(result => {
 
-      // 调用接口转换成具体位置
-      address(result.latitude, result.longitude).then(res => {
-        let markerDetail = {
-          ...result,
-          address: res.result.address_component.province + res.result.address_component.city + res.result.address_component.district,
-          recommend: res.result.formatted_addresses.recommend
-        }
-        that.setData({
-          isShow: true,
-          markerDetail: markerDetail
-        })
+      that.setData({
+        isShow: true,
+        markerDetail: result.data
       })
 
     })
@@ -405,6 +400,10 @@ Page({
         icon: 'none'
       })
 
+      this.setData({
+        multiIndex: [0, 0]
+      })
+
       return false;
     }
 
@@ -413,6 +412,10 @@ Page({
       wx.showToast({
         title: '开始间隔不能相同,选择无效',
         icon: 'none'
+      })
+
+      this.setData({
+        multiIndex: [0, 0]
       })
 
       return false;
@@ -502,8 +505,18 @@ Page({
 
     let date = this.data.date
 
-    let start = date + ' ' + multiArray[0][multiIndex[0]];
-    let end = date + ' ' + multiArray[1][multiIndex[1]];
+    let start = formatValue(date + ' ' + multiArray[0][multiIndex[0]]);
+    let end = formatValue(date + ' ' + multiArray[1][multiIndex[1]]);
+
+    let nowTime = formatValue(new Date());
+
+    if (start < nowTime) {
+      wx.showToast({
+        title: '开始间隔时间不能小于现在的时间,请重新选择',
+        icon: 'none'
+      })
+      return false;
+    }
 
 
 
@@ -524,7 +537,7 @@ Page({
       })
       setTimeout(() => {
         wx.navigateTo({
-          url: './active?result=' + JSON.stringify(result),
+          url: './active?result=' + JSON.stringify(result.data),
         })
       }, 1500)
 
@@ -581,8 +594,18 @@ Page({
 
     let date = this.data.date
 
-    let start = date + ' ' + multiArray[0][multiIndex[0]];
-    let end = date + ' ' + multiArray[1][multiIndex[1]];
+    let start = formatValue(date + ' ' + multiArray[0][multiIndex[0]]);
+    let end = formatValue(date + ' ' + multiArray[1][multiIndex[1]]);
+
+    let nowTime = formatValue(new Date());
+
+    if (start < nowTime) {
+      wx.showToast({
+        title: '开始间隔时间不能小于现在的时间,请重新选择',
+        icon: 'none'
+      })
+      return false;
+    }
 
 
 

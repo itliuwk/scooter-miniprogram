@@ -101,4 +101,18 @@
   </view>
 
 
+
+  <!-- 提示信息 菜单操作  -->
+  <view class="to-be-paid" wx:if="{{isExists}}">
+    <image src="../../assets/images/info.png"></image>
+    <view class="paid-content">
+      <view>您有预约中的车辆，点击查看去取车</view>
+      <view class="to-pay" style="flex:1;text-align:right;padding-right: 20rpx;">
+        <!-- <text bindtap="update" style='margin-right:10rpx'>修改预约</text> -->
+        <text bindtap="pickCar" style='rihgt:20rpx;'>去取车</text>
+      </view>
+    </view>
+  </view>
+
+
 </view>

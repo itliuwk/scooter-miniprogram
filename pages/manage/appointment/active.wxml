@@ -17,17 +17,17 @@
 
     <view>
       <text>预约地点：</text>
-      <text bindtap="intoMap" class="fw">{{result.address}}{{result.recommend}}</text>
+      <text bindtap="intoMap" class="fw">{{result.address}}</text>
     </view>
 
     <view>
       <text>预计费用：</text>
-      <text class="fw">{{result.estimatedCost}}</text>元
+      <text class="fw">{{result.estimatedCost||0}}</text>元
       <text class="tip" bindtap="tip">?</text>
     </view>
   </view>
 
-<view class="info">温馨提示:请在预约时间内取走车辆，超时订单将自动取消，并扣除费用。</view>
+  <view class="info">温馨提示:请在预约时间内取走车辆，超时订单将自动取消，并扣除费用。</view>
 
 
 

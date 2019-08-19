@@ -84,7 +84,7 @@ Page({
           latitude: res.latitude
         }, () => {
           //数据初始化
-          that.init()
+
         })
       }
     })
@@ -143,9 +143,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    let that = this
+
     setTimeout(() => {
       this.movetoCenter();
-    }, 2000)
+      that.init()
+    }, 1000)
   },
 
 
@@ -216,6 +219,10 @@ Page({
    */
   getInfo() {
 
+    if (!this.data.isEmpower) {
+      return false
+    }
+
 
 
     //订单交易 / 未完成订单
@@ -267,9 +274,14 @@ Page({
     fetch({
       url: '/business/reserve/exist?type=RENT',
     }).then(res => {
-      this.setData({
-        isExists: res.exists
-      })
+      if (res.data) {
+        this.setData({
+          isShow: true,
+          isExists: res.data,
+          menuH: this.data.infoH + 165 + 'rpx', //  165  对应菜单 提示的高度
+        })
+      }
+
     })
 
 
@@ -573,9 +585,15 @@ Page({
       }
     })
 
+  },
 
-
-
+  /**
+   * 去取车
+   */
+  pickCar() {
+    wx.navigateTo({
+      url: '/pages/personal/appointment',
+    })
   },
 
 
@@ -583,6 +601,8 @@ Page({
    * 授权
    */
   empower(res) {
+
+    let that = this;
 
     if (res.detail.errMsg == 'getUserInfo:ok') {
 
@@ -610,6 +630,8 @@ Page({
             }).then(res => {
               console.log(res)
             })
+
+            that.getInfo()
 
           } else {
             console.log('登录失败！' + res.errMsg)

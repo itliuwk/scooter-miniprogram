@@ -69,6 +69,16 @@ Page({
     wx.scanCode({
       success(res) {
 
+        if (res.result != that.data.appointment.id) {
+          wx.showToast({
+            title: '您的预约和该地点不一致,请重试或修改预约',
+            icon: 'none'
+          })
+          return false;
+        }
+
+ 
+
         if (type == 'RENT') {
 
           fetch({

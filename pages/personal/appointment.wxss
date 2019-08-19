@@ -72,6 +72,6 @@
   margin: 20rpx 0;
 }
 
-.opi-q {
+.opi  .opi-q {
   background: rgba(102, 94, 255, 1);
 }

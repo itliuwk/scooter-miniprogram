@@ -18,8 +18,9 @@
       </view>
     </view>
     <view class="right">
-      <view class="opi {{appointment.type == 'RENT' ? '' : 'opi-q'}}" >
-        <text bindtap="update" data-type="{{appointment.type}}">修改预约</text> <text bindtap="appointmentTap" data-type="{{appointment.type}}">{{appointment.typeName}}</text>
+      <view class="opi">
+        <text bindtap="update" wx:if="{{appointment.type == 'RENT'}}" data-type="{{appointment.type}}">修改预约</text>
+        <text class="{{appointment.type == 'RENT' ? '' : 'opi-q'}}" bindtap="appointmentTap" data-type="{{appointment.type}}">{{appointment.typeName}}</text>
       </view>
     </view>
   </view>

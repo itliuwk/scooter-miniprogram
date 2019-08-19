@@ -75,19 +75,7 @@ Page({
     })
 
 
-    // 获取经纬度
-    wx.getLocation({
-      type: 'wgs84',
-      success: (res) => {
-        that.setData({
-          longitude: res.longitude,
-          latitude: res.latitude
-        }, () => {
-          //数据初始化
 
-        })
-      }
-    })
 
 
 
@@ -147,23 +135,101 @@ Page({
 
     setTimeout(() => {
       this.movetoCenter();
-      that.init()
+      that.getUserLocation();
     }, 1000)
   },
 
 
 
   init() {
-    //获取附近所有网点信息
-    this.fetchNearest()
+    let that = this;
 
-    //获取是否绑定手机号  和 是否交付押金
-    this.fetchProfile()
+    // 获取经纬度
+    wx.getLocation({
+      type: 'wgs84',
+      success: (res) => {
+        that.setData({
+          longitude: res.longitude,
+          latitude: res.latitude
+        }, () => {
+          //获取附近所有网点信息
+          this.fetchNearest()
+
+          //获取是否绑定手机号  和 是否交付押金
+          this.fetchProfile()
 
 
-    //获取提示的请求是否显示  提示信息
-    this.getInfo();
+          //获取提示的请求是否显示  提示信息
+          this.getInfo();
+
+        })
+      },
+      complete(res) {}
+    })
+
+
+
   },
+
+
+  //定位方法
+  getUserLocation: function() {
+    var _this = this;
+    wx.getSetting({
+      success: (res) => {
+        // res.authSetting['scope.userLocation'] == undefined    表示 初始化进入该页面
+        // res.authSetting['scope.userLocation'] == false    表示 非初始化进入该页面,且未授权
+        // res.authSetting['scope.userLocation'] == true    表示 地理位置授权
+        if (res.authSetting['scope.userLocation'] != undefined && res.authSetting['scope.userLocation'] != true) {
+          //未授权
+          wx.showModal({
+            title: '请求授权当前位置',
+            content: '需要获取您的地理位置，请确认授权',
+            success: function(res) {
+              if (res.cancel) {
+                //取消授权
+                wx.showToast({
+                  title: '拒绝授权',
+                  icon: 'none',
+                  duration: 1000
+                })
+              } else if (res.confirm) {
+                //确定授权，通过wx.openSetting发起授权请求
+                wx.openSetting({
+                  success: function(res) {
+                    if (res.authSetting["scope.userLocation"] == true) {
+                      wx.showToast({
+                        title: '授权成功',
+                        icon: 'success',
+                        duration: 1000
+                      })
+                      //再次授权，调用wx.getLocation的API
+                      _this.init();
+                    } else {
+                      wx.showToast({
+                        title: '授权失败',
+                        icon: 'none',
+                        duration: 1000
+                      })
+                    }
+                  }
+                })
+              }
+            }
+          })
+        } else if (res.authSetting['scope.userLocation'] == undefined) {
+          //用户首次进入页面,调用wx.getLocation的API
+          _this.init();
+        } else {
+          console.log('授权成功')
+          //调用wx.getLocation的API
+          _this.init();
+        }
+      }
+    })
+
+  },
+
 
 
   //获取附近所有网点信息
@@ -302,21 +368,6 @@ Page({
       that.setData({
         markerDetail: result.data
       })
-
-      // 调用接口转换成具体位置
-      // address(result.latitude, result.longitude).then(res => {
-      //   let markerDetail = {
-      //     ...result,
-      //     address: res.result.address_component.province + res.result.address_component.city + res.result.address_component.district,
-      //     recommend: res.result.formatted_addresses.recommend
-      //   }
-      //   that.setData({
-      //     markerDetail: markerDetail
-      //   })
-      // })
-
-
-
 
 
 
@@ -493,19 +544,39 @@ Page({
     //   })
     // }, 1500)
 
+    let that = this
 
-    if (!this.data.userInfo.mobile) {
-      wx.showToast({
-        title: '你还没有绑定手机号码,不能用车',
-        icon: 'none'
-      })
+    wx.getSetting({
+      success(res) {
+        console.log(res)
+        if (res.authSetting['scope.userLocation'] != undefined && res.authSetting['scope.userLocation'] != true) {
+          that.getUserLocation()
+        } else {
+          if (!that.data.userInfo.mobile) {
+            wx.showToast({
+              title: '你还没有绑定手机号码,不能用车',
+              icon: 'none'
+            })
 
-      setTimeout(() => {
-        wx.navigateTo({
-          url: '/pages/personal/setUp/binding',
-        })
-      }, 1500)
-    }
+            setTimeout(() => {
+              wx.navigateTo({
+                url: '/pages/personal/setUp/binding',
+              })
+            }, 1500)
+          }
+
+          return false;
+        }
+      }
+    })
+
+
+
+
+
+
+
+
 
 
 
@@ -601,6 +672,10 @@ Page({
    * 授权
    */
   empower(res) {
+
+
+
+
 
     let that = this;
 

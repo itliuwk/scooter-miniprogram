@@ -251,7 +251,24 @@ Page({
 
   },
 
+
+  /**
+   * 结束行程
+   */
   still() {
+
+    let isExists = this.data.isExists
+    if (isExists) { //  是否有预约
+
+      wx.navigateTo({
+        url: '/pages/personal/appointment',
+      })
+
+      return false;
+    }
+
+
+
     let that = this
     wx.scanCode({
       success(res) {

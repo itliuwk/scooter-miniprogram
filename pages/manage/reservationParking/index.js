@@ -387,6 +387,10 @@ Page({
         icon: 'none'
       })
 
+      this.setData({
+        multiIndex: [0, 0]
+      })
+
       return false;
     }
 
@@ -395,6 +399,10 @@ Page({
       wx.showToast({
         title: '开始间隔不能相同,选择无效',
         icon: 'none'
+      })
+
+      this.setData({
+        multiIndex: [0, 0]
       })
 
       return false;
@@ -492,8 +500,18 @@ Page({
 
     let date = this.data.date
 
-    let start = date + ' ' + multiArray[0][multiIndex[0]];
-    let end = date + ' ' + multiArray[1][multiIndex[1]];
+    let start = formatValue(date + ' ' + multiArray[0][multiIndex[0]]);
+    let end = formatValue(date + ' ' + multiArray[1][multiIndex[1]]);
+
+    let nowTime = formatValue(new Date());
+
+    if (start < nowTime) {
+      wx.showToast({
+        title: '开始间隔时间不能小于现在的时间,请重新选择',
+        icon: 'none'
+      })
+      return false;
+    }
 
 
 
@@ -501,8 +519,8 @@ Page({
       url: '/business/reserve?id=' + this.data.currId + '&type=GIVEBACK',
       method: 'post',
       data: {
-        start: formatValue(start),
-        end: formatValue(end),
+        start,
+        end,
         id: this.data.currId,
         type: 'GIVEBACK'
       }
@@ -570,8 +588,20 @@ Page({
 
     let date = this.data.date
 
-    let start = date + ' ' + multiArray[0][multiIndex[0]];
-    let end = date + ' ' + multiArray[1][multiIndex[1]];
+    let start = formatValue(date + ' ' + multiArray[0][multiIndex[0]]);
+    let end = formatValue(date + ' ' + multiArray[1][multiIndex[1]]);
+
+    let nowTime = formatValue(new Date());
+
+    if (start < nowTime) {
+      wx.showToast({
+        title: '开始间隔时间不能小于现在的时间,请重新选择',
+        icon: 'none'
+      })
+      return false;
+    }
+
+
 
 
 
@@ -579,8 +609,8 @@ Page({
       url: '/business/reserve',
       method: 'PUT',
       data: {
-        start: formatValue(start),
-        end: formatValue(end),
+        start,
+        end,
         id: this.data.currId,
         type: 'GIVEBACK'
       }

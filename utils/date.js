@@ -12,7 +12,6 @@ export function formatYYYYSS(date) {
 
 
 export function formatHHMM(date) {
-  console.log(date)
   return moment(date).format('HH:mm')
 }
 

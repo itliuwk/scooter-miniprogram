@@ -9,7 +9,8 @@
       </view>
       <view class="title">
         <text>预约地址：</text>
-        <text>{{appointment.address}}{{appointment.recommend}}</text>
+        <text bindtap="intoMap">{{appointment.address}}{{appointment.recommend}}</text>
+        <image bindtap="intoMap" style="margin-left:15rpx;" src="../../assets/images/nav.png"></image>
       </view>
       <view class="title">
         <text>预约费用：</text>
@@ -17,7 +18,7 @@
       </view>
     </view>
     <view class="right">
-      <view class="opi {{appointment.type == 'RENT' ? '' : 'opi-q'}}"  bindtap="appointmentTap" data-type="{{appointment.type}}">
+      <view class="opi {{appointment.type == 'RENT' ? '' : 'opi-q'}}" bindtap="appointmentTap" data-type="{{appointment.type}}">
         {{appointment.typeName}}
       </view>
     </view>

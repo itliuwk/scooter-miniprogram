@@ -43,8 +43,10 @@ Page({
     isProgressing: false,
     progressingTotal: '', //进行中的订单 多少分钟
 
-    isEmpower: false,
-    isExists: false,
+    isEmpower: false, // 是否授权
+    isExists: false, //是否有预约
+
+    isScanCode: false
 
   },
 
@@ -73,15 +75,6 @@ Page({
     this.setData({
       menuH: this.data.infoH + 'rpx',
     })
-
-
-
-
-
-
-
-
-
 
 
 
@@ -135,7 +128,9 @@ Page({
 
     setTimeout(() => {
       this.movetoCenter();
-      that.getUserLocation();
+      if (!this.data.isScanCode) {
+        that.getUserLocation();
+      }
     }, 1000)
   },
 
@@ -571,15 +566,6 @@ Page({
     })
 
 
-
-
-
-
-
-
-
-
-
   },
 
 
@@ -602,6 +588,11 @@ Page({
     //   }, 1500)
     //   return false;
     // }
+    let that = this
+
+    that.setData({
+      isScanCode: true
+    })
 
     wx.scanCode({
       success(res) {
@@ -647,12 +638,11 @@ Page({
             })
           }
         })
-
-
-
-
-
-
+      },
+      complete(res) {
+        that.setData({
+          isScanCode: true
+        })
       }
     })
 

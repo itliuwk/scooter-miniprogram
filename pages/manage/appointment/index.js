@@ -4,7 +4,7 @@ import address from '../../../utils/address.js'
 import {
   formatYYYY,
   formatHHMM,
-  formatValue 
+  formatValue
 } from '../../../utils/date.js'
 
 
@@ -42,6 +42,7 @@ Page({
 
     isMenu: true, // 是否显示主菜单
     isExists: false, //是否预约
+    currId: ''
   },
 
   /**
@@ -189,7 +190,6 @@ Page({
    *   获取点击 mak  的详情
    */
   fetchDetail(id) {
-    console.log(345)
     let that = this
     fetch({
       url: '/business/stubDetail?id=' + id,
@@ -207,6 +207,8 @@ Page({
 
 
   fetchAppointment() {
+
+    console.log(this.data.isExists)
     let that = this;
     fetch({
       url: '/reservation',
@@ -214,9 +216,9 @@ Page({
     }).then(result => {
 
 
-      let date = formatYYYY(result.startTime)
-      let start = formatHHMM(result.startTime)
-      let end = formatHHMM(result.endTime)
+      let date = formatYYYY(result.data.startTime)
+      let start = formatHHMM(result.data.startTime)
+      let end = formatHHMM(result.data.endTime)
 
       let multiArray = this.data.multiArray
       // let multiIndex = this.data.multiIndex
@@ -238,22 +240,12 @@ Page({
 
 
 
-
-      // 调用接口转换成具体位置
-      address(result.latitude, result.longitude).then(res => {
-        let appointment = {
-          ...result,
-          address: res.result.address_component.province + res.result.address_component.city + res.result.address_component.district,
-          recommend: res.result.formatted_addresses.recommend
-        }
-
-        that.setData({
-          isShow: true,
-          currId: result.id,
-          date: date,
-          multiIndex,
-          markerDetail: appointment
-        })
+      that.setData({
+        isShow: true,
+        currId: result.data.id,
+        date: date,
+        multiIndex,
+        markerDetail: result.data
       })
 
     })
@@ -433,14 +425,6 @@ Page({
 
 
 
-  borrow() {
-    console.log('借车')
-  },
-
-  still() {
-    console.log('还车')
-  },
-
 
   /**
    *  点击 跳转附近滑板车
@@ -552,8 +536,9 @@ Page({
   cancel(e) {
 
 
+
     fetch({
-      url: '/business/reserve/cancel',
+      url: '/business/reserve/cancel?id=' + this.data.currId + '&type=RENT',
       method: 'post',
       data: {
         type: 'RENT',
@@ -566,7 +551,7 @@ Page({
       })
       setTimeout(() => {
         wx.reLaunch({
-          url: '/pages/manage/trip/use',
+          url: '/pages/index/index',
         })
       }, 1500)
 
@@ -610,7 +595,7 @@ Page({
 
 
     fetch({
-      url: '/scooter/business/reserve',
+      url: '/business/reserve',
       method: 'PUT',
       data: {
         start,
@@ -625,7 +610,7 @@ Page({
       })
       setTimeout(() => {
         wx.navigateTo({
-          url: './active',
+          url: './active?result=' + JSON.stringify(result.data),
         })
       }, 1500)
 

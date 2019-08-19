@@ -172,6 +172,16 @@ Page({
 
   update(e) {
     let type = e.currentTarget.dataset.type;
+
+    if (type == 'RENT') {
+      wx.navigateTo({
+        url: '/pages/manage/appointment/index?isExists=true',
+      })
+    } else {
+      wx.navigateTo({
+        url: '/pages/manage/appointment/index',
+      })
+    }
   },
 
 

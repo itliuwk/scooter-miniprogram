@@ -51,7 +51,7 @@
             <text>车辆编号：</text>
             <text>{{markerDetail.id}} </text>
 
-            <text class="default">(已默认为您推荐最近的车辆)</text>
+            <text class="default" wx:if="{{isExists=='false'}}">(已默认为您推荐最近的车辆)</text>
           </view>
 
           <view class="menu-content-t-title">

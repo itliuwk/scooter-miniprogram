@@ -68,7 +68,7 @@ Page({
       isLoading: true
     }).then(res => {
       this.setData({
-        wallet: res
+        wallet: res.data
       })
     })
   }

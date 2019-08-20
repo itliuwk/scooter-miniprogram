@@ -29,7 +29,7 @@ Page({
       isLoading: true
     }).then(res => {
       this.setData({
-        userInfo: res
+        userInfo: res.data
       })
     })
   },

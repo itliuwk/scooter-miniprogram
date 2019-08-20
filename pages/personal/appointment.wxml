@@ -1,7 +1,7 @@
 <!--pages/personal/appointment.wxml-->
 <view class="appointment">
 
-  <view class="item">
+  <view class="item" wx:if="{{appointment.date}}">
     <view class="left">
       <view>
         <image src="../../assets/images/time.png"></image>
@@ -23,6 +23,10 @@
         <text class="{{appointment.type == 'RENT' ? '' : 'opi-q'}}" bindtap="appointmentTap" data-type="{{appointment.type}}">{{appointment.typeName}}</text>
       </view>
     </view>
+  </view>
+
+  <view wx:else>
+    无预约
   </view>
 
 </view>

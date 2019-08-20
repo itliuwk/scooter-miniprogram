@@ -184,6 +184,14 @@
 					"id": -1,
 					"name": "预约停车位",
 					"pathName": "pages/manage/reservationParking/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "附近停车位",
+					"pathName": "pages/manage/reservationParking/nearby",
+					"query": "",
 					"scene": null
 				}
 			]

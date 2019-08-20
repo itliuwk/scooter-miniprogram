@@ -44,15 +44,19 @@ Page({
       isLoading: true
     }).then(result => {
 
+      if (result.data) {
+        result.data.date = formatYYYY(result.data.startTime)
+        result.data.time = formatHHMM(result.data.startTime) + '-' + formatHHMM(result.data.endTime)
+        result.data.typeName = result.data.type == 'RENT' ? '去取车' : '去还车'
 
-      result.data.date = formatYYYY(result.data.startTime)
-      result.data.time = formatHHMM(result.data.startTime) + '-' + formatHHMM(result.data.endTime)
-      result.data.typeName = result.data.type == 'RENT' ? '去取车' : '去还车'
+
+        that.setData({
+          appointment: result.data
+        })
+      }
 
 
-      that.setData({
-        appointment: result.data
-      })
+
 
 
     })
@@ -77,7 +81,7 @@ Page({
           return false;
         }
 
- 
+
 
         if (type == 'RENT') {
 

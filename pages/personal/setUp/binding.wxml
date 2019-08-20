@@ -3,7 +3,7 @@
 
   <view class="phone">
     <icon class="iconfont icon-phone"></icon>
-    <input placeholder="请输入手机号码" type="number" bindinput="mobileTap"></input>
+    <input placeholder="请输入手机号码" value="{{mobile}}" type="number" bindinput="mobileTap"></input>
   </view>
 
 
@@ -14,6 +14,8 @@
   </view>
 
 
-  <view class="confirm-binding confirm" bindtap="confirm">确认绑定</view>
+  <view class="confirm-binding confirm" wx:if="{{!isBid}}" bindtap="confirm">确认绑定</view>
+
+  <view class="confirm-binding confirm" wx:else bindtap="confirm">更换绑定</view>
 
 </view>

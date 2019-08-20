@@ -1,101 +1,105 @@
-<view class="info">
+<view class="container">
+  <view class="info">
 
 
-  <view class="person" wx:if="{{!isMenu}}">
-    <view class='image' bindtap='personal'>
-      <open-data type="userAvatarUrl"></open-data>
+    <view class="person" wx:if="{{!isMenu}}">
+      <view class='image' bindtap='personal'>
+        <open-data type="userAvatarUrl"></open-data>
+      </view>
+      <view bindtap="search">
+        <icon class="iconfont icon-sousuo"></icon>
+        查找附近可预约的停车位
+      </view>
     </view>
-    <view bindtap="search">
-      <icon class="iconfont icon-sousuo"></icon>
-      查找附近可预约的停车位
+
+    <view wx:else class="navigation" bindtap='intoMap'>
+      <view>
+        <view>{{markerDetail.address}}</view>
+      </view>
+      <view>
+        <image src="../../../assets/images/nav.png"></image>
+      </view>
     </view>
+
+
+
+
   </view>
 
-  <view wx:else class="navigation" bindtap='intoMap'>
-    <view>
-      <view>{{markerDetail.address}}</view>
-    </view>
-    <view>
-      <image src="../../../assets/images/nav.png"></image>
-    </view>
+  <!-- 地图 -->
+  <view class="container" style='height: calc( 100vh -  {{menuH}})'>
+    <map id="map" latitude="{{latitude}}" longitude="{{longitude}}" markers="{{markers}}" bindmarkertap="markertap" show-location controls="{{controls}}" scale="15" bindcontroltap="bindcontroltap" bindtap='bindtapMap' wx:if="{{hasMarkers}}" />
   </view>
 
 
 
 
-</view>
-
-<!-- 地图 -->
-<view class="container" style='height: calc( 100vh -  {{menuH}})'>
-  <map id="map" latitude="{{latitude}}" longitude="{{longitude}}" markers="{{markers}}" bindmarkertap="markertap" show-location controls="{{controls}}" scale="15" bindcontroltap="bindcontroltap" bindtap='bindtapMap' wx:if="{{hasMarkers}}" />
-</view>
 
 
 
+  <!-- 菜单操作 -->
+  <view class="panel-con" wx:if='{{isShow}}' animation="{{matrixData}}">
 
+    <view class="menu">
+      <image src="../../../assets/images/menu.png"></image>
 
-
-
-<!-- 菜单操作 -->
-<view class="panel-con" wx:if='{{isShow}}' animation="{{matrixData}}">
-
-  <view class="menu">
-    <image src="../../../assets/images/menu.png"></image>
-
-    <view class="menu-content">
-      <view class="menu-content-t">
-        <view>
-
-          <view class="menu-content-t-title">
-            <text>车辆编号：</text>
-            <text>{{markerDetail.id}} </text>
-
-            <text class="default">(已默认为您推荐最近停车位)</text>
-          </view>
-
-          <view class="menu-content-t-title">
-            <text>可用车位：</text>
-            <text>{{markerDetail.slotsNum}} </text>
-          </view>
-
-        </view>
-      </view>
-      <view class="selDateTime">
-        <view>请选择预约时间</view>
-        <picker mode="date" value="{{date}}" start="{{date}}" end="" bindchange="bindDateChange">
-          <view class="picker">
-            {{date}}
-          </view>
-        </picker>
-
-        <picker mode="multiSelector" bindchange="bindMultiPickerChange" value="{{multiIndex}}" range="{{multiArray}}">
-          <view class="picker">
-            {{multiArray[0][multiIndex[0]]}} - {{multiArray[1][multiIndex[1]]}}
-          </view>
-        </picker>
-
-
-      </view>
-      <view class="menu-content-b menu-content-appointment">
-        <view>我是收费文案文案文案文案(如:￥0.5/分钟)</view>
-        <view bindtap="active" class="add" wx:if="{{isExists=='false'}}">
-          <text>立即预约</text>
-        </view>
-        <view class="update" wx:else>
+      <view class="menu-content">
+        <view class="menu-content-t">
           <view>
-            <text bindtap="cancel">取消预约</text>
+
+            <view class="menu-content-t-title">
+              <text>车辆编号：</text>
+              <text>{{markerDetail.id}} </text>
+
+              <text class="default">(已默认为您推荐最近停车位)</text>
+            </view>
+
+            <view class="menu-content-t-title">
+              <text>可用车位：</text>
+              <text>{{markerDetail.slotsNum}} </text>
+            </view>
+
           </view>
-          <view>
-            <text bindtap="confirm">确认预约</text>
+        </view>
+        <view class="selDateTime">
+          <view>请选择预约时间</view>
+          <picker mode="date" value="{{date}}" start="{{date}}" end="" bindchange="bindDateChange">
+            <view class="picker">
+              {{date}}
+            </view>
+          </picker>
+
+          <picker mode="multiSelector" bindchange="bindMultiPickerChange" value="{{multiIndex}}" range="{{multiArray}}">
+            <view class="picker">
+              {{multiArray[0][multiIndex[0]]}} - {{multiArray[1][multiIndex[1]]}}
+            </view>
+          </picker>
+
+
+        </view>
+        <view class="menu-content-b menu-content-appointment">
+          <!-- <view>我是收费文案文案文案文案(如:￥0.5/分钟)</view> -->
+          <view>￥0.5/分钟</view>
+          <view bindtap="active" class="add" wx:if="{{isExists=='false'}}">
+            <text>立即预约</text>
+          </view>
+          <view class="update" wx:else>
+            <view>
+              <text bindtap="cancel">取消预约</text>
+            </view>
+            <view>
+              <text bindtap="confirm">确认预约</text>
+            </view>
           </view>
         </view>
       </view>
+
     </view>
 
+
+
+
+
   </view>
-
-
-
-
 
 </view>

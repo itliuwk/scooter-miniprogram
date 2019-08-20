@@ -33,7 +33,7 @@ Page({
 
   binding() {
     wx.navigateTo({
-      url: './binding',
+      url: './binding?mobile=' + this.data.mobile,
     })
   }
 })

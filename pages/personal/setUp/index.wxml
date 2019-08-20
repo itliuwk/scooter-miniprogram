@@ -22,7 +22,8 @@
     <view class="title">
       <text>手机号</text>
       <view class="binding" bindtap="binding">
-        <text>绑定手机号</text>
+        <text wx:if="{{!mobile}}">绑定手机号</text>
+        <text wx:else>更换手机号</text>
         <icon class="iconfont icon-right"></icon>
       </view>
     </view>

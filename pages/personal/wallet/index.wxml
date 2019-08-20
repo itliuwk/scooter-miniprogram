@@ -10,7 +10,7 @@
 
   <view class="balance deposit">
     <view>
-      <text>{{wallet.deposit}}</text>
+      <text>{{wallet.frozenBalance}}</text>
       <view>押金(元)</view>
     </view>
   </view>

@@ -13,13 +13,20 @@ Page({
     getAuthCodeTimer: null,
 
     mobile: '',
-    code: ''
+    code: '',
+    isBid: false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    if (options.mobile) {
+      this.setData({
+        mobile: options.mobile,
+        isBid: true
+      })
+    }
 
   },
 
@@ -75,6 +82,30 @@ Page({
       })
       return;
     }
+
+    let code = this.data.code
+    let mobile = this.data.mobile
+
+    fetch({
+      url: '/profile/mobile?mobile=' + mobile + '&code=' + code,
+      method: 'post',
+      data: {
+        code,
+        mobile
+      }
+    }).then(res => {
+      wx.showToast({
+        title: '绑定成功',
+      })
+
+      setTimeout(() => {
+        wx.navigateBack({
+          delta: 2
+        })
+      }, 1500)
+    })
+
+
   },
 
 
@@ -129,8 +160,15 @@ Page({
       getAuthCodeTimer: timer
     });
 
+
+    let mobile = this.data.mobile
+
     fetch({
-      url: '/sendMobileCode'
+      url: '/profile/sendMobileCode?mobile=' + mobile,
+      method: 'post',
+      data: {
+        mobile
+      }
     }).then(res => {
       wx.showToast({
         title: '获取验证码成功',

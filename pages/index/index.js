@@ -46,7 +46,7 @@ Page({
     isEmpower: false, // 是否授权
     isExists: false, //是否有预约
 
-    isScanCode: false
+    isLoadingShow: false
 
   },
 
@@ -127,8 +127,9 @@ Page({
     let that = this
 
     setTimeout(() => {
-      this.movetoCenter();
-      if (!this.data.isScanCode) {
+
+      if (!this.data.isLoadingShow) {
+        that.movetoCenter();
         that.getUserLocation();
       }
     }, 1000)
@@ -159,7 +160,14 @@ Page({
 
         })
       },
-      complete(res) {}
+      complete(res) {
+        //取消授权
+        wx.showToast({
+          title: '取消授权,将会影响该应用的使用',
+          icon: 'none',
+          duration: 1000
+        })
+      }
     })
 
 
@@ -591,7 +599,7 @@ Page({
     let that = this
 
     that.setData({
-      isScanCode: true
+      isLoadingShow: true
     })
 
     wx.scanCode({
@@ -641,7 +649,7 @@ Page({
       },
       complete(res) {
         that.setData({
-          isScanCode: true
+          isLoadingShow: true
         })
       }
     })
@@ -724,7 +732,8 @@ Page({
       success(res) {
         that.setData({
           longitude: res.longitude,
-          latitude: res.latitude
+          latitude: res.latitude,
+          isLoadingShow: true
         }, () => {
           that.fetchNearest()
         })

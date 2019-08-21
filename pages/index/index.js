@@ -1,5 +1,7 @@
 // pages/index/index.js
+import config from '../../config.js'
 import fetch from '../../lib/fetch.js'
+const BASE_URL = config.BASE_URL;
 import address from '../../utils/address.js'
 Page({
 
@@ -239,32 +241,33 @@ Page({
   fetchNearest() {
     let that = this
 
-    fetch({
-      url: '/business/nearestStub',
+    wx.request({
+      url: BASE_URL + '/api/wx/scooter/business/nearestStub',
+      method: 'get',
       data: {
-        longitude: this.data.longitude,
-        latitude: this.data.latitude
+        longitude: that.data.longitude,
+        latitude: that.data.latitude
       },
-      isLoading: true
-    }).then(res => {
-
-      let markers = res.data.map((item, index) => {
-        item.iconPath = '../../assets/images/marker.png';
-        item.width = 35;
-        item.height = 42;
-        return item;
-      })
+      success: (res) => {
+        let markers = res.data.data.map((item, index) => {
+          item.iconPath = '../../assets/images/marker.png';
+          item.width = 35;
+          item.height = 42;
+          return item;
+        })
 
 
-      that.setData({
-        markers,
-        hasMarkers: true
-      })
+        that.setData({
+          markers,
+          hasMarkers: true
+        })
+
+      }
     })
 
-
-
   },
+
+
 
 
 
@@ -684,35 +687,77 @@ Page({
       })
 
 
-      setTimeout(() => {
-        this.setData({
-          isEmpower: true
-        }, () => {
-          wx.hideLoading()
-        })
-      }, 1500)
 
-      wx.login({
-        success: res => {
-          // 登录注册接口
-          if (res.code) {
-            // 调用服务端登录接口，发送 res.code 到服务器端换取 openId, sessionKey, unionId并存入数据库中
 
-            fetch({
-              url: '/login'
-            }).then(res => {
-              console.log(res)
-            })
+      // wx.login({
+      //   success: res => {
+      //     // 登录注册接口
+      //     if (res.code) {
+      //       // 调用服务端登录接口，发送 res.code 到服务器端换取 openId, sessionKey, unionId并存入数据库中
 
-            that.getInfo()
 
-          } else {
-            console.log('登录失败！' + res.errMsg)
-          }
-        }
-      });
+      //       wx.request({
+      //         url: BASE_URL + '/wxa/login?code=' + res.code,
+      //         method: 'post',
+      //         data: {
+      //           code: res.code
+      //         },
+      //         success: (res) => {
+
+      //           setTimeout(() => {
+      //             this.setData({
+      //               isEmpower: true
+      //             }, () => {
+      //               wx.hideLoading()
+      //             })
+      //           }, 1500)
+
+      //           that.getInfo()
+      //           this.fetchWxlogin(res)
+      //         }
+      //       })
+
+
+
+
+      //     } else {
+      //       console.log('登录失败！' + res.errMsg)
+      //     }
+      //   }
+      // });
     }
   },
+
+
+
+  fetchWxlogin(res) {
+    let self = this
+   
+    wx.request({
+      url: BASE_URL + "/oauth/token",
+      method: "post",
+      data: {
+        grant_type: 'wxa',
+        openId: res.data.openId,
+      },
+      success: res => {
+        if (res.data.access_token) {
+          let expireTime = new Date().valueOf() + res.data.expires_in * 1000;
+          res.data.expireTime = expireTime;
+          try {
+            self.globalData.token = res.data;
+            wx.setStorageSync('tokenInfo', res.data);
+
+          } catch (err) {
+            console.error(err);
+          }
+
+        }
+
+      }
+    })
+  },
+
 
 
   /**

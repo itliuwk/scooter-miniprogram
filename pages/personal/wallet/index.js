@@ -29,7 +29,7 @@ Page({
       this.setData({
         wallet: {
           balance: 0,
-          deposit: 0
+          frozenBalance: 0
         }
       })
     } else {
@@ -49,7 +49,17 @@ Page({
 
     if (this.data.status == 'UNPAIDDEPOSIT') {
       wx.showToast({
-        title: '您还未交押金，退押金无效',
+        title: '您还未交押金或押金为0，退押金无效',
+        icon: 'none'
+      })
+      return false
+
+    }
+
+
+    if (this.data.wallet.frozenBalance === 0) {
+      wx.showToast({
+        title: '您的押金为0，退押金无效',
         icon: 'none'
       })
       return false

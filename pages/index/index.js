@@ -170,12 +170,6 @@ Page({
         })
       },
       complete(res) {
-        //取消授权
-        wx.showToast({
-          title: '取消授权,将会影响该应用的使用',
-          icon: 'none',
-          duration: 1000
-        })
       }
     })
 
@@ -710,8 +704,7 @@ Page({
                     code
                   },
                   success: (res) => {
-                    console.log(result)
-                    // encodeURIComponent(result.encryptedData);
+                    wx.setStorageSync('codeInfo', result);
                     let encryptedData = result.encryptedData;
                     that.fetchWxlogin(res, encryptedData, result.iv); //调用服务器api
 

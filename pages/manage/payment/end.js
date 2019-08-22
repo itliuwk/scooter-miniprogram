@@ -1,6 +1,9 @@
 // pages/payment/end.js
 import fetch from '../../../lib/fetch.js'
 import {
+  wxpay
+} from '../../../utils/wxpay.js'
+import {
   formatYYYY,
   formatHHMM
 } from '../../../utils/date.js'
@@ -19,7 +22,7 @@ Page({
   onLoad: function(options) {
 
   },
-  onUnload(){
+  onUnload() {
     wx.reLaunch({
       url: '/pages/index/index',
     })
@@ -52,15 +55,11 @@ Page({
   },
 
   confirm() {
-    //订单交易 / 未完成订单
     fetch({
-      url: '/transaction/pending'
+      url: '/transaction/pay',
+      method: 'post'
     }).then(res => {
-      res.data.createdDate = formatYYYY(res.data.createdDate)
-      res.data.time = parseInt((res.data.time / 1000) / 60)
-      this.setData({
-        detail: res.data
-      })
+      console.log(res)
     })
   }
 })

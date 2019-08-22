@@ -1,34 +1,40 @@
 <scroll-view bindscrolltolower="loadMoreListData" style="height:100vh" scroll-y="{{true}}">
   <view class="trip">
-    <view class="item" wx:for="{{tripList}}" wx:key="{{item.id}}">
-      <view class="left">
-        <view>
-          <image src="../../assets/images/time.png"></image>
-          <text class="fwd">{{item.createdDate}}</text>
-        </view>
-        <view class="title">
-          <text>行驶里程：</text>
-          <text class="fwd">{{item.distance||0}}</text>
-          <text>公里</text>
-        </view>
-        <view class="title">
-          <text>订单金额：</text>
-          <text class="fwd">{{item.total||0}}元</text>
-        </view>
 
-        <!-- <view class="title">
+    <block wx:if="{{tripList.length!=0}}">
+      <view class="item" wx:for="{{tripList}}" wx:key="{{item.id}}">
+        <view class="left">
+          <view>
+            <image src="../../assets/images/time.png"></image>
+            <text class="fwd">{{item.createdDate}}</text>
+          </view>
+          <view class="title">
+            <text>行驶里程：</text>
+            <text class="fwd">{{item.distance||0}}</text>
+            <text>公里</text>
+          </view>
+          <view class="title">
+            <text>订单金额：</text>
+            <text class="fwd">{{item.total||0}}元</text>
+          </view>
+
+          <!-- <view class="title">
           <text>行驶时间：</text>
           <text class="fwd">{{item.time||0}}</text>
           <text>分钟</text>
         </view> -->
 
-      </view>
-      <view class="right">
-        <text>行驶时间：</text>
-        <text>{{item.time||0}}</text>
-        <text>分钟</text>
-      </view>
+        </view>
+        <view class="right">
+          <text>行驶时间：</text>
+          <text>{{item.time||0}}</text>
+          <text>分钟</text>
+        </view>
 
+      </view>
+    </block>
+    <view wx:else style="text-align:center">
+      暂无行程
     </view>
 
 

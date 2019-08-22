@@ -3,7 +3,7 @@
 
   <view class="phone">
     <icon class="iconfont icon-phone"></icon>
-    <input placeholder="请输入手机号码" value="{{mobile}}" type="number" bindinput="mobileTap"></input>
+    <input placeholder="请输入手机号码"  type="number" bindinput="mobileTap"></input>
   </view>
 
 

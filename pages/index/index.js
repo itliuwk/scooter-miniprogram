@@ -755,7 +755,7 @@ Page({
 
 
             that.setData({
-              isEmpower:false
+              isEmpower:true
             },()=>{
               that.fetchProfile()
             })

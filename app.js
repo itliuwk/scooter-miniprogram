@@ -1,6 +1,6 @@
 import config from './config.js'
 const BASE_URL = config.BASE_URL;
-
+import CusBase64 from './lib/base64'
 
 App({
 
@@ -10,44 +10,21 @@ App({
   onLaunch: function() {
 
 
-    console.log(234)
-    let that = this
-
-
-    wx.login({
-      success: res => {
-        console.log(234)
-        // 登录注册接口
-        if (res.code) {
-          // 调用服务端登录接口，发送 res.code 到服务器端换取 openId, sessionKey, unionId并存入数据库中
-
-
-          wx.request({
-            url: BASE_URL + '/wxa/login?code=' + res.code,
-            method: 'post',
-            data: {
-              code: res.code
-            },
-            success: (res) => {
-              this.fetchWxlogin(res)
-            }
-          })
-        } else {
-          console.log('登录失败！' + res.errMsg)
-        }
-      }
-    });
   },
 
   fetchWxlogin(res) {
     let self = this
-
+    let Authorization = CusBase64.CusBASE64.encoder(`${config.client_id}:${config.client_secret}`);
     wx.request({
       url: BASE_URL + "/oauth/token",
       method: "post",
       data: {
         grant_type: 'wxa',
         openId: res.data.openId,
+      },
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': `Basic ${Authorization}`
       },
       success: res => {
         if (res.data.access_token) {

@@ -1,8 +1,15 @@
 // pages/index/index.js
+
+//获取应用实例
+const app = getApp();
+
 import config from '../../config.js'
 import fetch from '../../lib/fetch.js'
 const BASE_URL = config.BASE_URL;
 import address from '../../utils/address.js'
+import CusBase64 from '../../lib/base64'
+
+
 Page({
 
   /**
@@ -154,7 +161,7 @@ Page({
           this.fetchNearest()
 
           //获取是否绑定手机号  和 是否交付押金
-          this.fetchProfile()
+          // this.fetchProfile()
 
 
           //获取提示的请求是否显示  提示信息
@@ -675,9 +682,6 @@ Page({
   empower(res) {
 
 
-
-
-
     let that = this;
 
     if (res.detail.errMsg == 'getUserInfo:ok') {
@@ -688,65 +692,73 @@ Page({
 
 
 
+      let that = this
+      wx.login({
+        success: e => {
+          let code = e.code
 
-      // wx.login({
-      //   success: res => {
-      //     // 登录注册接口
-      //     if (res.code) {
-      //       // 调用服务端登录接口，发送 res.code 到服务器端换取 openId, sessionKey, unionId并存入数据库中
+          // 登录注册接口
+          if (code) {
+            // 调用服务端登录接口，发送 res.code 到服务器端换取 openId, sessionKey, unionId并存入数据库中
+            wx.getUserInfo({
+              success: function(result) {
 
+                wx.request({
+                  url: BASE_URL + '/wxa/login?code=' + code,
+                  method: 'post',
+                  data: {
+                    code
+                  },
+                  success: (res) => {
+                    console.log(result)
+                    // encodeURIComponent(result.encryptedData);
+                    let encryptedData = result.encryptedData;
+                    that.fetchWxlogin(res, encryptedData, result.iv); //调用服务器api
 
-      //       wx.request({
-      //         url: BASE_URL + '/wxa/login?code=' + res.code,
-      //         method: 'post',
-      //         data: {
-      //           code: res.code
-      //         },
-      //         success: (res) => {
+                  }
+                })
 
-      //           setTimeout(() => {
-      //             this.setData({
-      //               isEmpower: true
-      //             }, () => {
-      //               wx.hideLoading()
-      //             })
-      //           }, 1500)
-
-      //           that.getInfo()
-      //           this.fetchWxlogin(res)
-      //         }
-      //       })
-
-
-
-
-      //     } else {
-      //       console.log('登录失败！' + res.errMsg)
-      //     }
-      //   }
-      // });
+              }
+            })
+          }
+        }
+      });
     }
   },
 
 
 
-  fetchWxlogin(res) {
-    let self = this
-   
+  fetchWxlogin(res, encryptedData, iv) {
+    let that = this
+    let Authorization = CusBase64.CusBASE64.encoder(`${config.client_id}:${config.client_secret}`);
     wx.request({
       url: BASE_URL + "/oauth/token",
       method: "post",
       data: {
+        sessionKey: res.data.sessionKey,
         grant_type: 'wxa',
-        openId: res.data.openId,
+        encryptedData,
+        iv
       },
-      success: res => {
-        if (res.data.access_token) {
-          let expireTime = new Date().valueOf() + res.data.expires_in * 1000;
-          res.data.expireTime = expireTime;
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': `Basic ${Authorization}`
+      },
+      success: result => {
+        console.log(result)
+        if (result.data.access_token) {
+          let expireTime = new Date().valueOf() + result.data.expires_in * 1000;
+          result.data.expireTime = expireTime;
           try {
-            self.globalData.token = res.data;
-            wx.setStorageSync('tokenInfo', res.data);
+            app.globalData.token = result.data;
+            wx.setStorageSync('tokenInfo', result.data);
+
+
+            that.setData({
+              isEmpower:false
+            },()=>{
+              that.fetchProfile()
+            })
 
           } catch (err) {
             console.error(err);

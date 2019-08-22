@@ -55,7 +55,10 @@ Page({
     isEmpower: false, // 是否授权
     isExists: false, //是否有预约
 
-    isLoadingShow: false
+    isLoadingShow: false,
+
+
+    currId: '' //  记录所有车点中的第一个点
 
   },
 
@@ -160,17 +163,13 @@ Page({
           //获取附近所有网点信息
           this.fetchNearest()
 
-          //获取是否绑定手机号  和 是否交付押金
-          // this.fetchProfile()
-
 
           //获取提示的请求是否显示  提示信息
           this.getInfo();
 
         })
       },
-      complete(res) {
-      }
+      complete(res) {}
     })
 
 
@@ -250,7 +249,11 @@ Page({
         latitude: that.data.latitude
       },
       success: (res) => {
+        let first = {} //  记录所有车点中的第一个点
         let markers = res.data.data.map((item, index) => {
+          if (index === 0) {
+            first = item
+          }
           item.iconPath = '../../assets/images/marker.png';
           item.width = 35;
           item.height = 42;
@@ -260,6 +263,7 @@ Page({
 
         that.setData({
           markers,
+          currId: first.id,
           hasMarkers: true
         })
 
@@ -272,19 +276,6 @@ Page({
 
 
 
-  /**
-   *  获取是否绑定手机号  和 是否交付押金
-   */
-  fetchProfile() {
-    fetch({
-      url: '/profile',
-
-    }).then(res => {
-      this.setData({
-        userInfo: res
-      })
-    })
-  },
 
 
   /**
@@ -534,48 +525,62 @@ Page({
   },
 
 
+  /**
+   *  获取是否绑定手机号  和 是否交付押金
+   */
+  fetchProfile() {
+    let that = this
+    fetch({
+      url: '/profile',
+
+    }).then(reslut => {
+
+
+      this.setData({
+        userInfo: reslut.data
+      })
+
+      wx.getSetting({
+        success(res) {
+          if (res.authSetting['scope.userLocation'] != undefined && res.authSetting['scope.userLocation'] != true) {
+            that.getUserLocation()
+          } else {
+            if (!reslut.data.mobile) {
+              wx.showToast({
+                title: '你还没有绑定手机号码,不能用车',
+                icon: 'none'
+              })
+              setTimeout(() => {
+                wx.navigateTo({
+                  url: '/pages/personal/setUp/binding',
+                })
+              }, 1500)
+            } else {
+              let e = {
+                markerId: that.data.currId
+              }
+
+              that.markertap(e)
+            }
+            return false;
+          }
+        }
+      })
+
+
+
+    })
+  },
 
   /**
    * 立即出行
    */
   Trip() {
 
-    // wx.showToast({
-    //   title: '你还没有支付押金,不能用车',
-    //   icon: 'none'
-    // })
 
-    // setTimeout(() => {
-    //   wx.navigateTo({
-    //     url: '/pages/manage/payment/deposit',
-    //   })
-    // }, 1500)
+    //获取是否绑定手机号  和 是否交付押金
+    this.fetchProfile()
 
-    let that = this
-
-    wx.getSetting({
-      success(res) {
-        console.log(res)
-        if (res.authSetting['scope.userLocation'] != undefined && res.authSetting['scope.userLocation'] != true) {
-          that.getUserLocation()
-        } else {
-          if (!that.data.userInfo.mobile) {
-            wx.showToast({
-              title: '你还没有绑定手机号码,不能用车',
-              icon: 'none'
-            })
-
-            setTimeout(() => {
-              wx.navigateTo({
-                url: '/pages/personal/setUp/binding',
-              })
-            }, 1500)
-          }
-
-          return false;
-        }
-      }
-    })
 
 
   },
@@ -738,7 +743,6 @@ Page({
         'Authorization': `Basic ${Authorization}`
       },
       success: result => {
-        console.log(result)
         if (result.data.access_token) {
           let expireTime = new Date().valueOf() + result.data.expires_in * 1000;
           result.data.expireTime = expireTime;
@@ -748,9 +752,9 @@ Page({
 
 
             that.setData({
-              isEmpower:true
+              isEmpower: true
             },()=>{
-              that.fetchProfile()
+              wx.hideLoading();
             })
 
           } catch (err) {

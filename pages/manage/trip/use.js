@@ -32,7 +32,8 @@ Page({
 
     isExists: false,
 
-    timer: null
+    timer: null,
+    timerLocation: null,
 
   },
 
@@ -119,16 +120,24 @@ Page({
     })
 
 
+    that.setData({
+      timerLocation: setInterval(function() {
+        that.fetchLocation()
+      }, 60000)
+    })
+
+
     this.fecchExist();
   },
 
   onUnload: function() {
     clearInterval(this.data.timer)
+    clearInterval(this.data.timerLocation)
   },
 
   onHide: function() {
-
     clearInterval(this.data.timer)
+    clearInterval(this.data.timerLocation)
   },
 
 
@@ -196,6 +205,9 @@ Page({
   },
 
 
+  /**
+   *   租还车核心服务 / 当前计费进度
+   */
   fetchCharge() {
     fetch({
       url: '/business/charge',
@@ -216,6 +228,32 @@ Page({
       })
     })
   },
+
+
+  /**
+   *   位置信息 / 上报位置信息
+   */
+  fetchLocation() {
+    wx.getLocation({
+      type: 'wgs84',
+      success: (res) => {
+        fetch({
+          url: '/location/trail',
+          method: 'post',
+          data: {
+            longitude: res.longitude,
+            latitude: res.latitude
+          },
+        }).then(res => {
+
+        })
+      },
+    })
+
+  },
+
+
+
 
 
   /**

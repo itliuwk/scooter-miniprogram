@@ -145,6 +145,7 @@ Page({
         that.getUserLocation();
       }
     }, 1000)
+
   },
 
 
@@ -396,6 +397,24 @@ Page({
 
 
 
+    if (JSON.stringify(this.data.userInfo) == '{}' || this.data.userInfo.status == "UNPAIDDEPOSIT") {
+      wx.showToast({
+        title: '您还没有交押金,还不能用车',
+        icon: 'none'
+      })
+
+
+      setTimeout(() => {
+        wx.navigateTo({
+          url: "/pages/manage/payment/deposit"
+        })
+      }, 1500)
+
+      return false;
+    }
+
+
+
 
     this.fetchDetail(e.markerId);
 
@@ -519,9 +538,29 @@ Page({
    * 预约滑板车
    */
   appointment() {
+
+    if (this.data.userInfo.status == "UNPAIDDEPOSIT") {
+      wx.showToast({
+        title: '您还没有交押金,还不能用车',
+        icon: 'none'
+      })
+
+
+      setTimeout(() => {
+        wx.navigateTo({
+          url: "/pages/manage/payment/deposit"
+        })
+      }, 1500)
+
+      return false;
+    }
+
     wx.navigateTo({
       url: "/pages/manage/appointment/index?isExists=" + this.data.isExists
     })
+
+
+
   },
 
 
@@ -556,6 +595,9 @@ Page({
                 })
               }, 1500)
             } else {
+              that.setData({
+                userInfo: reslut.data
+              })
               let e = {
                 markerId: that.data.currId
               }
@@ -592,19 +634,24 @@ Page({
   Trips() {
 
 
-    // if (this.data.userInfo.status == 'UNPAIDDEPOSIT') {
-    //   wx.showToast({
-    //     title: '你还没有支付押金,不能用车',
-    //     icon: 'none'
-    //   })
+    if (this.data.userInfo.status == "UNPAIDDEPOSIT") {
+      wx.showToast({
+        title: '您还没有交押金,还不能用车',
+        icon: 'none'
+      })
 
-    //   setTimeout(() => {
-    //     wx.navigateTo({
-    //       url: '/pages/manage/payment/deposit',
-    //     })
-    //   }, 1500)
-    //   return false;
-    // }
+
+      setTimeout(() => {
+        wx.navigateTo({
+          url: "/pages/manage/payment/deposit"
+        })
+      }, 1500)
+
+      return false;
+    }
+
+
+
     let that = this
 
     that.setData({
@@ -753,7 +800,7 @@ Page({
 
             that.setData({
               isEmpower: true
-            },()=>{
+            }, () => {
               wx.hideLoading();
             })
 

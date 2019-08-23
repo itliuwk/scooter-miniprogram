@@ -19,15 +19,37 @@ Page({
   },
   confirmPay() {
 
-    wx.showToast({
-      title: '支付成功',
+    fetch({
+      url: '/settlement/recharge',
+      method: 'post',
+      isLoading: true
+    }).then(result => {
+      console.log()
+
+      if (result.data.state == "COMPLETED") {
+        wx.showToast({
+          title: '支付成功',
+        })
+
+        setTimeout(() => {
+          wx.navigateTo({
+            url: './complete',
+          })
+        }, 1500)
+      } else {
+
+      }
+
+
+
+
+
+
     })
 
-    setTimeout(() => {
-      wx.navigateTo({
-        url: './complete',
-      })
-    }, 1500)
+
+
+
 
 
 

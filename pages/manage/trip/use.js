@@ -116,7 +116,7 @@ Page({
     that.setData({
       timer: setInterval(function() {
         that.fetchCharge();
-      }, 1000)
+      }, 1500)
     })
 
 
@@ -238,7 +238,7 @@ Page({
       type: 'wgs84',
       success: (res) => {
         fetch({
-          url: '/location/trail',
+          url: '/location/trail?longitude=' + res.longitude + '&latitude=' + res.latitude,
           method: 'post',
           data: {
             longitude: res.longitude,

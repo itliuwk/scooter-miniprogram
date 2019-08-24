@@ -146,6 +146,9 @@ Page({
       }
     }, 1000)
 
+
+    that.fetchProfile()
+
   },
 
 
@@ -396,6 +399,18 @@ Page({
     }
 
 
+    if (JSON.stringify(this.data.userInfo) == '{}' || !this.data.userInfo.mobile) {
+      wx.showToast({
+        title: '你还没有绑定手机号码,不能用车',
+        icon: 'none'
+      })
+      setTimeout(() => {
+        wx.navigateTo({
+          url: '/pages/personal/setUp/binding',
+        })
+      }, 1500)
+      return false;
+    }
 
     if (JSON.stringify(this.data.userInfo) == '{}' || this.data.userInfo.status == "UNPAIDDEPOSIT") {
       wx.showToast({
@@ -572,43 +587,12 @@ Page({
     fetch({
       url: '/profile',
 
-    }).then(reslut => {
-
-
+    }).then(result => {
       this.setData({
-        userInfo: reslut.data
+        userInfo: result.data
       })
 
-      wx.getSetting({
-        success(res) {
-          if (res.authSetting['scope.userLocation'] != undefined && res.authSetting['scope.userLocation'] != true) {
-            that.getUserLocation()
-          } else {
-            if (!reslut.data.mobile) {
-              wx.showToast({
-                title: '你还没有绑定手机号码,不能用车',
-                icon: 'none'
-              })
-              setTimeout(() => {
-                wx.navigateTo({
-                  url: '/pages/personal/setUp/binding',
-                })
-              }, 1500)
-            } else {
-              that.setData({
-                userInfo: reslut.data
-              })
-              let e = {
-                markerId: that.data.currId
-              }
-
-              that.markertap(e)
-            }
-            return false;
-          }
-        }
-      })
-
+      wx.setStorageSync('userInfo', result.data);
 
 
     })
@@ -618,10 +602,39 @@ Page({
    * 立即出行
    */
   Trip() {
-
+    let that = this
 
     //获取是否绑定手机号  和 是否交付押金
-    this.fetchProfile()
+
+
+
+    wx.getSetting({
+      success(res) {
+        if (res.authSetting['scope.userLocation'] != undefined && res.authSetting['scope.userLocation'] != true) {
+          that.getUserLocation()
+        } else {
+          if (!that.data.userInfo.mobile) {
+            wx.showToast({
+              title: '你还没有绑定手机号码,不能用车',
+              icon: 'none'
+            })
+            setTimeout(() => {
+              wx.navigateTo({
+                url: '/pages/personal/setUp/binding',
+              })
+            }, 1500)
+          } else {
+            let e = {
+              markerId: that.data.currId
+            }
+
+            that.markertap(e)
+          }
+          return false;
+        }
+      }
+    })
+
 
 
 
@@ -802,6 +815,7 @@ Page({
               isEmpower: true
             }, () => {
               wx.hideLoading();
+              that.fetchProfile()
             })
 
           } catch (err) {

@@ -60,6 +60,16 @@ Page({
       method: 'post'
     }).then(res => {
       console.log(res)
+      if (res.data.state == "COMPLETED") {
+        wx.showToast({
+          title: '支付成功',
+        })
+        setTimeout(() => {
+          wx.reLaunch({
+            url: '/pages/index/index',
+          })
+        }, 1500)
+      }
     })
   }
 })

@@ -141,7 +141,7 @@ Page({
     setTimeout(() => {
 
       if (!this.data.isLoadingShow) {
-        that.movetoCenter();
+
         that.getUserLocation();
       }
     }, 1000)
@@ -269,6 +269,8 @@ Page({
           markers,
           currId: first.id,
           hasMarkers: true
+        }, () => {
+          that.movetoCenter();
         })
 
       }
@@ -816,6 +818,7 @@ Page({
             }, () => {
               wx.hideLoading();
               that.fetchProfile()
+
             })
 
           } catch (err) {

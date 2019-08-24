@@ -221,7 +221,8 @@ Page({
           color: "#3ACCE1",
           width: 4,
           dottedLine: true,
-          arrowLine: true
+          arrowLine: true,
+          arrowIconPath: '../../../assets/images/position.png'
         }],
         hasMap: true
 

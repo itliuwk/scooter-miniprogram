@@ -57,7 +57,7 @@ Page({
     }
 
 
-    if (this.data.wallet.frozenBalance === 0) {
+    if (this.data.wallet.frozenBalance == null || this.data.wallet.frozenBalance === 0) {
       wx.showToast({
         title: '您的押金为0，退押金无效',
         icon: 'none'

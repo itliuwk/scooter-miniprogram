@@ -3,9 +3,14 @@
 
   <view class="item" wx:if="{{appointment.date}}">
     <view class="left">
+
       <view>
         <image src="../../assets/images/time.png"></image>
         <text>{{appointment.date}} {{appointment.time}}</text>
+      </view>
+      <view class="title">
+        <text>订单号：</text>
+        <text>{{appointment.id}}</text>
       </view>
       <view class="title">
         <text>预约地址：</text>

@@ -710,7 +710,7 @@ Page({
 
           } else {
             wx.showToast({
-              title: '租车失败,请重新扫码',
+              title: '租车失败,请重新扫码或换个车厢',
               icon: 'none'
             })
           }

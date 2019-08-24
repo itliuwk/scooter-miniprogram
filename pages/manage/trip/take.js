@@ -6,6 +6,36 @@ Page({
    * 页面的初始数据
    */
   data: {
+    // lattice: [ {
+    //     id:  1,
+    //      checked: false
+    //   },   {
+    //     id:  2,
+    //      checked:  false
+    //   },   {
+    //     id:  3,
+    //      checked: true
+    //   },   {
+    //     id:  4,
+    //      checked:  false
+    //   },   {
+    //     id:  5,
+    //      checked:  false
+    //   },   {
+    //     id:  6,
+    //      checked:  false
+    //   },   {
+    //     id:  7,
+    //      checked:  false
+    //   },   {
+    //     id:  8,
+    //      checked:  false
+    //   },   {
+    //     id:  9,
+    //      checked:  false
+    //   }
+
+    // ],
     lattice: [],
     item: ''
   },
@@ -23,6 +53,7 @@ Page({
       }, () => {
         setTimeout(() => {
           this.toUse()
+          console.log(this.data.lattice)
         }, 1500)
       })
     }

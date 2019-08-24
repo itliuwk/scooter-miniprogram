@@ -18,10 +18,11 @@
   display: flex;
   flex-wrap: wrap;
   margin-top: 100rpx;
+  justify-content: center;
 }
 
 .center .item {
-  width: 28%;
+  width: 27%;
   margin: 15rpx;
   box-sizing: border-box;
   height: 106rpx;
@@ -51,9 +52,6 @@
   background: #fff;
 }
 
-
-.toHome{
+.toHome {
   padding: 0 50rpx;
 }
-
-

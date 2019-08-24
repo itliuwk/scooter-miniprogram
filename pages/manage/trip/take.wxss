@@ -17,10 +17,11 @@
   padding: 20rpx 100rpx;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .center .item {
-  width: 28%;
+  width: 27%;
   margin: 15rpx;
   box-sizing: border-box;
   height: 106rpx;
@@ -49,6 +50,3 @@
   border: 4rpx solid rgba(58, 204, 225, 1);
   background: #fff;
 }
-
-
-

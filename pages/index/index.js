@@ -401,6 +401,15 @@ Page({
     }
 
 
+    if (this.data.isExists) {
+      wx.showToast({
+        title: '您有预约中的车辆，点击查看去取车',
+        icon: 'none'
+      })
+      return false;
+    }
+
+
     if (JSON.stringify(this.data.userInfo) == '{}' || !this.data.userInfo.mobile) {
       wx.showToast({
         title: '你还没有绑定手机号码,不能用车',
@@ -505,6 +514,11 @@ Page({
   closeMenu() {
 
     if (this.data.isPending) {
+
+      return false;
+    }
+
+    if (this.data.isExists) {
 
       return false;
     }

@@ -141,6 +141,17 @@ Page({
   },
 
 
+  /**
+   * 跳转个人中心 
+   */
+  personal() {
+
+    wx.navigateTo({
+      url: '/pages/personal/index'
+    })
+  },
+
+
 
   /**
    * 点击mak 点

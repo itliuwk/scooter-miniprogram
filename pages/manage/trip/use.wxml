@@ -1,13 +1,18 @@
 <view class="info">
 
   <view class="navigation">
-    <view>
-      <text>{{chargeDetail.distance||0}}</text>
-      <view>里程(公里)</view>
+    <view class='image' bindtap='personal'>
+      <open-data type="userAvatarUrl"></open-data>
     </view>
     <view>
-      <text>{{chargeDetail.createdDate||0}}</text>
-      <view>时长(分钟)</view>
+      <view>
+        <text>{{chargeDetail.distance||0}}</text>
+        <view>里程(公里)</view>
+      </view>
+      <view>
+        <text>{{chargeDetail.createdDate||0}}</text>
+        <view>时长(分钟)</view>
+      </view>
     </view>
   </view>
 

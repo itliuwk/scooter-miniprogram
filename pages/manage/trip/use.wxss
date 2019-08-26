@@ -88,18 +88,26 @@ button {
 }
 
 .navigation>view {
-  flex: 1;
   display: inline-block;
   line-height: normal;
   text-align: center;
 }
 
-.navigation>view  text {
+.navigation>view:nth-child(2) {
+  flex: 4;
+  line-height: normal;
+  text-align: center;
+  display: flex;
+}
+.navigation>view:nth-child(2)>view{
+  flex: 1;
+}
+.navigation>view:nth-child(2)>view  text {
   color: rgba(58, 204, 225, 1);
   font-weight: bold;
 }
 
-.navigation>view view {
+.navigation>view:nth-child(2)>view view {
   color: rgba(120, 132, 158, 1);
 }
 

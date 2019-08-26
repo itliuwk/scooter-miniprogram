@@ -22,7 +22,7 @@ Page({
   onReady: function() {
 
   },
-  onShow:function(){
+  onShow: function() {
     this.fetchUserInfo()
   },
 
@@ -31,6 +31,12 @@ Page({
       url: '/profile',
       isLoading: true
     }).then(res => {
+      if (res.data.creditStatus == 'GOOD') {
+        res.data.creditStatus = '信用分良好'
+      } else {
+        res.data.creditStatus = '信用分较差'
+      }
+      res.data.mobile = res.data.mobile.replace(/^(\d{3})\d{4}(\d{4})$/, '$1****$2')
       this.setData({
         userInfo: res.data
       })

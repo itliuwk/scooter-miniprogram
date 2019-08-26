@@ -10,7 +10,7 @@
         </view>
         <view class="personal-info-t">
           <view>{{userInfo.mobile||''}}</view>
-          <view>信用分良好</view>
+          <view>{{userInfo.creditStatus}}  {{userInfo.creditScore||100}}</view>
         </view>
       </view>
 

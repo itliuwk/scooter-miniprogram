@@ -42,9 +42,9 @@
 
 .personal-info-t view:nth-child(2) {
   margin-top: 10rpx;
-  width: 160rpx;
-  height: 36rpx;
-  line-height: 36rpx;
+  /* height: 36rpx;
+  line-height: 36rpx; */
+  padding:5rpx 15rpx;
   text-align: center;
   background: rgba(52, 151, 253, 1);
   opacity: 0.69;

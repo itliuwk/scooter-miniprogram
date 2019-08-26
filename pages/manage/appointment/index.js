@@ -534,28 +534,39 @@ Page({
    * 取消预约
    */
   cancel(e) {
+    let that = this
+    wx.showModal({
+      title: '确定取消预约嘛?',
+      success(res) {
+        if (res.confirm) {
+          fetch({
+            url: '/business/reserve/cancel?id=' + that.data.currId + '&type=RENT',
+            method: 'post',
+            data: {
+              type: 'RENT',
+              id: that.data.currId
+            }
+          }).then(result => {
 
+            wx.showToast({
+              title: '取消预约成功',
+            })
+            setTimeout(() => {
+              wx.reLaunch({
+                url: '/pages/index/index',
+              })
+            }, 1500)
 
-
-    fetch({
-      url: '/business/reserve/cancel?id=' + this.data.currId + '&type=RENT',
-      method: 'post',
-      data: {
-        type: 'RENT',
-        id: this.data.currId
+          })
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
       }
-    }).then(result => {
-
-      wx.showToast({
-        title: '取消预约成功',
-      })
-      setTimeout(() => {
-        wx.reLaunch({
-          url: '/pages/index/index',
-        })
-      }, 1500)
-
     })
+
+
+
+
 
   },
 

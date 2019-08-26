@@ -18,8 +18,8 @@
         <image bindtap="intoMap" style="margin-left:15rpx;" src="../../assets/images/nav.png"></image>
       </view>
       <view class="title">
-        <text>预约费用：</text>
-        <text>{{appointment.amount}}元</text>
+        <text>预计费用：</text>
+        <text>{{appointment.amount||0}}元</text>
       </view>
     </view>
     <view class="right">

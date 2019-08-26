@@ -141,7 +141,7 @@ Page({
     setTimeout(() => {
 
       if (!this.data.isLoadingShow) {
-
+        that.movetoCenter();
         that.getUserLocation();
       }
     }, 1000)
@@ -270,7 +270,7 @@ Page({
           currId: first.id,
           hasMarkers: true
         }, () => {
-          that.movetoCenter();
+
         })
 
       }

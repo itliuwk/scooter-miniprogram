@@ -228,7 +228,27 @@ Page({
       this.setData({
         chargeDetail: res.data,
         polyline: [{
-          points: res.data.trail || [],
+          points: [{ //  res.data.trail || 
+              longitude: 113.363360,
+              latitude: 22.962374
+            },
+            {
+              longitude: 113.365088,
+              latitude: 22.963995
+            },
+            {
+              longitude: 113.366536,
+              latitude: 22.962849
+            },
+            {
+              longitude: 113.366160,
+              latitude: 22.962078
+            },
+            {
+              longitude: 113.367770,
+              latitude: 22.961495
+            }
+          ],
           color: "#3ACCE1",
           width: 4,
           dottedLine: true,

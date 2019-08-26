@@ -66,7 +66,7 @@ Page({
     }
 
     wx.navigateTo({
-      url: './withdraw?balance=' + this.data.wallet.balance,
+      url: './withdraw?balance=' + this.data.wallet.frozenBalance,
     })
 
   },

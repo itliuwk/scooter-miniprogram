@@ -53,8 +53,7 @@ Page({
       }, () => {
         setTimeout(() => {
           this.toUse()
-          console.log(this.data.lattice)
-        }, 1500)
+        }, 2500)
       })
     }
   },

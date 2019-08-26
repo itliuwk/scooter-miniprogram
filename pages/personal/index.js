@@ -36,7 +36,10 @@ Page({
       } else {
         res.data.creditStatus = '信用分较差'
       }
-      res.data.mobile = res.data.mobile.replace(/^(\d{3})\d{4}(\d{4})$/, '$1****$2')
+      if (res.data.mobile) {
+        res.data.mobile = res.data.mobile.replace(/^(\d{3})\d{4}(\d{4})$/, '$1****$2')
+      }
+
       this.setData({
         userInfo: res.data
       })

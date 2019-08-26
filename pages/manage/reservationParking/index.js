@@ -550,11 +550,10 @@ Page({
       success(res) {
         if (res.confirm) {
           fetch({
-            url: '/business/reserve/cancel?id=' + that.data.currId + '&type=GIVEBACK',
+            url: '/business/reserve/cancel?type=GIVEBACK',
             method: 'post',
             data: {
-              type: 'GIVEBACK',
-              id: that.data.currId
+              type: 'GIVEBACK'
             }
           }).then(result => {
 

@@ -65,7 +65,9 @@ Page({
       },
       isLoading: true
     }).then(result => {
-
+      result.data.map(item => {
+        item.distance = parseInt(item.distance)
+      })
       this.setData({
         list: result.data
       })

@@ -63,9 +63,9 @@
       </view>
       <view class="selDateTime">
         <view>请选择预约时间</view>
-        <picker mode="date" value="{{date}}" start="{{date}}" end="" bindchange="bindDateChange">
+        <picker mode="date" value="{{selDate}}" start="{{date}}" end="" bindchange="bindDateChange">
           <view class="picker">
-            {{date}}
+            {{selDate}}
           </view>
         </picker>
 

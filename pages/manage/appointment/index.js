@@ -32,6 +32,7 @@ Page({
 
 
     date: formatYYYY(new Date()),
+    selDate: formatYYYY(new Date()),
     multiArray: [
       ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'],
       ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00']
@@ -175,7 +176,8 @@ Page({
               if (this.data.isExists == 'false') {
                 this.fetchDetail(first.id) //  获取第一个点 mak 点
               } else {
-                this.fetchAppointment(first.id) //  获取第一个点 mak 点
+                // this.fetchAppointment(first.id) //  获取第一个点 mak 点
+                this.fetchDetail(first.id) //  获取第一个点 mak 点
               }
             })
           })
@@ -243,7 +245,7 @@ Page({
       that.setData({
         isShow: true,
         currId: result.data.id,
-        date: date,
+        selDate: date,
         multiIndex,
         markerDetail: result.data
       })
@@ -376,7 +378,7 @@ Page({
    */
   bindDateChange: function(e) {
     this.setData({
-      date: e.detail.value
+      selDate: e.detail.value
     })
   },
 
@@ -385,7 +387,22 @@ Page({
    * 时间间隔的选择
    */
   bindMultiPickerChange: function(e) {
+
     let value = e.detail.value
+    if (value[0] == value[1]) {
+      wx.showToast({
+        title: '开始间隔不能相同,选择无效',
+        icon: 'none'
+      })
+
+      this.setData({
+        multiIndex: [0, 0]
+      })
+
+      return false;
+    }
+
+
     if (value[0] > value[1]) {
       wx.showToast({
         title: '开始间隔不能大于结束间隔,选择无效',
@@ -399,19 +416,6 @@ Page({
       return false;
     }
 
-
-    if (value[0] == value[1]) {
-      wx.showToast({
-        title: '开始间隔不能相同,选择无效',
-        icon: 'none'
-      })
-
-      this.setData({
-        multiIndex: [0, 0]
-      })
-
-      return false;
-    }
 
 
     this.setData({
@@ -487,13 +491,13 @@ Page({
       return false;
     }
 
-    let date = this.data.date
+    let date = this.data.selDate
 
     let start = formatValue(date + ' ' + multiArray[0][multiIndex[0]]);
     let end = formatValue(date + ' ' + multiArray[1][multiIndex[1]]);
 
     let nowTime = formatValue(new Date());
-
+    console.log((start < nowTime))
     if (start < nowTime) {
       wx.showToast({
         title: '开始间隔时间不能小于现在的时间,请重新选择',
@@ -588,7 +592,7 @@ Page({
       return false;
     }
 
-    let date = this.data.date
+    let date = this.data.selDate
 
     let start = formatValue(date + ' ' + multiArray[0][multiIndex[0]]);
     let end = formatValue(date + ' ' + multiArray[1][multiIndex[1]]);

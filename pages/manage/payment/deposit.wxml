@@ -4,14 +4,14 @@
   <view class="top">
     <view>
       <text>￥</text>
-      <text>189</text>
+      <text>299</text>
       <view>押金</view>
     </view>
   </view>
 
   <view class="center">
     <view>押金使用规则</view>
-    <view>租借滑板车前需缴纳189元押金。滑板车归还成功后，押金 可随时在"个人中心—钱包"提现</view>
+    <view>租借滑板车前需缴纳299元押金。滑板车归还成功后，押金 可随时在"个人中心—钱包"提现</view>
   </view>
 
 

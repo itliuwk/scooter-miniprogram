@@ -40,6 +40,10 @@ Page({
         res.data.mobile = res.data.mobile.replace(/^(\d{3})\d{4}(\d{4})$/, '$1****$2')
       }
 
+      if (res.data.useTime) {
+        res.data.useTime = res.data.useTime.toFixed(2)
+      }
+
       this.setData({
         userInfo: res.data
       })

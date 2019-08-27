@@ -13,7 +13,7 @@
   <scroll-view class="items"  scroll-y="{{true}}">
 
 
-    <view class="item" bindtap="selItem" wx:for="{{list}}" wx:key="{{item.id}}">
+    <view class="item" bindtap="selItem" data-id="{{item.id}}" wx:for="{{list}}" wx:key="{{item.id}}">
       <image src="../../../assets/images/logo.png"></image>
       <view>
         <view>{{item.address}}</view>

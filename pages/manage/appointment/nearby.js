@@ -44,10 +44,21 @@ Page({
 
   },
 
-  selItem() {
-    wx.navigateTo({
-      url: './index',
+  selItem(e) {
+    let id = e.currentTarget.dataset.id;
+    var pages = getCurrentPages();
+    var prevPage = pages[pages.length - 2];
+
+
+    //返回上一级关闭当前页面
+    wx.navigateBack({
+      delta: 1
     })
+
+    prevPage.openMak(id)
+
+
+
   },
 
 

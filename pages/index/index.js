@@ -58,7 +58,7 @@ Page({
     isLoadingShow: false,
 
 
-    currId: '' //  记录所有车点中的第一个点
+    currId: '' //  记录所有车点中的第一个点  或者记录 从别的页面传过来的点
 
   },
 
@@ -258,11 +258,24 @@ Page({
           if (index === 0) {
             first = item
           }
-          item.iconPath = '../../assets/images/marker.png';
-          item.width = 35;
-          item.height = 42;
+
+          if (item.id == that.data.currId) {
+            item.width = 40;
+            item.height = 47;
+            item.iconPath = '../../assets/images/selMarker.png'
+          } else {
+            item.width = 35;
+            item.height = 42;
+            item.iconPath = '../../assets/images/marker.png'
+          }
+
+
+
           return item;
         })
+
+
+
 
 
         that.setData({
@@ -368,8 +381,28 @@ Page({
       isLoading: true
     }).then(result => {
 
+      // 用that取代this，防止不必要的情况发生
+      let markers = this.data.markers.map(item => {
+        if (item.id == id) {
+          item.width = 40;
+          item.height = 47;
+          item.iconPath = '../../assets/images/selMarker.png'
+        } else {
+          item.width = 35;
+          item.height = 42;
+          item.iconPath = '../../assets/images/marker.png'
+        }
+        return item;
+      })
+
+
+
+
 
       that.setData({
+        markers,
+        isMenu: true,
+        isInfo: false,
         markerDetail: result.data
       })
 
@@ -380,9 +413,26 @@ Page({
 
 
   /**
+   * 选择滑板车返回更新的方法
+   */
+  openMak(markerId) {
+    let that = this;
+    let e = {
+      markerId
+    }
+
+    that.markertap(e)
+    that.setData({
+      currId: markerId
+    })
+  },
+
+
+  /**
    * 点击mak 点
    */
   markertap(e) {
+    let that = this
     if (!this.data.isEmpower) {
       wx.showToast({
         title: '请先点击下方授权',
@@ -439,37 +489,13 @@ Page({
       return false;
     }
 
+    wx.showLoading({
+      title: '加载中'
+    })
 
 
 
     this.fetchDetail(e.markerId);
-
-
-
-
-    // 用that取代this，防止不必要的情况发生
-    var that = this;
-    let markers = this.data.markers.map(item => {
-      if (item.id == e.markerId) {
-        item.width = 40;
-        item.height = 47;
-        item.iconPath = '../../assets/images/selMarker.png'
-      } else {
-        item.width = 35;
-        item.height = 42;
-        item.iconPath = '../../assets/images/marker.png'
-      }
-      return item;
-    })
-
-
-    that.setData({
-      markers,
-      isMenu: true,
-      isInfo: false,
-    })
-
-
 
 
     if (this.data.isMarker) { //   用于判断是否第二次点击 mak 点
@@ -494,6 +520,12 @@ Page({
         isMarker: true //  用于判断是否第二次点击 mak 点
       })
     }, 200)
+
+    wx.hideLoading()
+
+
+
+
 
 
   },
@@ -650,8 +682,6 @@ Page({
         }
       }
     })
-
-
 
 
   },
@@ -860,17 +890,24 @@ Page({
       return false;
     }
     let that = this
-    wx.chooseLocation({
-      success(res) {
-        that.setData({
-          longitude: res.longitude,
-          latitude: res.latitude,
-          isLoadingShow: true
-        }, () => {
-          that.fetchNearest()
-        })
-      }
+
+    // wx.chooseLocation({
+    //   success(res) {
+    //     that.setData({
+    //       longitude: res.longitude,
+    //       latitude: res.latitude,
+    //       isLoadingShow: true
+    //     }, () => {
+    //       that.fetchNearest()
+    //     })
+    //   }
+    // })
+
+    wx.navigateTo({
+      url: '/pages/manage/appointment/nearby',
     })
+
+
   },
 
 

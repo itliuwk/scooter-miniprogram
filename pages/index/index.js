@@ -149,6 +149,10 @@ Page({
 
     that.fetchProfile()
 
+    that.setData({
+      currId: ''
+    })
+
   },
 
 
@@ -858,6 +862,7 @@ Page({
             }, () => {
               wx.hideLoading();
               that.fetchProfile()
+              that.getInfo()
 
             })
 
@@ -885,6 +890,26 @@ Page({
       })
       return false;
     }
+
+
+    if (this.data.isPending) {
+      wx.showToast({
+        title: '你有订单未支付，支付完成后才可以用车',
+        icon: 'none'
+      })
+      return false;
+    }
+
+
+    if (this.data.isExists) {
+      wx.showToast({
+        title: '您有预约中的车辆，点击查看去取车',
+        icon: 'none'
+      })
+      return false;
+    }
+
+
     let that = this
 
     // wx.chooseLocation({

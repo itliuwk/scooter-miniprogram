@@ -7,7 +7,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    list: []
+    list: [],
+    longitude: '',
+    latitude: '',
+    address: ''
   },
 
   /**
@@ -44,6 +47,17 @@ Page({
 
   },
 
+  inputTyping(e) {
+    let value = e.detail.value
+    this.setData({
+      address: value
+    })
+  },
+
+  search() {
+    this.fetchNearest()
+  },
+
   selItem(e) {
     let id = e.currentTarget.dataset.id;
     var pages = getCurrentPages();
@@ -72,12 +86,13 @@ Page({
       url: '/business/nearestStub',
       data: {
         longitude: this.data.longitude,
-        latitude: this.data.latitude
+        latitude: this.data.latitude,
+        address: this.data.address
       },
       isLoading: true
     }).then(result => {
       result.data.map(item => {
-        item.distance = parseInt(item.distance)
+        item.distance = parseFloat(item.distance / 1000).toFixed(2)
       })
       this.setData({
         list: result.data

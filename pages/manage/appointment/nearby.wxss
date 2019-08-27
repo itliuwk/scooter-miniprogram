@@ -38,7 +38,7 @@
 
 .items {
   margin-top: 30rpx;
-  height: calc(100% - 130rpx);
+  height: calc(100% - 180rpx);
 }
 
 .items .item {

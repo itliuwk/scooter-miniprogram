@@ -48,10 +48,10 @@
           <view>
 
             <view class="menu-content-t-title">
-              <text>车辆编号：</text>
+              <text>车厢编号：</text>
               <text>{{markerDetail.id}} </text>
 
-              <text class="default">(已默认为您推荐最近停车位)</text>
+              <!-- <text class="default">(已默认为您推荐最近停车位)</text> -->
             </view>
 
             <view class="menu-content-t-title">
@@ -88,7 +88,7 @@
               <text bindtap="cancel">取消预约</text>
             </view>
             <view>
-              <text bindtap="confirm">确认预约</text>
+              <text bindtap="confirm">确认修改</text>
             </view>
           </view>
         </view>

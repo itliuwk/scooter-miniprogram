@@ -29,6 +29,8 @@ Page({
     hasMarkers: false,
     markers: [],
 
+    markerDetail: {},
+
 
 
     date: formatYYYY(new Date()),
@@ -183,6 +185,11 @@ Page({
   },
 
 
+
+
+
+
+
   /**
    *   获取点击 mak  的详情
    */
@@ -247,7 +254,18 @@ Page({
   },
 
 
+  /**
+   * 选择滑板车返回更新的方法
+   */
+  openMak(markerId) {
+    let that = this;
+    let e = {
+      markerId
+    }
 
+    that.markertap(e)
+
+  },
 
 
   /**
@@ -260,11 +278,13 @@ Page({
 
     // 用that取代this，防止不必要的情况发生
     var that = this;
+    let markerDetail = {}
     let markers = this.data.markers.map(item => {
       if (item.id == e.markerId) {
         item.width = 40;
         item.height = 47;
         item.iconPath = '../../../assets/images/selMarker.png'
+        markerDetail = item
       } else {
         item.width = 35;
         item.height = 42;
@@ -276,6 +296,7 @@ Page({
 
     that.setData({
       markers,
+      markerDetail,
       currId: e.markerId,
       isMenu: true
     })
@@ -513,6 +534,15 @@ Page({
       return false;
     }
 
+    if (this.data.markerDetail.slotsNum == 0) {
+      wx.showToast({
+        title: '当前车厢位置已满,请重新选择其他车厢',
+        icon: 'none'
+      })
+
+      return false;
+    }
+
 
 
     fetch({
@@ -613,6 +643,17 @@ Page({
       return false;
     }
 
+
+
+
+    if (this.data.markerDetail.slotsNum == 0) {
+      wx.showToast({
+        title: '当前车厢位置已满,请重新选择其他车厢',
+        icon: 'none'
+      })
+
+      return false;
+    }
 
 
 

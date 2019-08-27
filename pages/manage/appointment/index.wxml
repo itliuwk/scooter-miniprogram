@@ -48,15 +48,15 @@
         <view>
 
           <view class="menu-content-t-title">
-            <text>车辆编号：</text>
+            <text>车厢编号：</text>
             <text>{{markerDetail.id}} </text>
 
-            <text class="default" wx:if="{{isExists=='false'}}">(已默认为您推荐最近的车辆)</text>
+            <!-- <text class="default" wx:if="{{isExists=='false'}}">(已默认为您推荐最近的车辆)</text> -->
           </view>
 
           <view class="menu-content-t-title">
             <text>可用车辆：</text>
-            <text>{{markerDetail.vehicleNum}} </text>
+            <text>{{markerDetail.vehicleNum||0}} </text>
           </view>
 
         </view>
@@ -87,7 +87,7 @@
             <text bindtap="cancel">取消预约</text>
           </view>
           <view>
-            <text bindtap="confirm">确认预约</text>
+            <text bindtap="confirm">确认修改</text>
           </view>
         </view>
       </view>

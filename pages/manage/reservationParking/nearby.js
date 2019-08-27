@@ -11,7 +11,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    listData: []
+    listData: [],
+    longitude: '',
+    latitude: '',
+    address: ''
   },
 
   /**
@@ -35,6 +38,19 @@ Page({
     this.fetchNearest()
   },
 
+
+
+  inputTyping(e) {
+    let value = e.detail.value
+    this.setData({
+      address: value
+    })
+  },
+
+  search() {
+    this.fetchNearest()
+  },
+
   /**
    * 获取停车位
    */
@@ -51,12 +67,13 @@ Page({
             url: '/business/nearestStub',
             data: {
               longitude: res.longitude,
-              latitude: res.latitude
+              latitude: res.latitude,
+              address: this.data.address
             },
             isLoading: true
           }).then(res => {
             res.data.map(item => {
-              item.distance = parseInt(item.distance)
+              item.distance = parseFloat(item.distance / 1000).toFixed(2)
             })
             this.setData({
               listData: res.data
@@ -69,9 +86,18 @@ Page({
 
   },
 
-  selItem() {
-    wx.navigateTo({
-      url: './index',
+  selItem(e) {
+    let id = e.currentTarget.dataset.id;
+    var pages = getCurrentPages();
+    var prevPage = pages[pages.length - 2];
+
+
+    //返回上一级关闭当前页面
+    wx.navigateBack({
+      delta: 1
     })
+
+    prevPage.openMak(id)
+
   }
 })

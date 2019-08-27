@@ -176,8 +176,8 @@ Page({
               if (this.data.isExists == 'false') {
                 this.fetchDetail(first.id) //  获取第一个点 mak 点
               } else {
-                // this.fetchAppointment(first.id) //  获取第一个点 mak 点
-                this.fetchDetail(first.id) //  获取第一个点 mak 点
+                this.fetchAppointment(first.id) //  获取第一个点 mak 点
+                // this.fetchDetail(first.id) //  获取第一个点 mak 点
               }
             })
           })
@@ -186,6 +186,9 @@ Page({
     })
 
   },
+
+
+
 
 
   /**
@@ -210,7 +213,7 @@ Page({
 
   fetchAppointment() {
 
-    console.log(this.data.isExists)
+
     let that = this;
     fetch({
       url: '/reservation',
@@ -253,6 +256,23 @@ Page({
     })
   },
 
+
+
+
+  /**
+   * 选择滑板车返回更新的方法
+   */
+  openMak(markerId) {
+    let that = this;
+    let e = {
+      markerId
+    }
+
+    that.markertap(e)
+    that.setData({
+      currId: markerId
+    })
+  },
 
 
 
@@ -507,6 +527,16 @@ Page({
     }
 
 
+    if (this.data.markerDetail.vehicleNum == 0) {
+      wx.showToast({
+        title: '当前车厢可用车辆为0,请重新选择其他车厢',
+        icon: 'none'
+      })
+
+      return false;
+    }
+
+
 
     fetch({
       url: '/business/reserve',
@@ -607,6 +637,15 @@ Page({
       return false;
     }
 
+
+    if (this.data.markerDetail.vehicleNum == 0) {
+      wx.showToast({
+        title: '当前车厢可用车辆为0,请重新选择其他车厢',
+        icon: 'none'
+      })
+
+      return false;
+    }
 
 
     fetch({

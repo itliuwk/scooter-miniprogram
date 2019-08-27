@@ -5,12 +5,12 @@
   <view class="search">
     <view>
       <icon class="iconfont icon-sousuo"></icon>
-      <input placeholder="请输入位置信息"></input>
+      <input placeholder="请输入位置信息" bindinput="inputTyping" bindconfirm="search"></input>
     </view>
   </view>
 
 
-  <scroll-view class="items"  scroll-y="{{true}}">
+  <scroll-view class="items" scroll-y="{{true}}">
 
 
     <view class="item" bindtap="selItem" data-id="{{item.id}}" wx:for="{{list}}" wx:key="{{item.id}}">
@@ -18,15 +18,15 @@
       <view>
         <view>{{item.address}}</view>
         <view>
-          <text>可用滑板车数：</text>
-          <text>{{item.slotsNum}}</text>
+          <text>可用车辆：</text>
+          <text>{{item.vehicleNum}}</text>
         </view>
         <view>
           <text>可用车位数：</text>
           <text>{{item.slotsNum}}</text>
         </view>
       </view>
-      <view>{{item.distance}}M</view>
+      <view>{{item.distance}} 公里</view>
     </view>
 
 

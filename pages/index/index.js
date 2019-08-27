@@ -524,10 +524,6 @@ Page({
     wx.hideLoading()
 
 
-
-
-
-
   },
 
 

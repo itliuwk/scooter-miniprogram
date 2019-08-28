@@ -127,6 +127,18 @@ Page({
    */
   onReady: function() {
     this.mapctx = wx.createMapContext("map");
+
+    let that = this
+
+    setTimeout(() => {
+      if (!this.data.isLoadingShow) {
+        that.getUserLocation();
+        that.movetoCenter();
+      }
+    }, 1000)
+
+
+
   },
   movetoCenter: function() {
     this.mapctx.moveToLocation();
@@ -136,22 +148,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    let that = this
 
-    setTimeout(() => {
-
-      if (!this.data.isLoadingShow) {
-        that.movetoCenter();
-        that.getUserLocation();
-      }
-    }, 1000)
-
+    let that = this;
 
     that.fetchProfile()
 
-    that.setData({
-      currId: ''
-    })
 
   },
 
@@ -756,7 +757,7 @@ Page({
 
           } else {
             wx.showToast({
-              title: '租车失败,请重新扫码或换个车厢',
+              title: '租车失败,可用车辆为0,请重新扫码或换个车厢',
               icon: 'none'
             })
           }

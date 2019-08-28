@@ -41,8 +41,10 @@ Page({
       }
 
       if (res.data.useTime) {
-        res.data.useTime = res.data.useTime.toFixed(2)
+        res.data.useTime = (res.data.useTime / 60).toFixed(2)
       }
+
+
 
       this.setData({
         userInfo: res.data

@@ -172,10 +172,16 @@ Page({
           //获取附近所有网点信息
           this.fetchNearest()
 
-
           //获取提示的请求是否显示  提示信息
           this.getInfo();
 
+        })
+      },
+      fail(err) {
+        wx.showToast({
+          title: '取消位置授权,影响该应该的使用,请点击下方继续授权',
+          icon: 'none',
+          duration: 2500
         })
       },
       complete(res) {}
@@ -265,12 +271,12 @@ Page({
           }
 
           if (item.id == that.data.currId) {
-            item.width = 40;
-            item.height = 47;
+            item.width = 45;
+            item.height = 52;
             item.iconPath = '../../assets/images/selMarker.png'
           } else {
-            item.width = 35;
-            item.height = 42;
+            item.width = 40;
+            item.height = 47;
             item.iconPath = '../../assets/images/marker.png'
           }
 
@@ -389,12 +395,12 @@ Page({
       // 用that取代this，防止不必要的情况发生
       let markers = this.data.markers.map(item => {
         if (item.id == id) {
-          item.width = 40;
-          item.height = 47;
+          item.width = 45;
+          item.height = 52;
           item.iconPath = '../../assets/images/selMarker.png'
         } else {
-          item.width = 35;
-          item.height = 42;
+          item.width = 40;
+          item.height = 47;
           item.iconPath = '../../assets/images/marker.png'
         }
         return item;
@@ -710,65 +716,77 @@ Page({
       return false;
     }
 
-
-
     let that = this
-
-    that.setData({
-      isLoadingShow: true
-    })
-
-    wx.scanCode({
+    wx.showModal({
+      content: '确定扫码用车嘛?',
       success(res) {
+        if (res.confirm) {
+          that.setData({
+            isLoadingShow: true
+          })
+
+          wx.scanCode({
+            success(res) {
 
 
-        fetch({
-          url: '/business/rent?id=' + res.result,
-          method: 'POST',
-          data: {
-            id: res.result
-          }
-        }).then(res => {
-
-
-          if (res.data.errorCode === 0) { //  是否借车成功
-            let lattice = []
-            for (let i = 1; i < res.data.maxSlotsNum + 1; i++) {
-              var obj = {}
-              if (i == res.data.slotNum) {
-                obj = {
-                  id: i,
-                  checked: true
+              fetch({
+                url: '/business/rent?id=' + res.result,
+                method: 'POST',
+                data: {
+                  id: res.result
                 }
-              } else {
-                obj = {
-                  id: i,
-                  checked: false
+              }).then(res => {
+
+
+                if (res.data.errorCode === 0) { //  是否借车成功
+                  let lattice = []
+                  for (let i = 1; i < res.data.maxSlotsNum + 1; i++) {
+                    var obj = {}
+                    if (i == res.data.slotNum) {
+                      obj = {
+                        id: i,
+                        checked: true
+                      }
+                    } else {
+                      obj = {
+                        id: i,
+                        checked: false
+                      }
+                    }
+                    lattice.push(obj)
+                  }
+                  res.data.lattice = lattice
+
+
+                  wx.redirectTo({
+                    url: '/pages/manage/trip/take?item=' + JSON.stringify(res.data),
+                  })
+
+                } else {
+                  wx.showToast({
+                    title: '租车失败,可用车辆为0,请重新扫码或换个车厢',
+                    icon: 'none'
+                  })
                 }
-              }
-              lattice.push(obj)
+              })
+            },
+            complete(res) {
+              that.setData({
+                isLoadingShow: true
+              })
             }
-            res.data.lattice = lattice
-
-
-            wx.navigateTo({
-              url: '/pages/manage/trip/take?item=' + JSON.stringify(res.data),
-            })
-
-          } else {
-            wx.showToast({
-              title: '租车失败,可用车辆为0,请重新扫码或换个车厢',
-              icon: 'none'
-            })
-          }
-        })
-      },
-      complete(res) {
-        that.setData({
-          isLoadingShow: true
-        })
+          })
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
       }
     })
+
+
+
+
+
+
 
   },
 

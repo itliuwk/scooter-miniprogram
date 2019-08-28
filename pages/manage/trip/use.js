@@ -116,7 +116,7 @@ Page({
     that.setData({
       timer: setInterval(function() {
         that.fetchCharge();
-      }, 1500)
+      }, 2000)
     })
 
 
@@ -327,74 +327,88 @@ Page({
    */
   still() {
 
-    let isExists = this.data.isExists
-    if (isExists) { //  是否有预约
-
-      wx.navigateTo({
-        url: '/pages/personal/appointment',
-      })
-
-      return false;
-    }
-
-
-
     let that = this
-    wx.scanCode({
+    wx.showModal({
+      title: '确定结束行程嘛',
       success(res) {
+        if (res.confirm) {
 
-        fetch({
-          url: '/business/return?id=' + res.result,
-          method: 'POST',
-          data: {
-            id: res.result
-          }
-        }).then(res => {
-          if (!res.data.full) { // 车位是否已满
+          let isExists = that.data.isExists
+          if (isExists) { //  是否有预约
 
-            if (res.data.errorCode === 0) { //  是否还车成功
-              let lattice = []
-              for (let i = 1; i < res.data.maxSlotsNum + 1; i++) {
-                var obj = {}
-                if (i == res.data.slotNum) {
-                  obj = {
-                    id: i,
-                    checked: true
-                  }
-                } else {
-                  obj = {
-                    id: i,
-                    checked: false
-                  }
-                }
-                lattice.push(obj)
-              }
-              res.data.lattice = lattice
-              wx.navigateTo({
-                url: '/pages/manage/trip/still?item=' + JSON.stringify(res.data),
-              })
-              clearInterval(that.timer)
-
-            } else {
-              wx.showToast({
-                title: '还车失败,请重新扫码',
-                icon: 'none'
-              })
-            }
-
-
-
-          } else {
-            wx.showToast({
-              title: '此车位已满,请重新扫码',
-              icon: 'none'
+            wx.navigateTo({
+              url: '/pages/personal/appointment',
             })
+
+            return false;
           }
 
-        })
 
+          wx.scanCode({
+            success(res) {
+
+              fetch({
+                url: '/business/return?id=' + res.result,
+                method: 'POST',
+                data: {
+                  id: res.result
+                }
+              }).then(res => {
+                if (!res.data.full) { // 车位是否已满
+
+                  if (res.data.errorCode === 0) { //  是否还车成功
+                    let lattice = []
+                    for (let i = 1; i < res.data.maxSlotsNum + 1; i++) {
+                      var obj = {}
+                      if (i == res.data.slotNum) {
+                        obj = {
+                          id: i,
+                          checked: true
+                        }
+                      } else {
+                        obj = {
+                          id: i,
+                          checked: false
+                        }
+                      }
+                      lattice.push(obj)
+                    }
+                    res.data.lattice = lattice
+                    wx.redirectTo({
+                      url: '/pages/manage/trip/still?item=' + JSON.stringify(res.data),
+                    })
+                    clearInterval(that.timer)
+
+                  } else {
+                    wx.showToast({
+                      title: '还车失败,请重新扫码',
+                      icon: 'none'
+                    })
+                  }
+
+
+
+                } else {
+                  wx.showToast({
+                    title: '此车位已满,请重新扫码',
+                    icon: 'none',
+                    duration: 2500
+                  })
+                }
+
+              })
+
+            }
+          })
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
       }
     })
+
+
+
+
 
   },
 

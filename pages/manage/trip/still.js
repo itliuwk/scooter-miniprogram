@@ -18,9 +18,7 @@ Page({
         lattice: JSON.parse(options.item).lattice,
         item: JSON.parse(options.item)
       }, () => {
-        setTimeout(() => {
-          this.toEnd()
-        }, 2500)
+
       })
     }
   },
@@ -36,7 +34,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    setTimeout(() => {
+      this.toEnd()
+    }, 2500)
   },
 
 

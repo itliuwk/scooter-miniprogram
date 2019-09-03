@@ -65,7 +65,7 @@ button {
 .info .image {
   width: 70rpx;
   height: 70rpx;
-  padding-top: 10rpx;
+  padding-top: 15rpx;
 }
 
 .info>view:nth-child(2) {

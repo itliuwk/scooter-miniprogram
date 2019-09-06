@@ -12,12 +12,12 @@
 
     <view class="item {{item.checked?'open':''}}" wx:for="{{lattice}}" wx:key="{{item.id}}">
       <image wx:if="{{item.checked}}" src="../../../assets/images/open.png"></image>
-      <text wx:else></text>
+      <image wx:else src="../../../assets/images/close.png"></image>
     </view>
 
   </view>
 
 
 
-  
+
 </view>

@@ -25,12 +25,15 @@
   width: 27%;
   margin: 15rpx;
   box-sizing: border-box;
-  height: 106rpx;
-  line-height: 120rpx;
+  height: 150rpx;
+  line-height: 150rpx;
   text-align: center;
-  background: rgba(120, 132, 158, 1);
+  background: #676868;
   opacity: 1;
-  border-radius: 16px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .center .item text {
@@ -43,12 +46,12 @@
 }
 
 .center .item image {
-  height: 100%;
-  width: 60%;
+  width: 90rpx;
+  height: 70rpx;
 }
 
 .center .open {
-  border: 4rpx solid rgba(58, 204, 225, 1);
+  border: 4rpx solid #a6e3cb;
   background: #fff;
 }
 

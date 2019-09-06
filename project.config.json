@@ -52,7 +52,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 17,
+			"current": 20,
 			"list": [
 				{
 					"id": -1,
@@ -192,6 +192,12 @@
 					"name": "附近停车位",
 					"pathName": "pages/manage/reservationParking/nearby",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "守约记录",
+					"pathName": "pages/personal/complianceRecord",
 					"scene": null
 				}
 			]

@@ -1,0 +1,47 @@
+<!--pages/personal/complianceRecord.wxml-->
+<view class="page">
+
+  <view class="credit-score">
+    <image src="../../assets/images/record.png"></image>
+    <view>
+      <view>
+        <view>98
+          <text>分</text>
+        </view>
+        <view>信用分良好</view>
+      </view>
+    </view>
+
+  </view>
+
+
+  <scroll-view class="scroll" scroll-y bindscrolltolower="bindscrolltolower">
+    <view class="items">
+      <view class="item">
+        <view class="top">
+          <view>
+            <view>市桥地跌A出口</view>
+            <view>广州市番禺市市桥地跌A出口</view>
+          </view>
+          <view>
+            准时守约
+          </view>
+        </view>
+        <view class="bottom">
+          <view class="df">
+            <view>取车时间</view>
+            <view>还车时间</view>
+          </view>
+          <view class="df df-time">
+            <view>2019-9-6 11:54:07</view>
+            <view>2019-9-6 11:58:43</view>
+          </view>
+          <view class="df">
+            <view></view>
+            <view class="num">+0.25分</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</view>

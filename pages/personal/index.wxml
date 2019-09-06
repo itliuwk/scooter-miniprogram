@@ -10,7 +10,7 @@
         </view>
         <view class="personal-info-t">
           <view>{{userInfo.mobile||''}}</view>
-          <view>{{userInfo.creditStatus}}  {{userInfo.creditScore||100}}</view>
+          <view>{{userInfo.creditStatus}} {{userInfo.creditScore||100}}</view>
         </view>
       </view>
 
@@ -43,14 +43,15 @@
         <image src="../../assets/images/history.png"></image>
         <view>行程历史</view>
       </view>
+      <view bindtap="toUrl" data-url='/pages/personal/complianceRecord'>
+        <image src="../../assets/images/complianceRecord.png"></image>
+        <view>守约记录</view>
+      </view>
       <view bindtap="toUrl" data-url='/pages/personal/setUp/index'>
         <image src="../../assets/images/setUp.png"></image>
         <view>设置</view>
       </view>
-      <!-- <view bindtap="toUrl" data-url='signOut'>
-        <image src="../../assets/images/signOut.png"></image>
-        <view>退出</view>
-      </view> -->
+
     </view>
   </view>
 

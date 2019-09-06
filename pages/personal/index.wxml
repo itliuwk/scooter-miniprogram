@@ -9,8 +9,13 @@
           <open-data class='icon' type="userAvatarUrl"></open-data>
         </view>
         <view class="personal-info-t">
-          <view>{{userInfo.mobile||''}}</view>
-          <view>{{userInfo.creditStatus}} {{userInfo.creditScore||100}}</view>
+          <view>
+            <view>昵称:
+              <open-data type="userNickName" lang="zh_CN"></open-data>
+            </view>
+            <view>信用值 {{userInfo.creditScore||100}}</view>
+          </view>
+          <view>账号：{{userInfo.mobile||''}}</view>
         </view>
       </view>
 

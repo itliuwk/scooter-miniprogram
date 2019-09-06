@@ -154,17 +154,25 @@ Page({
             let first = ''
             let markers = res.data.map((item, index) => {
               if (index == 0) {
-                item.width = 40;
-                item.height = 47;
+                item.width = 45;
+                item.height = 52;
                 item.iconPath = '../../../assets/images/selMarker.png'
                 first = item;
-                return item;
+
               } else {
                 item.iconPath = '../../../assets/images/marker.png';
-                item.width = 35;
-                item.height = 42;
-                return item;
+                item.width = 40;
+                item.height = 47;
               }
+
+              if (item.slotsNum === 0) {
+                item.iconPath = '../../../assets/images/noSpace.png'
+              }
+
+              if (item.vehicleNum === 0) {
+                item.iconPath = '../../../assets/images/noCar.png'
+              }
+              return item;
             })
 
 
@@ -289,13 +297,21 @@ Page({
     var that = this;
     let markers = this.data.markers.map(item => {
       if (item.id == e.markerId) {
-        item.width = 40;
-        item.height = 47;
+        item.width = 45;
+        item.height = 52;
         item.iconPath = '../../../assets/images/selMarker.png'
       } else {
-        item.width = 35;
-        item.height = 42;
+        item.width = 40;
+        item.height = 47;
         item.iconPath = '../../../assets/images/marker.png'
+
+        if (item.slotsNum === 0) {
+          item.iconPath = '../../../assets/images/noSpace.png'
+        }
+
+        if (item.vehicleNum === 0) {
+          item.iconPath = '../../../assets/images/noCar.png'
+        }
       }
       return item;
     })
@@ -357,6 +373,14 @@ Page({
       item.width = 35;
       item.height = 42;
       item.iconPath = '../../../assets/images/marker.png'
+
+      if (item.slotsNum === 0) {
+        item.iconPath = '../../../assets/images/noSpace.png'
+      }
+
+      if (item.vehicleNum === 0) {
+        item.iconPath = '../../../assets/images/noCar.png'
+      }
       return item;
     })
 

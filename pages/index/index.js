@@ -67,6 +67,8 @@ Page({
    */
   onLoad: function(options) {
 
+
+
     let that = this;
 
     //  获取是否授权
@@ -101,7 +103,7 @@ Page({
               width: 100,
               height: 100,
               left: res.screenWidth - 100,
-              top: res.windowHeight - 220
+              top: res.windowHeight - 270
             },
             clickable: true
           }, {
@@ -111,7 +113,7 @@ Page({
               width: 100,
               height: 100,
               left: res.screenWidth - 100,
-              top: res.windowHeight - 300
+              top: res.windowHeight - 350
             },
             clickable: true
           }]
@@ -179,7 +181,7 @@ Page({
       },
       fail(err) {
         wx.showToast({
-          title: '取消位置授权,影响该应该的使用,请点击下方继续授权',
+          title: '取消位置授权,影响该应该的使用,请点击下方继续注册/登录',
           icon: 'none',
           duration: 2500
         })
@@ -280,7 +282,13 @@ Page({
             item.iconPath = '../../assets/images/marker.png'
           }
 
+          if (item.slotsNum === 0) {
+            item.iconPath = '../../assets/images/noSpace.png'
+          }
 
+          if (item.vehicleNum === 0) {
+            item.iconPath = '../../assets/images/noCar.png'
+          }
 
           return item;
         })
@@ -394,14 +402,25 @@ Page({
 
       // 用that取代this，防止不必要的情况发生
       let markers = this.data.markers.map(item => {
+
+
         if (item.id == id) {
           item.width = 45;
           item.height = 52;
           item.iconPath = '../../assets/images/selMarker.png'
+
         } else {
+
           item.width = 40;
           item.height = 47;
           item.iconPath = '../../assets/images/marker.png'
+          if (item.slotsNum === 0) {
+            item.iconPath = '../../assets/images/noSpace.png'
+          }
+
+          if (item.vehicleNum === 0) {
+            item.iconPath = '../../assets/images/noCar.png'
+          }
         }
         return item;
       })
@@ -443,10 +462,11 @@ Page({
    * 点击mak 点
    */
   markertap(e) {
+
     let that = this
     if (!this.data.isEmpower) {
       wx.showToast({
-        title: '请先点击下方授权',
+        title: '请先点击下方注册/登录',
         icon: 'none'
       })
       return false;
@@ -568,6 +588,13 @@ Page({
       item.width = 35;
       item.height = 42;
       item.iconPath = '../../assets/images/marker.png'
+      if (item.slotsNum === 0) {
+        item.iconPath = '../../assets/images/noSpace.png'
+      }
+
+      if (item.vehicleNum === 0) {
+        item.iconPath = '../../assets/images/noCar.png'
+      }
       return item;
     })
 
@@ -904,7 +931,7 @@ Page({
 
     if (!this.data.isEmpower) {
       wx.showToast({
-        title: '请先点击下方授权',
+        title: '请先点击下方注册/登录',
         icon: 'none'
       })
       return false;
@@ -959,7 +986,7 @@ Page({
 
     if (!this.data.isEmpower) {
       wx.showToast({
-        title: '请先点击下方授权',
+        title: '请先点击下方注册/登录',
         icon: 'none'
       })
       return false;

@@ -148,7 +148,7 @@ button {
   display: inline-block;
   background: var(--main-bg-bt);
   padding: 10rpx 20rpx;
-  border-radius: 24rpx;
+  border-radius: 15rpx;
   color: #fff;
   box-sizing: border-box;
   position: relative;

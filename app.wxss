@@ -21,7 +21,7 @@ page {
   background: rgba(58, 204, 225, 1);
   opacity: 1;
   color: #fff;
-  border-radius: 24rpx;
+  border-radius: 15rpx;
   font-size: 30rpx;
 }
 

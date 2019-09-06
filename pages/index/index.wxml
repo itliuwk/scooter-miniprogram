@@ -30,7 +30,7 @@
 
 <!-- 地图 -->
 <view class="container" style='height: calc( 100vh -  {{menuH}})'>
-  <map id="map" latitude="{{latitude}}" longitude="{{longitude}}" markers="{{markers}}" polyline="{{polyline}}" bindmarkertap="markertap" show-location show-scale controls="{{controls}}" scale="15" bindcontroltap="bindcontroltap" bindtap='bindtapMap' wx:if="{{hasMarkers}}"
+  <map id="map" latitude="{{latitude}}" longitude="{{longitude}}" markers="{{markers}}" polyline="{{polyline}}" bindmarkertap="markertap" show-location show-scale controls="{{controls}}" scale="14" bindcontroltap="bindcontroltap" bindtap='bindtapMap' wx:if="{{hasMarkers}}"
   />
 </view>
 
@@ -39,8 +39,9 @@
 <!-- 借车/授权小程序 按钮 -->
 <cover-view class="controls" wx:if='{{!isShow}}'>
   <!-- <cover-image class="borrow" src="../../assets/images/travelAtOnce.png" bindtap="borrow" /> -->
-  <button wx:if="{{isEmpower}}" bindtap="Trip">立即出行</button>
-  <button bindgetuserinfo="empower" wx:if="{{!isEmpower}}" open-type="getUserInfo">授权小程序</button>
+  <button wx:if="{{isEmpower}}" bindtap="appointment">预约出行</button>
+  <button wx:if="{{isEmpower}}" bindtap="Trips">扫码出行</button>
+  <button bindgetuserinfo="empower" wx:if="{{!isEmpower}}" open-type="getUserInfo">注册/登录</button>
 </cover-view>
 
 
@@ -74,7 +75,7 @@
 
         </view>
         <view>
-          <text class="appointment" bindtap="appointment">预约滑板车</text>
+          <!-- <text class="appointment" bindtap="appointment">预约滑板车</text> -->
         </view>
       </view>
       <view class="menu-content-b">

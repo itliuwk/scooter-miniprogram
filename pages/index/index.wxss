@@ -12,21 +12,31 @@
 
 .controls {
   position: relative;
-  top: -140rpx;
-  display: flex;
+  top: -240rpx;
   justify-content: center;
   align-items: center;
   z-index: 1;
 }
 
-.controls button {
+.controls button:nth-child(1) {
+  width: 80%;
+  height: 70rpx;
+  line-height: 70rpx;
+  background: #3acadf;
+  border: none;
+  color: #fff;
+  border-radius: 15rpx;
+}
+
+.controls button:nth-child(2) {
+  margin-top: 30rpx;
   width: 80%;
   height: 84rpx;
   line-height: 84rpx;
-  background: #3acce1;
+  background: #ff5d5d;
   border: none;
   color: #fff;
-  border-radius: 24rpx;
+  border-radius: 15rpx;
 }
 
 button::after {
@@ -287,7 +297,7 @@ button {
   display: inline-block;
   background: var(--main-bg-bt);
   padding: 10rpx 20rpx;
-  border-radius: 24rpx;
+  border-radius: 15rpx;
   color: #fff;
   box-sizing: border-box;
   position: relative;

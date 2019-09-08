@@ -45,6 +45,12 @@ Page({
 
   },
 
+  recharge() {
+    wx.navigateTo({
+      url: './recharge',
+    })
+  },
+
   withdraw() {
 
     if (this.data.status == 'UNPAIDDEPOSIT') {

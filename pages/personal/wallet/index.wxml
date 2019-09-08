@@ -16,13 +16,17 @@
   </view>
 
 
-  <view wx:if="{{status=='PAIDDEPOSIT'&&wallet.balance!=null}}">
+  <view class="opi" wx:if="{{status=='PAIDDEPOSIT'&&wallet.balance!=null}}">
+    <view class="confirm recharge" bindtap="recharge">充值 </view>
+    <view style="width:100%"></view>
     <view class="confirm retreat" bindtap="withdraw">退押金 </view>
     <view class="info">退还押金数=余额(押金-超时未支付订单金额)</view>
   </view>
 
 
-  <view wx:else>
+  <view class="opi" wx:else>
+    <view class="confirm recharge" bindtap="recharge">充值 </view>
+    <view style="width:100%"></view>
     <view class="confirm no-retreat" bindtap="withdraw">退押金 </view>
     <view class="info">更换手机号不影响当前账户的押金</view>
   </view>

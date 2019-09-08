@@ -28,9 +28,9 @@
   color: rgba(149, 157, 173, 1);
 }
 
-.retreat {
+/* .retreat {
   margin-top: 70rpx;
-}
+} */
 
 .info {
   text-align: center;
@@ -40,4 +40,28 @@
 
 .no-retreat {
   background: #78849e;
+}
+
+.opi {
+  text-align: center;
+}
+
+.opi> .confirm {
+  height: 74rpx;
+  line-height: 74rpx;
+}
+
+.opi view.confirm {
+  width: 40%;
+  background: #ececec;
+  display: inline-block;
+  color: #5bd2e3;
+}
+
+.opi view.recharge {
+  width: 40%;
+  color: #fff;
+  display: inline-block;
+  margin-bottom: 20rpx;
+  background: rgba(58, 204, 225, 1);
 }

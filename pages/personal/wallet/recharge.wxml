@@ -1,0 +1,70 @@
+<!--pages/personal/index.wxml-->
+<view class="personal">
+
+  <view class="personal-info">
+    <view class="personal-info-content">
+      <view>
+        <view class="image">
+          <open-data class='icon' type="userAvatarUrl"></open-data>
+        </view>
+        <view class="personal-info-t">
+          <view>
+            <view>昵称:
+              <open-data type="userNickName" lang="zh_CN"></open-data>
+            </view>
+            <view>信用值 {{userInfo.creditScore||100}}</view>
+          </view>
+          <view>账号：{{userInfo.mobile||''}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="recharge">
+  <view class="filed">充值金额</view>
+
+  <view class="items">
+    <view class="item">
+      <view>20元</view>
+      <view>售价19.80元</view>
+    </view>
+    <view class="item">
+      <view>30元</view>
+      <view>售价29.80元</view>
+    </view>
+    <view class="item">
+      <view>50元</view>
+      <view>售价49.80元</view>
+    </view>
+  </view>
+  <view class="items">
+    <view class="item">
+      <view>100元</view>
+      <view>售价99.90元</view>
+    </view>
+    <view class="item">
+      <view>200元</view>
+      <view>售价199.00元</view>
+    </view>
+    <view class="item">
+      <view>500元</view>
+      <view>售价499.00元</view>
+    </view>
+  </view>
+
+
+  <view class="filed">自定义充值</view>
+  <view class="custom">
+    <input type="number" placeholder="1-500元"></input>
+  </view>
+
+  <view class="filed">余额:
+    <text>0</text> </view>
+
+
+  <view class="pay confirm" bindtap="confirmPay">
+    确认支付
+  </view>
+
+</view>

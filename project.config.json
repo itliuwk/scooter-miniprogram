@@ -52,7 +52,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 20,
+			"current": 7,
 			"list": [
 				{
 					"id": -1,
@@ -104,8 +104,8 @@
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "行程历史",
+					"id": 7,
+					"name": "订单列表",
 					"pathName": "pages/personal/trip",
 					"query": "",
 					"scene": null
@@ -198,6 +198,7 @@
 					"id": -1,
 					"name": "守约记录",
 					"pathName": "pages/personal/complianceRecord",
+					"query": "",
 					"scene": null
 				}
 			]

@@ -39,7 +39,7 @@
   font-weight: bold;
 }
 
-.item .left view {
+.item .left>view {
   margin-bottom: 24rpx;
 }
 
@@ -54,7 +54,6 @@
 }
 
 .item  text {
-  margin-left: 12rpx;
   color: rgba(42, 46, 67, 1);
 }
 
@@ -68,7 +67,32 @@
   opacity: 1;
 }
 
-.fwd {
+.left .fwd {
   color: rgba(42, 46, 67, 1);
   font-weight: bold;
+}
+
+.df {
+  display: flex;
+  color: rgba(42, 46, 67, 1);
+}
+
+.df view:nth-child(1) {
+  flex: 1.5;
+}
+
+.df view:nth-child(2) {
+  flex: 1;
+  text-align: right;
+}
+
+.left .df .total {
+  color: red;
+  font-weight: bold;
+}
+
+.df-time {
+  font-weight: bold;
+  opacity: 1;
+  color: #000;
 }

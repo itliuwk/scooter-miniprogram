@@ -46,7 +46,7 @@
       </view>
       <view bindtap="toUrl" data-url='/pages/personal/trip'>
         <image src="../../assets/images/history.png"></image>
-        <view>行程历史</view>
+        <view>订单列表</view>
       </view>
       <view bindtap="toUrl" data-url='/pages/personal/complianceRecord'>
         <image src="../../assets/images/complianceRecord.png"></image>

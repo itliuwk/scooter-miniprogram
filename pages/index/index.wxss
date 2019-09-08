@@ -18,7 +18,7 @@
   z-index: 1;
 }
 
-.controls button:nth-child(1) {
+.controls .appointment {
   width: 80%;
   height: 70rpx;
   line-height: 70rpx;
@@ -28,7 +28,7 @@
   border-radius: 15rpx;
 }
 
-.controls button:nth-child(2) {
+.controls .Trips, .controls  .empower {
   margin-top: 30rpx;
   width: 80%;
   height: 84rpx;
@@ -37,6 +37,10 @@
   border: none;
   color: #fff;
   border-radius: 15rpx;
+}
+
+.controls  .empower {
+  margin-top: 100rpx;
 }
 
 button::after {

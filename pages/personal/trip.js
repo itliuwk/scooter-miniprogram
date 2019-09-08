@@ -65,7 +65,6 @@ Page({
         item.time = parseInt((item.time / 1000) / 60)
         return item;
       })
-      console.log(res.data)
 
 
       this.setData({

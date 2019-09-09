@@ -75,3 +75,9 @@
 .opi  .opi-q {
   background: rgba(102, 94, 255, 1);
 }
+
+.no-data image {
+  width: 340rpx;
+  height: 400rpx;
+  display: inline-block;
+}

@@ -96,3 +96,9 @@
   opacity: 1;
   color: #000;
 }
+
+.no-data image {
+  width: 340rpx;
+  height: 400rpx;
+  display: inline-block;
+}

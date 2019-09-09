@@ -30,8 +30,8 @@
     </view>
   </view>
 
-  <view wx:else style="text-align:center">
-    暂无预约
+  <view wx:else style="text-align:center" class="no-data">
+      <image src="../../assets/images/noData.png"></image>
   </view>
 
 </view>

@@ -51,3 +51,21 @@
 .confirm-binding {
   margin-top: 200rpx;
 }
+
+.info {
+  text-align: center;
+  color: rgba(42, 46, 67, 1);
+  margin-top: 30rpx;
+  opacity: 0.8;
+}
+
+.mobile {
+  margin-bottom: 30rpx;
+  text-align: center;
+}
+
+.mobile view {
+  font-weight: bold;
+  font-size: 30rpx;
+  margin-bottom: 20rpx;
+}

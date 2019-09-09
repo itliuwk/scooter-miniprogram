@@ -10,22 +10,24 @@
 
 .controls {
   position: relative;
-  top: -140rpx;
-  display: flex;
+  top: -240rpx;
   justify-content: center;
   align-items: center;
   z-index: 1;
 }
 
 .controls .borrow, .controls .still {
-  width: 200rpx;
+  width: 80%;
   height: 88rpx;
   text-align: center;
   line-height: 88rpx;
   border-radius: 10rpx;
   color: #fff;
-  margin: 0 80rpx;
   z-index: 100;
+}
+
+.controls .still {
+  margin-top: 30rpx;
 }
 
 button::after {
@@ -38,6 +40,7 @@ button {
 }
 
 .controls  button {
+  width: 80%;
   padding: 0 25rpx;
   border-radius: 10px;
   background: #3497fd;
@@ -99,9 +102,11 @@ button {
   text-align: center;
   display: flex;
 }
-.navigation>view:nth-child(2)>view{
+
+.navigation>view:nth-child(2)>view {
   flex: 1;
 }
+
 .navigation>view:nth-child(2)>view  text {
   color: rgba(58, 204, 225, 1);
   font-weight: bold;

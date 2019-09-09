@@ -30,8 +30,6 @@
 
   <button wx:if='{{!isExists}}' bindtap="borrow">预约车位</button>
   <button wx:if='{{isExists}}' bindtap="borrow">修改预约</button>
-  <button bindtap="still">结束行程</button>
+  <button bindtap="still" class="still">结束行程</button>
 
-  <!-- <cover-image class="borrow" src="../../../assets/images/reservationParking.png" bindtap="borrow" />
-  <cover-image class="still" src="../../../assets/images/endJourney.png" bindtap="still" /> -->
 </cover-view>

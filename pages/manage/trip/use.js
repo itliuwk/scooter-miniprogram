@@ -73,7 +73,7 @@ Page({
               width: 100,
               height: 100,
               left: res.screenWidth - 100,
-              top: res.windowHeight - 220
+              top: res.windowHeight - 270
             },
             clickable: true
           }, {
@@ -83,7 +83,7 @@ Page({
               width: 100,
               height: 100,
               left: res.screenWidth - 100,
-              top: res.windowHeight - 300
+              top: res.windowHeight - 350
             },
             clickable: true
           }]

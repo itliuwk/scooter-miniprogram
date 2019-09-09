@@ -1,9 +1,14 @@
 <!--pages/personal/setUp/binding.wxml-->
 <view class="binding">
 
+  <view class="mobile" wx:if="{{isBid}}">
+    <view>当前手机号</view>
+    <view>{{mobile}}</view>
+  </view>
+
   <view class="phone">
     <icon class="iconfont icon-phone"></icon>
-    <input placeholder="请输入手机号码"  type="number" bindinput="mobileTap"></input>
+    <input placeholder="请输入手机号码" type="number" bindinput="mobileTap"></input>
   </view>
 
 
@@ -17,5 +22,6 @@
   <view class="confirm-binding confirm" wx:if="{{!isBid}}" bindtap="confirm">确认绑定</view>
 
   <view class="confirm-binding confirm" wx:else bindtap="confirm">更换绑定</view>
+  <view wx:if="{{isBid}}" class="info">更换手机号不影响当前账户的押金</view>
 
 </view>

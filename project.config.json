@@ -1,213 +1,213 @@
 {
-  "description": "项目配置文件",
-  "packOptions": {
-    "ignore": []
-  },
-  "setting": {
-    "urlCheck": false,
-    "es6": true,
-    "postcss": true,
-    "minified": true,
-    "newFeature": true,
-    "coverView": true,
-    "autoAudits": false,
-    "checkInvalidKey": true,
-    "checkSiteMap": true,
-    "uploadWithSourceMap": true,
-    "babelSetting": {
-      "ignore": [],
-      "disablePlugins": [],
-      "outputPath": ""
-    }
-  },
-  "compileType": "miniprogram",
-  "libVersion": "2.8.0",
-  "appid": "wx14f566a2504ec2e4",
-  "projectname": "scooter-miniprogram",
-  "debugOptions": {
-    "hidedInDevtools": []
-  },
-  "isGameTourist": false,
-  "simulatorType": "wechat",
-  "simulatorPluginLibVersion": {},
-  "condition": {
-    "search": {
-      "current": -1,
-      "list": []
-    },
-    "conversation": {
-      "current": -1,
-      "list": []
-    },
-    "plugin": {
-      "current": -1,
-      "list": []
-    },
-    "game": {
-      "currentL": -1,
-      "list": []
-    },
-    "gamePlugin": {
-      "current": -1,
-      "list": []
-    },
-    "miniprogram": {
-      "current": 21,
-      "list": [
-        {
-          "id": -1,
-          "name": "支付押金",
-          "pathName": "pages/manage/payment/deposit",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "支付完成",
-          "pathName": "pages/manage/payment/complete",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "已结束",
-          "pathName": "pages/manage/payment/end",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "个人中心",
-          "pathName": "pages/personal/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "我的预约",
-          "pathName": "pages/personal/appointment",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "我的钱包",
-          "pathName": "pages/personal/wallet/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "充值",
-          "pathName": "pages/personal/wallet/recharge",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "退押金",
-          "pathName": "pages/personal/wallet/withdraw",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": 7,
-          "name": "订单列表",
-          "pathName": "pages/personal/trip",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "设置",
-          "pathName": "pages/personal/setUp/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "绑定手机号",
-          "pathName": "pages/personal/setUp/binding",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "预约滑板车",
-          "pathName": "pages/manage/appointment/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "附近滑板车",
-          "pathName": "pages/manage/appointment/nearby",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "预约中",
-          "pathName": "pages/manage/appointment/active",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "车辆报修",
-          "pathName": "pages/manage/repair/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "取车",
-          "pathName": "pages/manage/trip/take",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "还车",
-          "pathName": "pages/manage/trip/still",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "使用中",
-          "pathName": "pages/manage/trip/use",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "支付押金",
-          "pathName": "pages/manage/payment/deposit",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "预约停车位",
-          "pathName": "pages/manage/reservationParking/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "附近停车位",
-          "pathName": "pages/manage/reservationParking/nearby",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "守约记录",
-          "pathName": "pages/personal/complianceRecord",
-          "query": "",
-          "scene": null
-        }
-      ]
-    }
-  }
+	"description": "项目配置文件",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"coverView": true,
+		"autoAudits": false,
+		"checkInvalidKey": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		}
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.8.0",
+	"appid": "wx14f566a2504ec2e4",
+	"projectname": "scooter-miniprogram",
+	"debugOptions": {
+		"hidedInDevtools": []
+	},
+	"isGameTourist": false,
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"gamePlugin": {
+			"current": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 21,
+			"list": [
+				{
+					"id": -1,
+					"name": "支付押金",
+					"pathName": "pages/manage/payment/deposit",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "支付完成",
+					"pathName": "pages/manage/payment/complete",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "已结束",
+					"pathName": "pages/manage/payment/end",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "个人中心",
+					"pathName": "pages/personal/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的预约",
+					"pathName": "pages/personal/appointment",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的钱包",
+					"pathName": "pages/personal/wallet/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "充值",
+					"pathName": "pages/personal/wallet/recharge",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "退押金",
+					"pathName": "pages/personal/wallet/withdraw",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 7,
+					"name": "订单列表",
+					"pathName": "pages/personal/trip",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "设置",
+					"pathName": "pages/personal/setUp/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "绑定手机号",
+					"pathName": "pages/personal/setUp/binding",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "预约滑板车",
+					"pathName": "pages/manage/appointment/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "附近滑板车",
+					"pathName": "pages/manage/appointment/nearby",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "预约中",
+					"pathName": "pages/manage/appointment/active",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "车辆报修",
+					"pathName": "pages/manage/repair/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "取车",
+					"pathName": "pages/manage/trip/take",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "还车",
+					"pathName": "pages/manage/trip/still",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "使用中",
+					"pathName": "pages/manage/trip/use",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "支付押金",
+					"pathName": "pages/manage/payment/deposit",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "预约停车位",
+					"pathName": "pages/manage/reservationParking/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "附近停车位",
+					"pathName": "pages/manage/reservationParking/nearby",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "守约记录",
+					"pathName": "pages/personal/complianceRecord",
+					"query": "",
+					"scene": null
+				}
+			]
+		}
+	}
 }

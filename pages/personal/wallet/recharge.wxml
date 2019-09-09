@@ -25,29 +25,29 @@
   <view class="filed">充值金额</view>
 
   <view class="items">
-    <view class="item">
+    <view class="item {{active=='1'?'active':''}}" bindtap="selPrice" data-price="19.80" data-num="1">
       <view>20元</view>
       <view>售价19.80元</view>
     </view>
-    <view class="item">
+    <view class="item {{active=='2'?'active':''}}" bindtap="selPrice" data-price="29.80" data-num="2">
       <view>30元</view>
       <view>售价29.80元</view>
     </view>
-    <view class="item">
+    <view class="item {{active=='3'?'active':''}}" bindtap="selPrice" data-price="49.80" data-num="3">
       <view>50元</view>
       <view>售价49.80元</view>
     </view>
   </view>
   <view class="items">
-    <view class="item">
+    <view class="item {{active=='4'?'active':''}}" bindtap="selPrice" data-price="99.80" data-num="4">
       <view>100元</view>
       <view>售价99.90元</view>
     </view>
-    <view class="item">
+    <view class="item {{active=='5'?'active':''}}" bindtap="selPrice" data-price="199.00" data-num="5">
       <view>200元</view>
       <view>售价199.00元</view>
     </view>
-    <view class="item">
+    <view class="item {{active=='6'?'active':''}}" bindtap="selPrice" data-price="499.00" data-num="6">
       <view>500元</view>
       <view>售价499.00元</view>
     </view>
@@ -56,7 +56,7 @@
 
   <view class="filed">自定义充值</view>
   <view class="custom">
-    <input type="number" placeholder="1-500元"></input>
+    <input type="number" bindinput="selPriceVal" placeholder="请输入充值金额"></input>
   </view>
 
   <view class="filed">余额:

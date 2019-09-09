@@ -81,6 +81,11 @@
   margin: 0 50rpx;
 }
 
+.items .active {
+  background: #59af7e;
+  color: #fff;
+}
+
 .item>view:nth-child(1) {
   font-size: 35rpx;
 }

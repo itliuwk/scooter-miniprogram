@@ -6,29 +6,65 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userInfo: {}
+    userInfo: {},
+    active: '',
+    price: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
 
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     this.fetchUserInfo()
   },
+
+  selPrice(e) {
+    let price = e.currentTarget.dataset.price;
+    let num = e.currentTarget.dataset.num;
+    this.setData({
+      active: num,
+      price: price
+    })
+  },
+
+  selPriceVal(e) {
+    let value = Number(e.detail.value);
+    // if (value < 1) {
+    //   value = ''
+    //   return false;
+    // }
+
+    // if (value > 500) {
+    //   value = ''
+    //   return false;
+    // }
+    // console.log(value)
+
+    if (value) {
+      this.setData({
+        active: 0,
+        price: value
+      })
+    }
+
+
+  },
+
+
   fetchUserInfo() {
     fetch({
       url: '/profile',
@@ -56,5 +92,5 @@ Page({
   },
 
 
-  
+
 })

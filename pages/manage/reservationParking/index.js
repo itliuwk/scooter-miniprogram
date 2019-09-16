@@ -168,9 +168,9 @@ Page({
                 item.iconPath = '../../../assets/images/noSpace.png'
               }
 
-              if (item.vehicleNum === 0) {
-                item.iconPath = '../../../assets/images/noCar.png'
-              }
+              // if (item.vehicleNum === 0) {
+              //   item.iconPath = '../../../assets/images/noCar.png'
+              // }
               return item;
             })
 
@@ -302,9 +302,9 @@ Page({
           item.iconPath = '../../../assets/images/noSpace.png'
         }
 
-        if (item.vehicleNum === 0) {
-          item.iconPath = '../../../assets/images/noCar.png'
-        }
+        // if (item.vehicleNum === 0) {
+        //   item.iconPath = '../../../assets/images/noCar.png'
+        // }
       }
       return item;
     })
@@ -371,9 +371,9 @@ Page({
         item.iconPath = '../../../assets/images/noSpace.png'
       }
 
-      if (item.vehicleNum === 0) {
-        item.iconPath = '../../../assets/images/noCar.png'
-      }
+      // if (item.vehicleNum === 0) {
+      //   item.iconPath = '../../../assets/images/noCar.png'
+      // }
       return item;
     })
 

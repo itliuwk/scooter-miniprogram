@@ -165,9 +165,9 @@ Page({
                 item.height = 47;
               }
 
-              if (item.slotsNum === 0) {
-                item.iconPath = '../../../assets/images/noSpace.png'
-              }
+              // if (item.slotsNum === 0) {
+              //   item.iconPath = '../../../assets/images/noSpace.png'
+              // }
 
               if (item.vehicleNum === 0) {
                 item.iconPath = '../../../assets/images/noCar.png'
@@ -305,9 +305,9 @@ Page({
         item.height = 47;
         item.iconPath = '../../../assets/images/marker.png'
 
-        if (item.slotsNum === 0) {
-          item.iconPath = '../../../assets/images/noSpace.png'
-        }
+        // if (item.slotsNum === 0) {
+        //   item.iconPath = '../../../assets/images/noSpace.png'
+        // }
 
         if (item.vehicleNum === 0) {
           item.iconPath = '../../../assets/images/noCar.png'
@@ -374,9 +374,9 @@ Page({
       item.height = 42;
       item.iconPath = '../../../assets/images/marker.png'
 
-      if (item.slotsNum === 0) {
-        item.iconPath = '../../../assets/images/noSpace.png'
-      }
+      // if (item.slotsNum === 0) {
+      //   item.iconPath = '../../../assets/images/noSpace.png'
+      // }
 
       if (item.vehicleNum === 0) {
         item.iconPath = '../../../assets/images/noCar.png'

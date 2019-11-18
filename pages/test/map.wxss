@@ -1,0 +1,47 @@
+/* pages/index/index.wxss */
+
+.container {
+  height: 100%;
+  width: 100%;
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+}
+
+.info .navigation {
+  width: 100%;
+  height: 100rpx;
+  padding: 0 20rpx;
+  display: flex;
+}
+
+.navigation>view {
+  flex: 1;
+  display: inline-block;
+}
+
+.navigation>view:nth-child(1) {
+  flex: 3;
+}
+
+.map_address >view {
+  font-size: 25rpx;
+}
+
+.map_address >view:nth-child(1) {
+  color: rgba(42, 46, 67, 1);
+  font-weight: bold;
+}
+
+.navigation image {
+  width: 48rpx;
+  height: 48rpx;
+}
+
+.navigation>view:nth-child(2) {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}

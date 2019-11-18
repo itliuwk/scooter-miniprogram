@@ -100,6 +100,7 @@
 					"id": -1,
 					"name": "充值",
 					"pathName": "pages/personal/wallet/recharge",
+					"query": "",
 					"scene": null
 				},
 				{
@@ -205,6 +206,12 @@
 					"name": "守约记录",
 					"pathName": "pages/personal/complianceRecord",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "map",
+					"pathName": "pages/test/map",
 					"scene": null
 				}
 			]

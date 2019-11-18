@@ -1,0 +1,26 @@
+<!--pages/index/index.wxml-->
+
+<view class="info">
+  <view class="navigation" bindtap='intoMap'>
+    <view class="map_address">
+      <view>{{markerDetail.name}}</view>
+      <view>{{markerDetail.address}}</view>
+    </view>
+    <view>
+      <image src="../../assets/images/nav.png"></image>
+    </view>
+  </view>
+</view>
+
+
+<!-- 地图 -->
+<view class="container" style='height: calc( 100vh)'>
+  <map id="map" latitude="{{latitude}}" longitude="{{longitude}}" markers="{{markers}}"  bindmarkertap="markertap" show-location show-scale controls="{{controls}}" scale="14" bindcontroltap="bindcontroltap" bindtap='bindtapMap' wx:if="{{hasMarkers}}"
+  />
+</view>
+
+
+
+
+
+

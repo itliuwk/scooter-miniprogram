@@ -1,6 +1,6 @@
 <!--pages/index/index.wxml-->
 
-<view class="info">
+<view class="info" wx:if="{{isShowInfo}}">
   <view class="navigation" bindtap='intoMap'>
     <view class="map_address">
       <view>{{markerDetail.name}}</view>

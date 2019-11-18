@@ -21,6 +21,8 @@ Page({
     hasMarkers: false,
     markers: [],
 
+    isShowInfo: false,
+
     markerDetail: {}, //  某个mak 点详细信息
 
 
@@ -222,7 +224,7 @@ Page({
         latitude: that.data.latitude
       },
       success: (res) => {
-        let markers = res.data.data.map((item, index) => {  //设置初始图标
+        let markers = res.data.data.map((item, index) => { //设置初始图标
           item.width = 40;
           item.height = 47;
           item.iconPath = '../../assets/images/marker.png'
@@ -265,7 +267,8 @@ Page({
           longitude: res.result.ad_info.location.lng,
           name: res.result.address_component.street_number,
           address: res.result.address,
-        }
+        },
+        isShowInfo: true
       })
 
       wx.hideLoading()
@@ -301,7 +304,8 @@ Page({
 
       that.setData({
         markers,
-        markerDetail: result.data
+        markerDetail: result.data,
+        isShowInfo: true
       })
 
 
@@ -309,6 +313,17 @@ Page({
     })
 
   },
+
+
+  /**
+   * 点击地图上触发
+   */
+  bindtapMap(e) {
+    this.setData({
+      isShowInfo: false
+    })
+  },
+
 
 
 
